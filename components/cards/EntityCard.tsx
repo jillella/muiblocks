@@ -17,7 +17,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         border: '1px solid #e0e0e0',
         height: '100%',
-        minWidth: 300,
+        minWidth: 375,
       }}
     >
       <CardContent sx={{ p: 3 }}>

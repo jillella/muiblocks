@@ -30,13 +30,13 @@ export default function DashboardPage() {
               gap: 3,
             }}
           >
-            <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
+            <Box sx={{ flex: '1 1 375px', minWidth: 375 }}>
               <EntityCard metrics={mockEntityMetrics} />
             </Box>
-            <Box sx={{ flex: '1 1 340px', minWidth: 340 }}>
+            <Box sx={{ flex: '1 1 460px', minWidth: 460 }}>
               <ProductsCard products={mockProducts} />
             </Box>
-            <Box sx={{ flex: '1 1 380px', minWidth: 380 }}>
+            <Box sx={{ flex: '1 1 460px', minWidth: 460 }}>
               <RiskFactorsCard riskFactors={mockRiskFactors} />
             </Box>
           </Box>
