@@ -55,79 +55,49 @@ export default function ProductsCard({ products }: ProductsCardProps) {
 
         <Divider sx={{ my: 2 }} />
 
-        {/* Row 1 */}
-        <Box sx={{ display: 'flex', py: 1.5 }}>
-          <Box
-            sx={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderRight: '1px solid #e5e7eb',
-              pr: 2,
-            }}
-          >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
-              {products[0]?.name}
-            </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
-              {products[0]?.varValue}
-            </Typography>
+        <Box sx={{ display: 'flex' }}>
+          {/* Left Column */}
+          <Box sx={{ flex: 1, pr: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5 }}>
+              <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
+                {products[0]?.name}
+              </Typography>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+                {products[0]?.varValue}
+              </Typography>
+            </Box>
+            <Divider />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5 }}>
+              <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
+                {products[2]?.name}
+              </Typography>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+                {products[2]?.varValue}
+              </Typography>
+            </Box>
           </Box>
-          <Box
-            sx={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              pl: 2,
-            }}
-          >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
-              {products[1]?.name}
-            </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
-              {products[1]?.varValue}
-            </Typography>
-          </Box>
-        </Box>
 
-        <Divider />
+          <Divider orientation="vertical" flexItem />
 
-        {/* Row 2 */}
-        <Box sx={{ display: 'flex', py: 1.5 }}>
-          <Box
-            sx={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderRight: '1px solid #e5e7eb',
-              pr: 2,
-            }}
-          >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
-              {products[2]?.name}
-            </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
-              {products[2]?.varValue}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              pl: 2,
-            }}
-          >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
-              {products[3]?.name}
-            </Typography>
-            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
-              {products[3]?.varValue}
-            </Typography>
+          {/* Right Column */}
+          <Box sx={{ flex: 1, pl: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5 }}>
+              <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
+                {products[1]?.name}
+              </Typography>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+                {products[1]?.varValue}
+              </Typography>
+            </Box>
+            <Divider />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5 }}>
+              <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
+                {products[3]?.name}
+              </Typography>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+                {products[3]?.varValue}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </CardContent>
