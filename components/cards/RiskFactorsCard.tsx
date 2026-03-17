@@ -59,7 +59,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
         <Box sx={{ display: 'flex' }}>
           {/* Left Column */}
           <Box sx={{ flex: 1, pr: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5, gap: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1.5, gap: 2 }}>
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {riskFactors[0]?.name}
               </Typography>
@@ -68,7 +68,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
               </Typography>
             </Box>
             <Divider />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5, gap: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pt: 1.5, gap: 2 }}>
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {riskFactors[2]?.name}
               </Typography>
@@ -82,7 +82,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
 
           {/* Right Column */}
           <Box sx={{ flex: 1, pl: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5, gap: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1.5, gap: 2 }}>
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {riskFactors[1]?.name}
               </Typography>
@@ -91,7 +91,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
               </Typography>
             </Box>
             <Divider />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', py: 1.5, gap: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pt: 1.5, gap: 2 }}>
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {riskFactors[3]?.name}
               </Typography>
