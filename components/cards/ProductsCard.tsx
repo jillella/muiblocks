@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
+import { Card, CardContent, Typography, Box, IconButton, Divider } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { Product } from '@/lib/mock-data';
@@ -53,12 +53,14 @@ export default function ProductsCard({ products }: ProductsCardProps) {
           </IconButton>
         </Box>
 
+        <Divider sx={{ my: 2 }} />
+
         <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: 2,
-            mt: 3,
+            mt: 2,
           }}
         >
           {products.map((product, index) => (

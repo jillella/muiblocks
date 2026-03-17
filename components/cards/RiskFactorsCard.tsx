@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
+import { Card, CardContent, Typography, Box, IconButton, Divider } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { RiskFactor } from '@/lib/mock-data';
@@ -53,12 +53,14 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
           </IconButton>
         </Box>
 
+        <Divider sx={{ my: 2 }} />
+
         <Box
           sx={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
             gap: 2,
-            mt: 3,
+            mt: 2,
           }}
         >
           {riskFactors.map((factor, index) => (

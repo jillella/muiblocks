@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
+import { Card, CardContent, Typography, Box, IconButton, Divider } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import BusinessIcon from '@mui/icons-material/Business';
 import { EntityMetric } from '@/lib/mock-data';
@@ -53,7 +53,9 @@ export default function EntityCard({ metrics }: EntityCardProps) {
           </IconButton>
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
+        <Divider sx={{ my: 2 }} />
+
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
           {metrics.map((metric, index) => (
             <Box
               key={metric.label}
