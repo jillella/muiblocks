@@ -17,6 +17,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         border: '1px solid #e0e0e0',
         height: '100%',
+        minWidth: 340,
       }}
     >
       <CardContent sx={{ p: 3 }}>
@@ -62,7 +63,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[0]?.name}
               </Typography>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[0]?.varValue}
               </Typography>
             </Box>
@@ -71,7 +72,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[2]?.name}
               </Typography>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[2]?.varValue}
               </Typography>
             </Box>
@@ -85,7 +86,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[1]?.name}
               </Typography>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[1]?.varValue}
               </Typography>
             </Box>
@@ -94,7 +95,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[3]?.name}
               </Typography>
-              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[3]?.varValue}
               </Typography>
             </Box>

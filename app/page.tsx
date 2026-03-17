@@ -22,15 +22,16 @@ export default function DashboardPage() {
           py: 4,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ overflowX: 'auto' }}>
           <Box
             sx={{
               display: 'grid',
               gridTemplateColumns: {
                 xs: '1fr',
-                md: 'repeat(3, 1fr)',
+                lg: 'repeat(3, 1fr)',
               },
               gap: 3,
+              minWidth: 'fit-content',
             }}
           >
             <EntityCard metrics={mockEntityMetrics} />
