@@ -2,7 +2,7 @@
 
 import { Card, CardContent, Typography, Box, IconButton, Divider } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import PolicyIcon from '@mui/icons-material/Policy';
+import PolicyOutlinedIcon from '@mui/icons-material/PolicyOutlined';
 import { RiskFactor } from '@/lib/mock-data';
 
 interface RiskFactorsCardProps {
@@ -35,7 +35,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
                 mb: 1,
               }}
             >
-              <PolicyIcon sx={{ color: '#7c3aed', fontSize: 24 }} />
+              <PolicyOutlinedIcon sx={{ color: '#7c3aed', fontSize: 24 }} />
             </Box>
             <Typography
               variant="subtitle1"
