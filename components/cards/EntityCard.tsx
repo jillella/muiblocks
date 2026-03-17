@@ -71,7 +71,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 variant="caption"
                 sx={{
                   color: '#6b7280',
-                  fontSize: '0.75rem',
+                  fontSize: '0.875rem',
                   display: 'block',
                   mb: 0.5,
                 }}
@@ -94,6 +94,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                   sx={{
                     color: '#10b981',
                     fontSize: '0.875rem',
+                    fontWeight: '600'
                   }}
                 >
                   {metric.change}
