@@ -55,46 +55,80 @@ export default function ProductsCard({ products }: ProductsCardProps) {
 
         <Divider sx={{ my: 2 }} />
 
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: 2,
-            mt: 2,
-          }}
-        >
-          {products.map((product, index) => (
-            <Box
-              key={product.name}
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderRight: index % 2 === 0 ? '1px solid #e5e7eb' : 'none',
-                pr: index % 2 === 0 ? 2 : 0,
-              }}
-            >
-              <Typography
-                variant="body2"
-                sx={{
-                  color: '#6b7280',
-                  fontSize: '0.875rem',
-                }}
-              >
-                {product.name}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{
-                  fontWeight: 600,
-                  color: '#1f2937',
-                  fontSize: '0.875rem',
-                }}
-              >
-                {product.varValue}
-              </Typography>
-            </Box>
-          ))}
+        {/* Row 1 */}
+        <Box sx={{ display: 'flex', py: 1.5 }}>
+          <Box
+            sx={{
+              flex: 1,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderRight: '1px solid #e5e7eb',
+              pr: 2,
+            }}
+          >
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+              {products[0]?.name}
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              {products[0]?.varValue}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              flex: 1,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              pl: 2,
+            }}
+          >
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+              {products[1]?.name}
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              {products[1]?.varValue}
+            </Typography>
+          </Box>
+        </Box>
+
+        <Divider />
+
+        {/* Row 2 */}
+        <Box sx={{ display: 'flex', py: 1.5 }}>
+          <Box
+            sx={{
+              flex: 1,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderRight: '1px solid #e5e7eb',
+              pr: 2,
+            }}
+          >
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+              {products[2]?.name}
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              {products[2]?.varValue}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              flex: 1,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              pl: 2,
+            }}
+          >
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+              {products[3]?.name}
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
+              {products[3]?.varValue}
+            </Typography>
+          </Box>
         </Box>
       </CardContent>
     </Card>
