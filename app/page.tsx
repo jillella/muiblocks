@@ -22,21 +22,23 @@ export default function DashboardPage() {
           py: 4,
         }}
       >
-        <Container maxWidth="xl" sx={{ overflowX: 'auto' }}>
+        <Container maxWidth="xl">
           <Box
             sx={{
-              display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                lg: 'repeat(3, 1fr)',
-              },
+              display: 'flex',
+              flexWrap: 'wrap',
               gap: 3,
-              minWidth: 'fit-content',
             }}
           >
-            <EntityCard metrics={mockEntityMetrics} />
-            <ProductsCard products={mockProducts} />
-            <RiskFactorsCard riskFactors={mockRiskFactors} />
+            <Box sx={{ flex: '1 1 300px', minWidth: 300 }}>
+              <EntityCard metrics={mockEntityMetrics} />
+            </Box>
+            <Box sx={{ flex: '1 1 340px', minWidth: 340 }}>
+              <ProductsCard products={mockProducts} />
+            </Box>
+            <Box sx={{ flex: '1 1 380px', minWidth: 380 }}>
+              <RiskFactorsCard riskFactors={mockRiskFactors} />
+            </Box>
           </Box>
         </Container>
       </Box>
