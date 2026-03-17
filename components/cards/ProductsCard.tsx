@@ -67,7 +67,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               pr: 2,
             }}
           >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
               {products[0]?.name}
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
@@ -83,7 +83,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               pl: 2,
             }}
           >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
               {products[1]?.name}
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
@@ -106,7 +106,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               pr: 2,
             }}
           >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
               {products[2]?.name}
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
@@ -122,7 +122,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               pl: 2,
             }}
           >
-            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem' }}>
+            <Typography variant="body2" sx={{ color: '#6b7280', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
               {products[3]?.name}
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem' }}>
