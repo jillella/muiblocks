@@ -34,14 +34,15 @@ export default function EntityCard({ metrics }: EntityCardProps) {
               width: 48,
               height: 48,
               borderRadius: '50%',
-              backgroundColor: '#c9a57a',
+              backgroundColor: '#AA936C',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
+              border: '5px solid #E2DCD1',
             }}
           >
-            <BusinessIcon sx={{ color: 'white', fontSize: 24 }} />
+            <BusinessIcon sx={{ color: '#fff', fontSize: 24 }} />
           </Box>
           <Box sx={{ flex: 1, pt: 0.5 }}>
             <Box
