@@ -21,8 +21,8 @@ export default function ProductsCard({ products }: ProductsCardProps) {
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Box
               sx={{
                 width: 48,
@@ -32,7 +32,6 @@ export default function ProductsCard({ products }: ProductsCardProps) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                mb: 1,
               }}
             >
               <DescriptionOutlinedIcon sx={{ color: '#0d9488', fontSize: 24 }} />
