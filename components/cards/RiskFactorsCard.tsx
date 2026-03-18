@@ -21,41 +21,42 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-            <Box
-              sx={{
-                width: 48,
-                height: 48,
-                borderRadius: '50%',
-                backgroundColor: '#f3e8ff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <PolicyOutlinedIcon sx={{ color: '#7c3aed', fontSize: 24 }} />
-            </Box>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontWeight: 600,
-                color: '#1a365d',
-                letterSpacing: 1,
-                textTransform: 'uppercase',
-              }}
-            >
-              RISK FACTORS
-            </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
+          <Box
+            sx={{
+              width: 48,
+              height: 48,
+              borderRadius: '50%',
+              backgroundColor: '#f3e8ff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <PolicyOutlinedIcon sx={{ color: '#7c3aed', fontSize: 24 }} />
           </Box>
-          <IconButton size="small" sx={{ color: '#9ca3af' }}>
-            <InfoOutlinedIcon fontSize="small" />
-          </IconButton>
-        </Box>
+          <Box sx={{ flex: 1 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: '#1a365d',
+                  letterSpacing: 1.5,
+                  textTransform: 'uppercase',
+                  fontSize: '1.1rem',
+                }}
+              >
+                RISK FACTORS
+              </Typography>
+              <IconButton size="small" sx={{ color: '#9ca3af' }}>
+                <InfoOutlinedIcon fontSize="small" />
+              </IconButton>
+            </Box>
+            <Divider sx={{ mb: 2 }} />
 
-        <Divider sx={{ my: 2 }} />
-
-        <Box sx={{ display: 'flex' }}>
+            <Box sx={{ display: 'flex' }}>
           {/* Left Column */}
           <Box sx={{ flex: 1, pr: 2 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1.5, gap: 2 }}>
@@ -97,6 +98,8 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
               <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {riskFactors[3]?.varValue}
               </Typography>
+            </Box>
+          </Box>
             </Box>
           </Box>
         </Box>
