@@ -34,14 +34,14 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
               width: 48,
               height: 48,
               borderRadius: '50%',
-              backgroundColor: '#f3e8ff',
+              backgroundColor: '#efe6fb',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
             }}
           >
-            <PolicyOutlinedIcon sx={{ color: '#7c3aed', fontSize: 24 }} />
+            <PolicyOutlinedIcon sx={{ color: '#8662d1', fontSize: 24 }} />
           </Box>
           <Box sx={{ flex: 1, pt: 0.5 }}>
             <Box

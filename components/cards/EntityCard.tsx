@@ -34,7 +34,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
               width: 48,
               height: 48,
               borderRadius: '50%',
-              backgroundColor: '#d4a574',
+              backgroundColor: '#c9a57a',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

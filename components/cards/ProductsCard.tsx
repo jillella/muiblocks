@@ -34,14 +34,14 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               width: 48,
               height: 48,
               borderRadius: '50%',
-              backgroundColor: '#e8f4f0',
+              backgroundColor: '#e6f2ee',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
             }}
           >
-            <DescriptionOutlinedIcon sx={{ color: '#0d9488', fontSize: 24 }} />
+            <DescriptionOutlinedIcon sx={{ color: '#5f9f97', fontSize: 24 }} />
           </Box>
           <Box sx={{ flex: 1, pt: 0.5 }}>
             <Box
