@@ -1,6 +1,13 @@
 'use client';
 
-import { Card, CardContent, Typography, Box, IconButton, Divider } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  IconButton,
+  Divider,
+} from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import BusinessIcon from '@mui/icons-material/Business';
 import { EntityMetric } from '@/lib/mock-data';
@@ -17,46 +24,56 @@ export default function EntityCard({ metrics }: EntityCardProps) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         border: '1px solid #e0e0e0',
         height: '100%',
-        minWidth: 375,
+        minWidth: 445,
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 2 }}>
+          <Box
+            sx={{
+              width: 48,
+              height: 48,
+              borderRadius: '50%',
+              backgroundColor: '#AA936C',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              border: '5px solid #E2DCD1',
+            }}
+          >
+            <BusinessIcon sx={{ color: '#fff', fontSize: 24 }} />
+          </Box>
+          <Box sx={{ flex: 1, pt: 0.5 }}>
             <Box
               sx={{
-                width: 48,
-                height: 48,
-                borderRadius: '50%',
-                backgroundColor: '#d4a574',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                mb: 1,
+                justifyContent: 'space-between',
               }}
             >
-              <BusinessIcon sx={{ color: 'white', fontSize: 24 }} />
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 600,
+                  color: '#486c94',
+                  letterSpacing: 1.5,
+                  textTransform: 'uppercase',
+                  fontSize: '1.5rem',
+                  lineHeight: 1.15,
+                  mb: 0.2,
+                }}
+              >
+                ENTITY
+              </Typography>
+              <IconButton size="small" sx={{ color: '#9ca3af' }}>
+                <InfoOutlinedIcon fontSize="small" />
+              </IconButton>
             </Box>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontWeight: 600,
-                color: '#1a365d',
-                letterSpacing: 1,
-                textTransform: 'uppercase',
-              }}
-            >
-              ENTITY
-            </Typography>
+            <Divider sx={{ mt: 0.45 }} />
           </Box>
-          <IconButton size="small" sx={{ color: '#9ca3af' }}>
-            <InfoOutlinedIcon fontSize="small" />
-          </IconButton>
         </Box>
-
-        <Divider sx={{ my: 2 }} />
-
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {metrics.map((metric, index) => (
             <Box
               key={metric.label}
@@ -70,8 +87,9 @@ export default function EntityCard({ metrics }: EntityCardProps) {
               <Typography
                 variant="caption"
                 sx={{
-                  color: '#6b7280',
+                  color: '#486c94',
                   fontSize: '0.875rem',
+                  fontWeight: 500,
                   display: 'block',
                   mb: 0.5,
                 }}
@@ -82,9 +100,9 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 <Typography
                   variant="h4"
                   sx={{
-                    fontWeight: 600,
-                    color: '#1f2937',
-                    fontSize: '1.75rem',
+                    fontWeight: 500,
+                    color: '#121b2c',
+                    fontSize: '2.375rem',
                   }}
                 >
                   {metric.value}
@@ -92,9 +110,9 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 <Typography
                   variant="body2"
                   sx={{
-                    color: '#10b981',
-                    fontSize: '0.875rem',
-                    fontWeight: '600'
+                    color: '#1c8783',
+                    fontSize: '0.9375rem',
+                    fontWeight: 500,
                   }}
                 >
                   {metric.change}
