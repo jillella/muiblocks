@@ -55,11 +55,11 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="h6"
                 sx={{
-                  fontWeight: 700,
-                  color: '#1a365d',
+                  fontWeight: 600,
+                  color: '#486c94',
                   letterSpacing: 1.5,
                   textTransform: 'uppercase',
-                  fontSize: '1.1rem',
+                  fontSize: '1.5rem',
                   lineHeight: 1.15,
                   mb: 0.2,
                 }}
@@ -88,8 +88,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  color: '#6b7280',
+                  color: '#486c94',
                   fontSize: '0.875rem',
+                  fontWeight: 500,
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -98,9 +99,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  fontWeight: 600,
-                  color: '#1f2937',
-                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: '#121b2c',
+                  fontSize: '0.9375rem',
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -120,8 +121,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  color: '#6b7280',
+                  color: '#486c94',
                   fontSize: '0.875rem',
+                  fontWeight: 500,
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -130,9 +132,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  fontWeight: 600,
-                  color: '#1f2937',
-                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: '#121b2c',
+                  fontSize: '0.9375rem',
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -156,8 +158,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  color: '#6b7280',
+                  color: '#486c94',
                   fontSize: '0.875rem',
+                  fontWeight: 500,
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -166,9 +169,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  fontWeight: 600,
-                  color: '#1f2937',
-                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: '#121b2c',
+                  fontSize: '0.9375rem',
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -188,8 +191,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  color: '#6b7280',
+                  color: '#486c94',
                   fontSize: '0.875rem',
+                  fontWeight: 500,
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -198,9 +202,9 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography
                 variant="body2"
                 sx={{
-                  fontWeight: 600,
-                  color: '#1f2937',
-                  fontSize: '0.875rem',
+                  fontWeight: 700,
+                  color: '#121b2c',
+                  fontSize: '0.9375rem',
                   whiteSpace: 'nowrap',
                 }}
               >
