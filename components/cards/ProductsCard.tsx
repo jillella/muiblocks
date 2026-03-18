@@ -21,42 +21,46 @@ export default function ProductsCard({ products }: ProductsCardProps) {
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
-          <Box
-            sx={{
-              width: 48,
-              height: 48,
-              borderRadius: '50%',
-              backgroundColor: '#e8f4f0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            <DescriptionOutlinedIcon sx={{ color: '#0d9488', fontSize: 24 }} />
-          </Box>
-          <Box sx={{ flex: 1 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: 700,
-                  color: '#1a365d',
-                  letterSpacing: 1.5,
-                  textTransform: 'uppercase',
-                  fontSize: '1.1rem',
-                }}
-              >
-                PRODUCTS
-              </Typography>
-              <IconButton size="small" sx={{ color: '#9ca3af' }}>
-                <InfoOutlinedIcon fontSize="small" />
-              </IconButton>
+        {/* Header with Icon and Title */}
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                backgroundColor: '#e8f4f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <DescriptionOutlinedIcon sx={{ color: '#0d9488', fontSize: 24 }} />
             </Box>
-            <Divider sx={{ mb: 2 }} />
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                color: '#1a365d',
+                letterSpacing: 1.5,
+                textTransform: 'uppercase',
+                fontSize: '1.1rem',
+              }}
+            >
+              PRODUCTS
+            </Typography>
+          </Box>
+          <IconButton size="small" sx={{ color: '#9ca3af' }}>
+            <InfoOutlinedIcon fontSize="small" />
+          </IconButton>
+        </Box>
 
-            <Box sx={{ display: 'flex' }}>
+        {/* Divider starting below title */}
+        <Divider sx={{ ml: 8, mb: 2 }} />
+
+        {/* Content - Full Width */}
+        <Box sx={{ display: 'flex' }}>
           {/* Left Column */}
           <Box sx={{ flex: 1, pr: 2 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1.5, gap: 2 }}>
@@ -98,8 +102,6 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography variant="body2" sx={{ fontWeight: 600, color: '#1f2937', fontSize: '0.875rem', whiteSpace: 'nowrap' }}>
                 {products[3]?.varValue}
               </Typography>
-            </Box>
-          </Box>
             </Box>
           </Box>
         </Box>

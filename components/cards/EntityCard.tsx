@@ -21,42 +21,46 @@ export default function EntityCard({ metrics }: EntityCardProps) {
       }}
     >
       <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
-          <Box
-            sx={{
-              width: 48,
-              height: 48,
-              borderRadius: '50%',
-              backgroundColor: '#d4a574',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
-            }}
-          >
-            <BusinessIcon sx={{ color: 'white', fontSize: 24 }} />
-          </Box>
-          <Box sx={{ flex: 1 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-              <Typography
-                variant="h6"
-                sx={{
-                  fontWeight: 700,
-                  color: '#1a365d',
-                  letterSpacing: 1.5,
-                  textTransform: 'uppercase',
-                  fontSize: '1.1rem',
-                }}
-              >
-                ENTITY
-              </Typography>
-              <IconButton size="small" sx={{ color: '#9ca3af' }}>
-                <InfoOutlinedIcon fontSize="small" />
-              </IconButton>
+        {/* Header with Icon and Title */}
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box
+              sx={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                backgroundColor: '#d4a574',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}
+            >
+              <BusinessIcon sx={{ color: 'white', fontSize: 24 }} />
             </Box>
-            <Divider sx={{ mb: 2 }} />
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                color: '#1a365d',
+                letterSpacing: 1.5,
+                textTransform: 'uppercase',
+                fontSize: '1.1rem',
+              }}
+            >
+              ENTITY
+            </Typography>
+          </Box>
+          <IconButton size="small" sx={{ color: '#9ca3af' }}>
+            <InfoOutlinedIcon fontSize="small" />
+          </IconButton>
+        </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+        {/* Divider starting below title */}
+        <Divider sx={{ ml: 8, mb: 2 }} />
+
+        {/* Content - Full Width */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {metrics.map((metric, index) => (
             <Box
               key={metric.label}
@@ -102,8 +106,6 @@ export default function EntityCard({ metrics }: EntityCardProps) {
               </Box>
             </Box>
           ))}
-        </Box>
-          </Box>
         </Box>
       </CardContent>
     </Card>
