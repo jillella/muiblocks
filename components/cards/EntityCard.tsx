@@ -56,8 +56,8 @@ export default function EntityCard({ metrics }: EntityCardProps) {
           </IconButton>
         </Box>
 
-        {/* Divider starting below title */}
-        <Divider sx={{ ml: 8, mb: 2 }} />
+        {/* Divider - full width */}
+        <Divider sx={{ my: 2 }} />
 
         {/* Content - Full Width */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
