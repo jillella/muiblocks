@@ -30,7 +30,7 @@ export default function DashboardPage() {
               gap: 3,
             }}
           >
-            <Box sx={{ flex: '1 1 375px', minWidth: 375 }}>
+            <Box sx={{ flex: '1 1 445px', minWidth: 445 }}>
               <EntityCard metrics={mockEntityMetrics} />
             </Box>
             <Box sx={{ flex: '1 1 460px', minWidth: 460 }}>
