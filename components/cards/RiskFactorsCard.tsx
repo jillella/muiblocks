@@ -57,7 +57,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
         </Box>
 
         {/* Divider starting below title */}
-        <Divider sx={{ ml: 8, mt: 1, mb: 2 }} />
+        <Divider sx={{ ml: 8, mt: 0.5, mb: 2 }} />
 
         {/* Content - Full Width */}
         <Box sx={{ display: 'flex' }}>
