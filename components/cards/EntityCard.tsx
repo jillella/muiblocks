@@ -22,7 +22,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
     >
       <CardContent sx={{ p: 3 }}>
         {/* Header with Icon and Title */}
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', pb: 1.5, mb: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Box
               sx={{
@@ -54,9 +54,10 @@ export default function EntityCard({ metrics }: EntityCardProps) {
           <IconButton size="small" sx={{ color: '#9ca3af' }}>
             <InfoOutlinedIcon fontSize="small" />
           </IconButton>
-          {/* Divider starting below title */}
-          <Divider sx={{ position: 'absolute', left: 80, right: 24, bottom: 0 }} />
         </Box>
+
+        {/* Divider starting below title */}
+        <Divider sx={{ ml: 8, mt: 0.5, mb: 2 }} />
 
         {/* Content - Full Width */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
