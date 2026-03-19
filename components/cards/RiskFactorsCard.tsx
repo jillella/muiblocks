@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import PolicyOutlinedIcon from '@mui/icons-material/PolicyOutlined';
+import GradientDivider from '@/components/common/GradientDivider';
 import { RiskFactor } from '@/lib/mock-data';
 
 interface RiskFactorsCardProps {
@@ -70,7 +71,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
                 <InfoOutlinedIcon fontSize="small" />
               </IconButton>
             </Box>
-            <Divider sx={{ mt: 0.45 }} />
+            <GradientDivider sx={{ mt: 0.45 }} />
           </Box>
         </Box>
 
@@ -143,7 +144,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
             </Box>
           </Box>
 
-          <Divider orientation="vertical" flexItem />
+          <GradientDivider orientation="vertical" flexItem sx={{ mx: 0.5 }} />
 
           <Box sx={{ flex: 1, pl: 2 }}>
             <Box

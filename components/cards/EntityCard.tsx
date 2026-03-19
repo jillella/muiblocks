@@ -6,10 +6,10 @@ import {
   Typography,
   Box,
   IconButton,
-  Divider,
 } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import BusinessIcon from '@mui/icons-material/Business';
+import GradientDivider from '@/components/common/GradientDivider';
 import { EntityMetric } from '@/lib/mock-data';
 
 interface EntityCardProps {
@@ -70,7 +70,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 <InfoOutlinedIcon fontSize="small" />
               </IconButton>
             </Box>
-            <Divider sx={{ mt: 0.45 }} />
+            <GradientDivider sx={{ mt: 0.45 }} />
           </Box>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
