@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import BusinessIcon from '@mui/icons-material/Business';
+import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
 import GradientDivider from '@/components/common/GradientDivider';
 import { EntityMetric } from '@/lib/mock-data';
 
@@ -24,7 +25,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         border: '1px solid #e0e0e0',
         height: '100%',
-        minWidth: 445,
+        minWidth: 480,
       }}
     >
       <CardContent sx={{ p: 3 }}>
@@ -67,22 +68,49 @@ export default function EntityCard({ metrics }: EntityCardProps) {
               >
                 ENTITY
               </Typography>
-              <IconButton size="small" sx={{ color: '#9ca3af' }}>
-                <InfoOutlinedIcon fontSize="small" />
-              </IconButton>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.2 }}>
+                <IconButton size="small" sx={{ color: '#a7afb8', p: 0.4 }}>
+                  <AutorenewRoundedIcon sx={{ fontSize: 16 }} />
+                </IconButton>
+                <IconButton size="small" sx={{ color: '#9ca3af', p: 0.4 }}>
+                  <InfoOutlinedIcon sx={{ fontSize: 15 }} />
+                </IconButton>
+              </Box>
             </Box>
             <GradientDivider sx={{ mt: 0.45 }} />
           </Box>
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {metrics.map((metric, index) => (
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 1.8,
+            position: 'relative',
+          }}
+        >
+          {metrics.map((metric) => (
             <Box
               key={metric.label}
               sx={{
+                position: 'relative',
                 flex: 1,
-                borderRight: index === 0 ? '1px solid #e5e7eb' : 'none',
-                pr: index === 0 ? 2 : 0,
-                pl: index === 1 ? 2 : 0,
+                px: 1.7,
+                py: 1.15,
+                backgroundColor: '#ffffff',
+                border: '1px solid #d8e2eb',
+                borderRadius: 3,
+                boxShadow: '0 3px 8px rgba(30, 56, 88, 0.12)',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 0,
+                  height: 0,
+                  borderTop: '22px solid #2b9a93',
+                  borderLeft: '22px solid transparent',
+                  opacity: 0.9,
+                },
               }}
             >
               <Typography

@@ -25,7 +25,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         border: '1px solid #e0e0e0',
         height: '100%',
-        minWidth: 460,
+        minWidth: 480,
       }}
     >
       <CardContent sx={{ p: 3 }}>
