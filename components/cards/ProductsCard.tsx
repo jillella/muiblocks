@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import GradientDivider from '@/components/common/GradientDivider';
 import { Product } from '@/lib/mock-data';
 
 interface ProductsCardProps {
@@ -24,11 +25,18 @@ export default function ProductsCard({ products }: ProductsCardProps) {
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
         border: '1px solid #e0e0e0',
         height: '100%',
-        minWidth: 460,
+        minWidth: 480,
       }}
     >
-      <CardContent sx={{ p: 3 }}>
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 2 }}>
+      <CardContent
+        sx={{
+          p: 2,
+          '&.MuiCardContent-root:last-child': {
+            pb: 2,
+          },
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
           <Box
             sx={{
               width: 48,
@@ -50,6 +58,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                px: 2,
               }}
             >
               <Typography
@@ -70,7 +79,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
                 <InfoOutlinedIcon fontSize="small" />
               </IconButton>
             </Box>
-            <Divider sx={{ mt: 0.45 }} />
+            <GradientDivider sx={{ mt: 0.45 }} />
           </Box>
         </Box>
 
@@ -143,7 +152,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
             </Box>
           </Box>
 
-          <Divider orientation="vertical" flexItem />
+          <GradientDivider orientation="vertical" flexItem sx={{ mx: 0.5 }} />
 
           <Box sx={{ flex: 1, pl: 2 }}>
             <Box
