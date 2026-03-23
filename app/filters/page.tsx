@@ -28,11 +28,11 @@ const theme = createTheme({
 const riskTags = ['Liquidity', 'Concentration', 'Market', 'Operational', 'Credit', 'Compliance'];
 
 const pillSelectSx = {
-  height: 48,
+  height: 44,
   borderRadius: '999px',
-  backgroundColor: '#014f47',
-  color: '#b9cec9',
-  fontSize: '0.95rem',
+  backgroundColor: '#033928',
+  color: '#acb6ca',
+  fontSize: '0.9rem',
   fontWeight: 500,
   letterSpacing: 0.1,
   '& .MuiOutlinedInput-notchedOutline': {
@@ -45,9 +45,9 @@ const pillSelectSx = {
     border: 'none',
   },
   '& .MuiSelect-select': {
-    py: 0.55,
-    pl: 3.1,
-    pr: '4.9rem !important',
+    py: 0.45,
+    pl: 3.4,
+    pr: '5.7rem !important',
     display: 'flex',
     alignItems: 'center',
     minWidth: 0,
@@ -56,7 +56,7 @@ const pillSelectSx = {
     textOverflow: 'ellipsis',
   },
   '& .MuiSelect-icon': {
-    right: 16,
+    right: 20,
     top: '50%',
     transform: 'translateY(-50%)',
     transition: 'transform 180ms ease',
@@ -66,10 +66,10 @@ const pillSelectSx = {
     justifyContent: 'center',
     boxSizing: 'border-box',
     color: '#86aaa5',
-    width: 26,
-    height: 26,
-    p: 0.22,
-    border: '2px solid #628e88',
+    width: 23,
+    height: 23,
+    p: 0.16,
+    border: '2px solid #acb6ca80',
     borderRadius: '50%',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
@@ -110,15 +110,15 @@ export default function FiltersPage() {
         <Container maxWidth="lg">
           <Box
             sx={{
-              px: 3,
+              px: 4,
               py: 1.75,
               borderRadius: 2.5,
               border: '1px solid #e5e7eb',
-              backgroundColor: '#ffffff',
+              backgroundColor: '#004b35',
               boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
             }}
           >
-            <Typography variant="subtitle2" sx={{ color: '#486c94', fontWeight: 700, mb: 1.25 }}>
+            <Typography variant="subtitle2" sx={{ color: '#fff', fontWeight: 700, mb: 1.25 }}>
               Page filters
             </Typography>
             <Stack spacing={2}>
