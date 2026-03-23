@@ -1,7 +1,6 @@
 'use client';
 
 import CheckIcon from '@mui/icons-material/Check';
-import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import {
   Box,
   Container,
@@ -9,7 +8,6 @@ import {
   ListItemIcon,
   ListItemText,
   MenuItem,
-  Select,
   Stack,
   ThemeProvider,
   Typography,
@@ -17,6 +15,7 @@ import {
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
+import FilterSelect from '@/components/common/FilterSelect';
 import { mockProducts, mockRiskFactors } from '@/lib/mock-data';
 
 const theme = createTheme({
@@ -26,57 +25,6 @@ const theme = createTheme({
 });
 
 const riskTags = ['Liquidity', 'Concentration', 'Market', 'Operational', 'Credit', 'Compliance'];
-
-const pillSelectSx = {
-  height: 44,
-  borderRadius: '999px',
-  backgroundColor: '#033928',
-  color: '#acb6ca',
-  fontSize: '0.9rem',
-  fontWeight: 500,
-  letterSpacing: 0.1,
-  '& .MuiOutlinedInput-notchedOutline': {
-    border: 'none',
-  },
-  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-    border: 'none',
-  },
-  '&:hover .MuiOutlinedInput-notchedOutline': {
-    border: 'none',
-  },
-  '& .MuiSelect-select': {
-    py: 0.45,
-    pl: 3.4,
-    pr: '5.7rem !important',
-    display: 'flex',
-    alignItems: 'center',
-    minWidth: 0,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  '& .MuiSelect-icon': {
-    right: 20,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    transition: 'transform 180ms ease',
-    transformOrigin: 'center',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxSizing: 'border-box',
-    color: '#86aaa5',
-    width: 23,
-    height: 23,
-    p: 0.16,
-    border: '2px solid #acb6ca80',
-    borderRadius: '50%',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  '& .MuiSelect-iconOpen': {
-    transform: 'translateY(-50%) rotate(180deg)',
-  },
-};
 
 export default function FiltersPage() {
   const [selectedTags, setSelectedTags] = useState<string[]>(['Liquidity', 'Market']);
@@ -123,45 +71,39 @@ export default function FiltersPage() {
             </Typography>
             <Stack spacing={2}>
               <FormControl fullWidth>
-                <Select
+                <FilterSelect
                   id="product-select"
-                  IconComponent={KeyboardArrowDownRoundedIcon}
                   value={selectedProduct}
                   onChange={handleProductChange}
-                  sx={pillSelectSx}
                 >
                   {mockProducts.map((product) => (
                     <MenuItem key={product.name} value={product.name}>
                       {product.name}
                     </MenuItem>
                   ))}
-                </Select>
+                </FilterSelect>
               </FormControl>
 
               <FormControl fullWidth>
-                <Select
+                <FilterSelect
                   id="risk-factor-select"
-                  IconComponent={KeyboardArrowDownRoundedIcon}
                   value={selectedRiskFactor}
                   onChange={handleRiskFactorChange}
-                  sx={pillSelectSx}
                 >
                   {mockRiskFactors.map((factor) => (
                     <MenuItem key={factor.name} value={factor.name}>
                       {factor.name}
                     </MenuItem>
                   ))}
-                </Select>
+                </FilterSelect>
               </FormControl>
 
               <FormControl fullWidth>
-                <Select
+                <FilterSelect
                   id="risk-tag-select"
-                  IconComponent={KeyboardArrowDownRoundedIcon}
                   multiple
                   value={selectedTags}
                   onChange={handleTagChange}
-                  sx={pillSelectSx}
                   renderValue={(selected) => {
                     if (!selected.length) return 'Tags';
                     if (selected.length === 1) return selected[0];
@@ -182,7 +124,7 @@ export default function FiltersPage() {
                       </MenuItem>
                     );
                   })}
-                </Select>
+                </FilterSelect>
               </FormControl>
             </Stack>
           </Box>
