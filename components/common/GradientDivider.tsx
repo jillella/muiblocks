@@ -6,7 +6,8 @@ import { styled } from '@mui/material/styles';
 const GradientDivider = styled(Divider)({
   border: 'none',
   height: '1.7px',
-  background: 'linear-gradient(90deg, transparent 0%, #486c94 50%, transparent 100%)',
+  background:
+    'linear-gradient(90deg, transparent 0%, #486c94 50%, transparent 100%)',
   margin: '8px 0',
   opacity: 1,
   '&.MuiDivider-vertical': {

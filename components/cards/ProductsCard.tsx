@@ -28,7 +28,14 @@ export default function ProductsCard({ products }: ProductsCardProps) {
         minWidth: 480,
       }}
     >
-      <CardContent sx={{ p: 3 }}>
+      <CardContent
+        sx={{
+          p: 2,
+          '&.MuiCardContent-root:last-child': {
+            pb: 2,
+          },
+        }}
+      >
         <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
           <Box
             sx={{

@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  IconButton,
-} from '@mui/material';
+import { Card, CardContent, Typography, Box, IconButton } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import BusinessIcon from '@mui/icons-material/Business';
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
@@ -28,7 +22,14 @@ export default function EntityCard({ metrics }: EntityCardProps) {
         minWidth: 480,
       }}
     >
-      <CardContent sx={{ p: 3 }}>
+      <CardContent
+        sx={{
+          p: 2,
+          '&.MuiCardContent-root:last-child': {
+            pb: 2,
+          },
+        }}
+      >
         <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
           <Box
             sx={{
@@ -69,11 +70,11 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 ENTITY
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.2 }}>
-                <IconButton size="small" sx={{ color: '#a7afb8', p: 0.4 }}>
-                  <AutorenewRoundedIcon sx={{ fontSize: 16 }} />
+                <IconButton size="small" sx={{ color: '#9ca3af' }}>
+                  <AutorenewRoundedIcon fontSize="small" />
                 </IconButton>
-                <IconButton size="small" sx={{ color: '#9ca3af', p: 0.4 }}>
-                  <InfoOutlinedIcon sx={{ fontSize: 15 }} />
+                <IconButton size="small" sx={{ color: '#9ca3af' }}>
+                  <InfoOutlinedIcon fontSize="small" />
                 </IconButton>
               </Box>
             </Box>
@@ -95,7 +96,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 position: 'relative',
                 flex: 1,
                 px: 1.7,
-                py: 1.15,
+                pb: 0.2,
                 backgroundColor: '#ffffff',
                 borderTop: 'none',
                 borderLeft: 'none',
@@ -104,7 +105,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 borderTopLeftRadius: 0,
                 borderTopRightRadius: 0,
                 borderBottomLeftRadius: 0,
-                borderBottomRightRadius: 8,
+                borderBottomRightRadius: 12,
                 boxShadow: '2px 3px 5px -2px rgba(30, 56, 88, 0.28)',
                 '&::after': {
                   content: '""',
