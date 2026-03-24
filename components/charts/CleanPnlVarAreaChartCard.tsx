@@ -1,10 +1,13 @@
 'use client';
 
-import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
+import EqualizerRoundedIcon from '@mui/icons-material/EqualizerRounded';
+import CloseFullscreenRoundedIcon from '@mui/icons-material/CloseFullscreenRounded';
 import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBulletedRounded';
-import { Box, Card, CardContent, IconButton, Typography } from '@mui/material';
+import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
+import OpenInFullRoundedIcon from '@mui/icons-material/OpenInFullRounded';
+import { Box, Card, CardContent, Dialog, IconButton, Typography } from '@mui/material';
 import { AgCharts } from 'ag-charts-react';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
 import type { CleanPnlVarPoint } from '@/lib/mock-data';
 
@@ -15,6 +18,8 @@ interface CleanPnlVarAreaChartCardProps {
 registerAgModules();
 
 export default function CleanPnlVarAreaChartCard({ data }: CleanPnlVarAreaChartCardProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const options: any = useMemo(
     () => ({
       data,
@@ -71,7 +76,8 @@ export default function CleanPnlVarAreaChartCard({ data }: CleanPnlVarAreaChartC
       },
       legend: {
         enabled: true,
-        position: 'top',
+        position: 'bottom',
+        spacing: 18,
         item: {
           label: { color: '#6b7280', fontSize: 12 },
         },
@@ -80,43 +86,113 @@ export default function CleanPnlVarAreaChartCard({ data }: CleanPnlVarAreaChartC
     [data],
   );
 
-  return (
-    <Card
-      sx={{
-        borderRadius: 3,
-        border: '1px solid #e0e0e0',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-        height: '100%',
-      }}
-    >
-      <CardContent sx={{ p: 2.25, '&.MuiCardContent-root:last-child': { pb: 2.25 } }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.25 }}>
-          <Typography sx={{ fontSize: '1.3rem', fontWeight: 500, color: '#3d516b' }}>
-            CM Inc VaR / SVaR
-          </Typography>
-          <Box
-            sx={{
-              p: 0.2,
-              borderRadius: 999,
-              backgroundColor: '#eef4f8',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.25,
-            }}
-          >
-            <IconButton size="small" sx={{ width: 26, height: 26, color: '#6d8098' }}>
-              <BarChartRoundedIcon fontSize="small" />
-            </IconButton>
-            <IconButton size="small" sx={{ width: 26, height: 26, color: '#6d8098' }}>
-              <FormatListBulletedRoundedIcon fontSize="small" />
-            </IconButton>
-          </Box>
-        </Box>
+  const renderActions = ({ expanded }: { expanded: boolean }) => (
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box
+        sx={{
+          py: 0.2,
+          px: 0.5,
+          borderRadius: 999,
+          backgroundColor: '#eef5ff',
+          border: '1px solid #deebf8',
+          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.55)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 0.2,
+        }}
+      >
+        <IconButton
+          size="small"
+          sx={{
+            width: 52,
+            height: 32,
+            borderRadius: 999,
+            backgroundColor: '#ffffff',
+            color: '#2f8fe8',
+            boxShadow: '0 1px 3px rgba(35,94,165,0.18)',
+            '&:hover': {
+              backgroundColor: '#ffffff',
+            },
+          }}
+        >
+          <EqualizerRoundedIcon fontSize="small" />
+        </IconButton>
+        <IconButton
+          size="small"
+          sx={{
+            width: 52,
+            height: 32,
+            borderRadius: 999,
+            color: '#6d6d6d',
+            '&:hover': {
+              backgroundColor: 'rgba(255,255,255,0.5)',
+            },
+          }}
+        >
+          <FormatListBulletedRoundedIcon fontSize="small" />
+        </IconButton>
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
+        <IconButton
+          size="small"
+          sx={{ color: '#8b97a4' }}
+          onClick={() => setIsExpanded((current) => !current)}
+        >
+          {expanded ? (
+            <CloseFullscreenRoundedIcon fontSize="small" />
+          ) : (
+            <OpenInFullRoundedIcon fontSize="small" />
+          )}
+        </IconButton>
+        <IconButton size="small" sx={{ color: '#8b97a4' }}>
+          <MoreVertRoundedIcon fontSize="small" />
+        </IconButton>
+      </Box>
+    </Box>
+  );
 
-        <Box sx={{ width: '100%', height: 248 }}>
-          <AgCharts options={options} style={{ width: '100%', height: 248 }} />
+  return (
+    <>
+      <Card
+        sx={{
+          borderRadius: 3,
+          border: '1px solid #e0e0e0',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+          height: '100%',
+        }}
+      >
+        <CardContent sx={{ p: 2.25, '&.MuiCardContent-root:last-child': { pb: 2.25 } }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.25 }}>
+            <Typography sx={{ fontSize: '1.3rem', fontWeight: 500, color: '#3d516b' }}>
+              CM Inc VaR / SVaR
+            </Typography>
+            {renderActions({ expanded: false })}
+          </Box>
+
+          <Box sx={{ width: '100%', height: 248 }}>
+            <AgCharts options={options} style={{ width: '100%', height: 248 }} />
+          </Box>
+        </CardContent>
+      </Card>
+
+      <Dialog fullScreen open={isExpanded} onClose={() => setIsExpanded(false)}>
+        <Box sx={{ minHeight: '100vh', backgroundColor: '#f8fafc', p: 3 }}>
+          <Card sx={{ borderRadius: 3, border: '1px solid #e0e0e0', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+            <CardContent sx={{ p: 2.25, '&.MuiCardContent-root:last-child': { pb: 2.25 } }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.25 }}>
+                <Typography sx={{ fontSize: '1.3rem', fontWeight: 500, color: '#3d516b' }}>
+                  CM Inc VaR / SVaR
+                </Typography>
+                {renderActions({ expanded: true })}
+              </Box>
+
+              <Box sx={{ width: '100%', height: 'calc(100vh - 180px)' }}>
+                <AgCharts options={options} style={{ width: '100%', height: '100%' }} />
+              </Box>
+            </CardContent>
+          </Card>
         </Box>
-      </CardContent>
-    </Card>
+      </Dialog>
+    </>
   );
 }
