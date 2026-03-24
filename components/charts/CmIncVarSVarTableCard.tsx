@@ -38,7 +38,7 @@ export default function CmIncVarSVarTableCard({ rows }: CmIncVarSVarTableCardPro
     [],
   );
 
-  const renderTable = (height: number) => (
+  const renderTable = ({ height, autoHeight = false }: { height?: number; autoHeight?: boolean }) => (
     <Box
       className="ag-theme-quartz"
       sx={{
@@ -54,7 +54,7 @@ export default function CmIncVarSVarTableCard({ rows }: CmIncVarSVarTableCardPro
         '--ag-cell-horizontal-padding': '12px',
         '--ag-header-column-resize-handle-display': 'none',
         width: '100%',
-        height,
+        height: autoHeight ? 'auto' : height,
         borderRadius: 2,
         overflow: 'hidden',
         border: '1px solid #e9edf2',
@@ -70,6 +70,7 @@ export default function CmIncVarSVarTableCard({ rows }: CmIncVarSVarTableCardPro
         theme="legacy"
         rowData={rows}
         columnDefs={columnDefs}
+        domLayout={autoHeight ? 'autoHeight' : 'normal'}
         defaultColDef={{ sortable: false, filter: false, resizable: false }}
         rowHeight={42}
         headerHeight={42}
@@ -105,7 +106,7 @@ export default function CmIncVarSVarTableCard({ rows }: CmIncVarSVarTableCardPro
             </Box>
           </Box>
 
-          {renderTable(260)}
+          {renderTable({ height: 260 })}
         </CardContent>
       </Card>
 
@@ -127,7 +128,7 @@ export default function CmIncVarSVarTableCard({ rows }: CmIncVarSVarTableCardPro
                 </Box>
               </Box>
 
-              {renderTable(720)}
+              {renderTable({ autoHeight: true })}
             </CardContent>
           </Card>
         </Box>
