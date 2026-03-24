@@ -3,6 +3,7 @@
 import OpenInFullRoundedIcon from '@mui/icons-material/OpenInFullRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import CloseFullscreenRoundedIcon from '@mui/icons-material/CloseFullscreenRounded';
+import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
 import { Box, Card, CardContent, Dialog, IconButton, Typography } from '@mui/material';
 import { AgCharts } from 'ag-charts-react';
 import { useMemo, useState } from 'react';
@@ -159,6 +160,9 @@ export default function TopRiskDataDriversChartCard({ series }: TopRiskDataDrive
               <IconButton size="small" sx={{ color: '#8b97a4' }} onClick={() => setIsExpanded(true)}>
                 <OpenInFullRoundedIcon fontSize="small" />
               </IconButton>
+              <IconButton size="small" sx={{ color: '#8b97a4', cursor: 'grab' }}>
+                <DragIndicatorRoundedIcon fontSize="small" />
+              </IconButton>
               <IconButton size="small" sx={{ color: '#8b97a4' }}>
                 <MoreVertRoundedIcon fontSize="small" />
               </IconButton>
@@ -180,6 +184,9 @@ export default function TopRiskDataDriversChartCard({ series }: TopRiskDataDrive
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
                   <IconButton size="small" sx={{ color: '#8b97a4' }} onClick={() => setIsExpanded(false)}>
                     <CloseFullscreenRoundedIcon fontSize="small" />
+                  </IconButton>
+                  <IconButton size="small" sx={{ color: '#8b97a4', cursor: 'grab' }}>
+                    <DragIndicatorRoundedIcon fontSize="small" />
                   </IconButton>
                   <IconButton size="small" sx={{ color: '#8b97a4' }}>
                     <MoreVertRoundedIcon fontSize="small" />
