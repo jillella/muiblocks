@@ -40,7 +40,7 @@ const entityScopeGroups = [
   },
 ];
 const regulators = ['JFSA', 'FRB', 'NFA', 'PRA'];
-const marketRiskOptions = ['Market Risk XVA'];
+const marketRiskOptions = ['Market Risk XVA', 'XVA'];
 
 export default function FiltersPage() {
   const [selectedEntityScopes, setSelectedEntityScopes] = useState<string[]>([]);
@@ -304,37 +304,23 @@ export default function FiltersPage() {
                     MenuListProps: { sx: { py: 0.5 } },
                   }}
                 >
-                  {regulators.flatMap((regulator, index) => {
-                    const menuItems = [
-                      <MenuItem
-                        key={regulator}
-                        value={regulator}
-                        sx={{
-                          minHeight: 50,
-                          px: 3,
-                          fontSize: '0.98rem',
-                          lineHeight: 1.2,
-                          fontWeight: 500,
-                          '&.Mui-selected': { backgroundColor: 'transparent' },
-                          '&.Mui-selected:hover': { backgroundColor: '#f1f4f6' },
-                        }}
-                      >
-                        {regulator}
-                      </MenuItem>,
-                    ];
-
-                    if (index < regulators.length - 1) {
-                      menuItems.push(
-                        <Divider
-                          key={`regulator-divider-${regulator}`}
-                          variant="middle"
-                          sx={{ borderColor: '#d5d9de', my: 0 }}
-                        />,
-                      );
-                    }
-
-                    return menuItems;
-                  })}
+                  {regulators.map((regulator) => (
+                    <MenuItem
+                      key={regulator}
+                      value={regulator}
+                      sx={{
+                        minHeight: 50,
+                        px: 3,
+                        fontSize: '0.98rem',
+                        lineHeight: 1.2,
+                        fontWeight: 500,
+                        '&.Mui-selected': { backgroundColor: 'transparent' },
+                        '&.Mui-selected:hover': { backgroundColor: '#f1f4f6' },
+                      }}
+                    >
+                      {regulator}
+                    </MenuItem>
+                  ))}
                 </FilterSelect>
               </FormControl>
 
