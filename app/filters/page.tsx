@@ -44,7 +44,7 @@ const marketRiskOptions = ['Market Risk XVA', 'XVA'];
 
 export default function FiltersPage() {
   const [selectedEntityScopes, setSelectedEntityScopes] = useState<string[]>([]);
-  const [selectedRegulator, setSelectedRegulator] = useState<string>(regulators[0]);
+  const [selectedRegulator, setSelectedRegulator] = useState<string>('');
   const [selectedMarketRisk, setSelectedMarketRisk] = useState<string>(marketRiskOptions[0]);
 
   const toggleEntityScopeChild = (child: string) => {
@@ -297,6 +297,7 @@ export default function FiltersPage() {
                   id="regulator-select"
                   value={selectedRegulator}
                   onChange={handleRegulatorChange}
+                  displayEmpty
                   renderValue={(selected) => (selected as string) || 'Regulator'}
                   MenuProps={{
                     PaperProps: {
