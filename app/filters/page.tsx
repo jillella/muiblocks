@@ -134,7 +134,7 @@ export default function FiltersPage() {
                         border: '1px solid #d9dfe5',
                         backgroundColor: '#f7f9fa',
                         boxShadow: '0 8px 22px rgba(0,0,0,0.12)',
-                        '& .MuiMenu-list': { py: 1.25 },
+                        '& .MuiMenu-list': { py: 0.75 },
                       },
                     },
                   }}
@@ -150,9 +150,9 @@ export default function FiltersPage() {
                           toggleEntityScopeParent(group.children);
                         }}
                         sx={{
-                          minHeight: 58,
-                          px: 2.5,
-                          gap: 1.25,
+                          minHeight: 48,
+                          px: 2,
+                          gap: 1,
                           '&.Mui-selected': { backgroundColor: 'transparent' },
                           '&.Mui-selected:hover': { backgroundColor: '#f1f4f6' },
                         }}
@@ -160,9 +160,9 @@ export default function FiltersPage() {
                         <ListItemIcon sx={{ minWidth: 0 }}>
                           <Box
                             sx={{
-                              width: 38,
-                              height: 38,
-                              borderRadius: 1.75,
+                              width: 30,
+                              height: 30,
+                              borderRadius: 1.25,
                               backgroundColor: '#eef2f0',
                               display: 'grid',
                               placeItems: 'center',
@@ -170,20 +170,21 @@ export default function FiltersPage() {
                           >
                             <Box
                               sx={{
-                                width: 24,
-                                height: 24,
-                                borderRadius: 0.75,
-                                backgroundColor: '#0b5d45',
+                                width: 20,
+                                height: 20,
+                                borderRadius: 0.5,
+                                backgroundColor: checked || indeterminate ? '#2f9e44' : '#0b5d45',
                                 display: 'grid',
                                 placeItems: 'center',
+                                transition: 'background-color 140ms ease',
                               }}
                             >
                               {indeterminate ? (
-                                <RemoveIcon sx={{ fontSize: 18, color: '#fff' }} />
+                                <RemoveIcon sx={{ fontSize: 16, color: '#fff' }} />
                               ) : (
                                 <CheckIcon
                                   sx={{
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     color: '#fff',
                                     opacity: checked ? 1 : 0,
                                     transition: 'opacity 120ms ease',
@@ -196,7 +197,7 @@ export default function FiltersPage() {
                         <ListItemText
                           primary={group.parent}
                           primaryTypographyProps={{
-                            fontSize: '1.04rem',
+                            fontSize: '0.98rem',
                             fontWeight: 700,
                             color: '#1d2329',
                           }}
@@ -215,9 +216,9 @@ export default function FiltersPage() {
                             toggleEntityScopeChild(child);
                           }}
                           sx={{
-                            minHeight: 58,
-                            px: 2.5,
-                            gap: 1.25,
+                            minHeight: 46,
+                            px: 2,
+                            gap: 1,
                             '&.Mui-selected': { backgroundColor: 'transparent' },
                             '&.Mui-selected:hover': { backgroundColor: '#f1f4f6' },
                           }}
@@ -225,9 +226,9 @@ export default function FiltersPage() {
                           <ListItemIcon sx={{ minWidth: 0 }}>
                             <Box
                               sx={{
-                                width: 38,
-                                height: 38,
-                                borderRadius: 1.75,
+                                width: 30,
+                                height: 30,
+                                borderRadius: 1.25,
                                 backgroundColor: '#eef2f0',
                                 display: 'grid',
                                 placeItems: 'center',
@@ -235,17 +236,18 @@ export default function FiltersPage() {
                             >
                               <Box
                                 sx={{
-                                  width: 24,
-                                  height: 24,
-                                  borderRadius: 0.75,
-                                  backgroundColor: '#0b5d45',
+                                  width: 20,
+                                  height: 20,
+                                  borderRadius: 0.5,
+                                  backgroundColor: isSelected ? '#2f9e44' : '#0b5d45',
                                   display: 'grid',
                                   placeItems: 'center',
+                                  transition: 'background-color 140ms ease',
                                 }}
                               >
                                 <CheckIcon
                                   sx={{
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     color: '#fff',
                                     opacity: isSelected ? 1 : 0,
                                     transition: 'opacity 120ms ease',
@@ -257,7 +259,7 @@ export default function FiltersPage() {
                           <ListItemText
                             primary={child}
                             primaryTypographyProps={{
-                              fontSize: '1.04rem',
+                              fontSize: '0.96rem',
                               fontWeight: 500,
                               color: '#1d2329',
                             }}
@@ -269,7 +271,11 @@ export default function FiltersPage() {
 
                     if (groupIndex < entityScopeGroups.length - 1) {
                       groupItems.push(
-                        <Divider key={`entity-divider-${groupIndex}`} sx={{ my: 0.75, borderColor: '#d4d9de' }} />,
+                        <Divider
+                          key={`entity-divider-${groupIndex}`}
+                          variant="middle"
+                          sx={{ my: 0.45, borderColor: '#d4d9de' }}
+                        />,
                       );
                     }
 
@@ -283,19 +289,19 @@ export default function FiltersPage() {
                   id="regulator-select"
                   value={selectedRegulator}
                   onChange={handleRegulatorChange}
-                  renderValue={() => 'Regulator'}
+                  renderValue={(selected) => (selected as string) || 'Regulator'}
                   MenuProps={{
                     PaperProps: {
                       sx: {
                         mt: 1,
-                        minWidth: 220,
+                        minWidth: 230,
                         borderRadius: 2,
                         border: '1px solid #d9dfe5',
                         backgroundColor: '#f7f9fa',
                         boxShadow: '0 8px 22px rgba(0,0,0,0.12)',
                       },
                     },
-                    MenuListProps: { sx: { py: 0.75 } },
+                    MenuListProps: { sx: { py: 0.5 } },
                   }}
                 >
                   {regulators.flatMap((regulator, index) => {
@@ -304,9 +310,10 @@ export default function FiltersPage() {
                         key={regulator}
                         value={regulator}
                         sx={{
-                          minHeight: 56,
-                          px: 2.5,
-                          fontSize: '1.02rem',
+                          minHeight: 50,
+                          px: 3,
+                          fontSize: '0.98rem',
+                          lineHeight: 1.2,
                           fontWeight: 500,
                           '&.Mui-selected': { backgroundColor: 'transparent' },
                           '&.Mui-selected:hover': { backgroundColor: '#f1f4f6' },
@@ -317,7 +324,13 @@ export default function FiltersPage() {
                     ];
 
                     if (index < regulators.length - 1) {
-                      menuItems.push(<Divider key={`regulator-divider-${regulator}`} sx={{ borderColor: '#e1e5e9' }} />);
+                      menuItems.push(
+                        <Divider
+                          key={`regulator-divider-${regulator}`}
+                          variant="middle"
+                          sx={{ borderColor: '#d5d9de', my: 0 }}
+                        />,
+                      );
                     }
 
                     return menuItems;
