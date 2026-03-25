@@ -196,10 +196,14 @@ export default function FiltersPage() {
                         </ListItemIcon>
                         <ListItemText
                           primary={group.parent}
-                          primaryTypographyProps={{
-                            fontSize: '0.98rem',
-                            fontWeight: 700,
-                            color: '#1d2329',
+                          slotProps={{
+                            primary: {
+                              sx: {
+                                fontSize: '0.98rem',
+                                fontWeight: 700,
+                                color: '#1d2329',
+                              },
+                            },
                           }}
                         />
                       </MenuItem>,
@@ -258,10 +262,14 @@ export default function FiltersPage() {
                           </ListItemIcon>
                           <ListItemText
                             primary={child}
-                            primaryTypographyProps={{
-                              fontSize: '0.96rem',
-                              fontWeight: 500,
-                              color: '#1d2329',
+                            slotProps={{
+                              primary: {
+                                sx: {
+                                  fontSize: '0.96rem',
+                                  fontWeight: 500,
+                                  color: '#1d2329',
+                                },
+                              },
                             }}
                             sx={{ pl: 0.5 }}
                           />
