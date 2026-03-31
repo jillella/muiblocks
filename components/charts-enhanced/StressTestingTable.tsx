@@ -16,7 +16,7 @@ export interface StressTestingRow {
   ccarDate: number;
 }
 
-interface StressTestingCardProps {
+interface StressTestingTableProps {
   rows: StressTestingRow[];
 }
 
@@ -26,7 +26,7 @@ const numberFormat = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 1,
 });
 
-export default function StressTestingCard({ rows }: StressTestingCardProps) {
+export default function StressTestingTable({ rows }: StressTestingTableProps) {
   const columnDefs = useMemo<ColDef<StressTestingRow>[]>(
     () => [
       { field: 'product', headerName: 'Products / Risk Sensitivity', flex: 2.2, minWidth: 220 },
