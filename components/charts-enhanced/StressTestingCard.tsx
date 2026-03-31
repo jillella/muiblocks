@@ -1,7 +1,13 @@
 'use client';
 
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Box } from '@mui/material';
+import type { ColDef } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { useMemo } from 'react';
+import { registerAgModules } from '@/lib/ag-modules';
 import { EnhancedCardFrame } from './shared';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 export interface StressTestingRow {
   product: string;
@@ -14,49 +20,86 @@ interface StressTestingCardProps {
   rows: StressTestingRow[];
 }
 
+registerAgModules();
+
 const numberFormat = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 1,
 });
 
 export default function StressTestingCard({ rows }: StressTestingCardProps) {
+  const columnDefs = useMemo<ColDef<StressTestingRow>[]>(
+    () => [
+      { field: 'product', headerName: 'Products / Risk Sensitivity', flex: 2.2, minWidth: 220 },
+      {
+        field: 'mtm',
+        headerName: 'MTM',
+        flex: 0.9,
+        minWidth: 84,
+        cellStyle: { textAlign: 'right' },
+        valueFormatter: ({ value }) => numberFormat.format(value),
+      },
+      {
+        field: 'adScenario',
+        headerName: 'Ad Scenario',
+        flex: 1,
+        minWidth: 102,
+        cellStyle: { textAlign: 'right' },
+        valueFormatter: ({ value }) => numberFormat.format(value),
+      },
+      {
+        field: 'ccarDate',
+        headerName: 'CCAR - 07-Mar-26',
+        flex: 1.2,
+        minWidth: 130,
+        cellStyle: { textAlign: 'right' },
+        valueFormatter: ({ value }) => numberFormat.format(value),
+      },
+    ],
+    [],
+  );
+
   return (
-    <EnhancedCardFrame title="Stress Testing - CM Inc">
-      <TableContainer>
-        <Table size="small">
-          <TableHead>
-            <TableRow sx={{ backgroundColor: '#f5f7fa' }}>
-              <TableCell sx={{ color: '#4f5f74', fontSize: '0.86rem', fontWeight: 600 }}>
-                Products / Risk Sensitivity
-              </TableCell>
-              <TableCell align="right" sx={{ color: '#4f5f74', fontSize: '0.86rem', fontWeight: 600 }}>
-                MTM
-              </TableCell>
-              <TableCell align="right" sx={{ color: '#4f5f74', fontSize: '0.86rem', fontWeight: 600 }}>
-                Ad Scenario
-              </TableCell>
-              <TableCell align="right" sx={{ color: '#4f5f74', fontSize: '0.86rem', fontWeight: 600 }}>
-                CCAR 07-Mar-26
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.product} hover>
-                <TableCell sx={{ color: '#55657a', fontSize: '0.84rem' }}>{row.product}</TableCell>
-                <TableCell align="right" sx={{ color: '#455669', fontSize: '0.84rem' }}>
-                  {numberFormat.format(row.mtm)}
-                </TableCell>
-                <TableCell align="right" sx={{ color: '#455669', fontSize: '0.84rem' }}>
-                  {numberFormat.format(row.adScenario)}
-                </TableCell>
-                <TableCell align="right" sx={{ color: '#455669', fontSize: '0.84rem' }}>
-                  {numberFormat.format(row.ccarDate)}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    <EnhancedCardFrame title="Stress Testing">
+      <Box
+        className="ag-theme-quartz"
+        sx={{
+          '--ag-font-family': '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+          '--ag-borders': 'none',
+          '--ag-row-border-style': 'solid',
+          '--ag-row-border-color': '#e9edf2',
+          '--ag-header-background-color': '#f5f7fa',
+          '--ag-header-foreground-color': '#4f5f74',
+          '--ag-foreground-color': '#455669',
+          '--ag-border-color': '#e9edf2',
+          '--ag-row-hover-color': '#f8fbff',
+          '--ag-cell-horizontal-padding': '12px',
+          '--ag-header-column-resize-handle-display': 'none',
+          width: '100%',
+          borderRadius: 1.5,
+          border: '1px solid #e9edf2',
+          overflow: 'hidden',
+          '& .ag-header-cell-label': {
+            fontWeight: 600,
+            fontSize: '0.86rem',
+          },
+          '& .ag-cell': {
+            fontSize: '0.84rem',
+            color: '#455669',
+          },
+        }}
+      >
+        <AgGridReact<StressTestingRow>
+          theme="legacy"
+          rowData={rows}
+          columnDefs={columnDefs}
+          domLayout="autoHeight"
+          defaultColDef={{ sortable: false, filter: false, resizable: false }}
+          rowHeight={40}
+          headerHeight={40}
+          suppressCellFocus
+          suppressMovableColumns
+        />
+      </Box>
     </EnhancedCardFrame>
   );
 }

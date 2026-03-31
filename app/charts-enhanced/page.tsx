@@ -30,11 +30,11 @@ const varAttributionRows: AttributionRow[] = [
 ];
 
 const stressTestingRows: StressTestingRow[] = [
-  { product: 'Interest Rate Swap', mtm: 4, adScenario: 4, ccarDate: 7 },
-  { product: 'Interest Rate Swaption', mtm: 2, adScenario: 6, ccarDate: 2 },
-  { product: 'Interest Rate Futures', mtm: 1, adScenario: 3, ccarDate: 1 },
-  { product: 'Cap Floor', mtm: 1.2, adScenario: 4, ccarDate: 7 },
-  { product: 'Other', mtm: 3, adScenario: 1, ccarDate: 1 },
+  { product: 'Interest Rate Swap', mtm: 18, adScenario: 4, ccarDate: 7 },
+  { product: 'Interest Rate Swaption', mtm: 14, adScenario: 2.2, ccarDate: 14.4 },
+  { product: 'Interest Rate Futures', mtm: 22, adScenario: 3, ccarDate: 1 },
+  { product: 'Cap Floor', mtm: 7, adScenario: 1, ccarDate: 7 },
+  { product: 'Other', mtm: 7.2, adScenario: 1, ccarDate: 8 },
 ];
 
 const monthlySeries: PerformancePoint[] = [
