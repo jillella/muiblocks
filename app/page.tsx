@@ -3,7 +3,9 @@ import Link from 'next/link';
 const links = [
   { href: '/summary', label: 'summary' },
   { href: '/charts', label: 'charts' },
+  { href: '/charts-enhanced', label: 'charts-enhanced' },
   { href: '/filters', label: 'filters' },
+  { href: '/tooltip', label: 'tooltip' },
 ] as const;
 
 export default function HomePage() {
