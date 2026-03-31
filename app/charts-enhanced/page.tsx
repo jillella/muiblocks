@@ -14,10 +14,10 @@ const VarAttributionTable = dynamic(() => import('@/components/charts-enhanced/V
 const StressTestingTable = dynamic(() => import('@/components/charts-enhanced/StressTestingTable'), {
   ssr: false,
 });
-const VarBacktestingCard = dynamic(() => import('@/components/charts-enhanced/VarBacktestingCard'), {
+const VarBacktestingChart = dynamic(() => import('@/components/charts-enhanced/VarBacktestingChart'), {
   ssr: false,
 });
-const StressMaxLossCard = dynamic(() => import('@/components/charts-enhanced/StressMaxLossCard'), {
+const StressMaxLossChart = dynamic(() => import('@/components/charts-enhanced/StressMaxLossChart'), {
   ssr: false,
 });
 
@@ -81,8 +81,8 @@ export default function ChartsEnhancedPage() {
           >
             <VarAttributionTable rows={varAttributionRows} />
             <StressTestingTable rows={stressTestingRows} />
-            <VarBacktestingCard data={monthlySeries} />
-            <StressMaxLossCard data={monthlySeries} />
+            <VarBacktestingChart data={monthlySeries} />
+            <StressMaxLossChart data={monthlySeries} />
           </Box>
         </Container>
       </Box>
