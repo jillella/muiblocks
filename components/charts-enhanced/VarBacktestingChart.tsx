@@ -2,10 +2,10 @@
 
 import PerformanceComboChartCard, { type PerformancePoint } from './PerformanceComboChartCard';
 
-interface VarBacktestingCardProps {
+interface VarBacktestingChartProps {
   data: PerformancePoint[];
 }
 
-export default function VarBacktestingCard({ data }: VarBacktestingCardProps) {
+export default function VarBacktestingChart({ data }: VarBacktestingChartProps) {
   return <PerformanceComboChartCard title="VaR Backtesting - CM Inc" yAxisLabel="VaR / PnL" data={data} />;
 }
