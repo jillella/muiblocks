@@ -5,4 +5,4 @@ export { default as StressMaxLossChart } from './StressMaxLossChart';
 
 export type { AttributionRow } from './VarAttributionTable';
 export type { StressTestingRow } from './StressTestingTable';
-export type { PerformancePoint } from './PerformanceComboChartCard';
+export type { PerformancePoint } from './types';
