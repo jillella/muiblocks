@@ -18,7 +18,7 @@ export interface AttributionRow {
   fxVega: number;
 }
 
-interface VarAttributionCardProps {
+interface VarAttributionTableProps {
   rows: AttributionRow[];
 }
 
@@ -28,7 +28,7 @@ const numberFormat = new Intl.NumberFormat('en-US', {
   maximumFractionDigits: 1,
 });
 
-export default function VarAttributionCard({ rows }: VarAttributionCardProps) {
+export default function VarAttributionTable({ rows }: VarAttributionTableProps) {
   const columnDefs = useMemo<ColDef<AttributionRow>[]>(
     () => [
       { field: 'product', headerName: 'Products / Risk Sensitivity', flex: 2.1, minWidth: 210 },
