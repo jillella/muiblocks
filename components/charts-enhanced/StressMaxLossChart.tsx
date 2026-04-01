@@ -221,8 +221,8 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
             {renderActions({ expanded: false })}
           </Box>
 
-          <Box sx={{ width: '100%', height: 172 }}>
-            <AgCharts options={options} style={{ width: '100%', height: 172 }} />
+          <Box sx={{ width: '100%', height: 272 }}>
+            <AgCharts options={options} style={{ width: '100%', height: 272 }} />
           </Box>
         </CardContent>
       </Card>
