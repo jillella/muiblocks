@@ -146,7 +146,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           },
           gridLine: {
             enabled: true,
-            style: [{ stroke: '#dce4ed', lineDash: [2, 4] }],
+            style: [{ stroke: '#dce4ed', lineDash: [] }],
           },
         },
       },
@@ -250,7 +250,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
             }}
           >
             <Typography
-              sx={{ fontSize: '1.06rem', fontWeight: 600, color: '#5a6a80' }}
+              sx={{ fontSize: '1.06rem', fontWeight: 600, color: '#5a6a80', mb: 1.3 }}
             >
               Stress Max Loss
             </Typography>

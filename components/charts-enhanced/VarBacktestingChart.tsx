@@ -148,7 +148,7 @@ export default function VarBacktestingChart({
           },
           gridLine: {
             enabled: true,
-            style: [{ stroke: '#dce4ed', lineDash: [2, 4] }],
+            style: [{ stroke: '#dce4ed', lineDash: [] }],
           },
         },
       },
@@ -252,7 +252,7 @@ export default function VarBacktestingChart({
             }}
           >
             <Typography
-              sx={{ fontSize: '1.06rem', fontWeight: 600, color: '#5a6a80' }}
+              sx={{ fontSize: '1.06rem', fontWeight: 600, color: '#5a6a80', mb: 1.3 }}
             >
               VaR Backtesting
             </Typography>
