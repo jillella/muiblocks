@@ -20,16 +20,43 @@ interface StressMaxLossChartProps {
 export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const chartData = useMemo(() => {
+    const minMax = (values: number[]) => ({
+      min: Math.min(...values),
+      max: Math.max(...values),
+    });
+    const mapRange = (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => {
+      if (inMin === inMax) return (outMin + outMax) / 2;
+      return outMin + ((value - inMin) / (inMax - inMin)) * (outMax - outMin);
+    };
+
+    const clean = data.map((d) => d.cleanPnl);
+    const varSeries = data.map((d) => d.var);
+    const cleanBounds = minMax(clean);
+    const varBounds = minMax(varSeries);
+
+    return data.map((d) => {
+      const cleanPnlDisplay = mapRange(d.cleanPnl, cleanBounds.min, cleanBounds.max, 60, 140);
+      const varDisplay = mapRange(d.var, varBounds.min, varBounds.max, 100, 235);
+      return {
+        ...d,
+        cleanPnlDisplay,
+        varDisplay,
+        thresholdDisplay: 250,
+      };
+    });
+  }, [data]);
+
   const options: any = useMemo(
     () => ({
-      data,
+      data: chartData,
       background: { fill: 'transparent' },
       padding: { top: 12, right: 10, bottom: 16, left: 10 },
       series: [
         {
           type: 'bar',
           xKey: 'month',
-          yKey: 'cleanPnl',
+          yKey: 'cleanPnlDisplay',
           yName: 'Clean PnL',
           fill: '#2f6f87',
           stroke: '#2f6f87',
@@ -39,7 +66,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
         {
           type: 'line',
           xKey: 'month',
-          yKey: 'var',
+          yKey: 'varDisplay',
           yName: 'VaR',
           stroke: '#c8b26d',
           strokeWidth: 2,
@@ -55,7 +82,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
         {
           type: 'line',
           xKey: 'month',
-          yKey: 'threshold',
+          yKey: 'thresholdDisplay',
           yName: 'Threshold',
           showInLegend: false,
           stroke: '#cf7d38',
@@ -108,7 +135,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
         },
       },
     }),
-    [data],
+    [chartData],
   );
 
   const renderActions = ({ expanded }: { expanded: boolean }) => (
