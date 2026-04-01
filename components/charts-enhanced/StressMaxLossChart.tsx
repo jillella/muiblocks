@@ -5,7 +5,14 @@ import CloseFullscreenRoundedIcon from '@mui/icons-material/CloseFullscreenRound
 import FormatListBulletedRoundedIcon from '@mui/icons-material/FormatListBulletedRounded';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import OpenInFullRoundedIcon from '@mui/icons-material/OpenInFullRounded';
-import { Box, Card, CardContent, Dialog, IconButton, Typography } from '@mui/material';
+import {
+  Box,
+  Card,
+  CardContent,
+  Dialog,
+  IconButton,
+  Typography,
+} from '@mui/material';
 import { AgCharts } from 'ag-charts-react';
 import { useMemo, useState } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
@@ -25,7 +32,13 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
       min: Math.min(...values),
       max: Math.max(...values),
     });
-    const mapRange = (value: number, inMin: number, inMax: number, outMin: number, outMax: number) => {
+    const mapRange = (
+      value: number,
+      inMin: number,
+      inMax: number,
+      outMin: number,
+      outMax: number
+    ) => {
       if (inMin === inMax) return (outMin + outMax) / 2;
       return outMin + ((value - inMin) / (inMax - inMin)) * (outMax - outMin);
     };
@@ -36,8 +49,20 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
     const varBounds = minMax(varSeries);
 
     return data.map((d) => {
-      const cleanPnlDisplay = mapRange(d.cleanPnl, cleanBounds.min, cleanBounds.max, 60, 140);
-      const varDisplay = mapRange(d.var, varBounds.min, varBounds.max, 100, 235);
+      const cleanPnlDisplay = mapRange(
+        d.cleanPnl,
+        cleanBounds.min,
+        cleanBounds.max,
+        60,
+        140
+      );
+      const varDisplay = mapRange(
+        d.var,
+        varBounds.min,
+        varBounds.max,
+        100,
+        235
+      );
       return {
         ...d,
         cleanPnlDisplay,
@@ -51,7 +76,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
     () => ({
       data: chartData,
       background: { fill: 'transparent' },
-      padding: { top: 12, right: 10, bottom: 16, left: 10 },
+      padding: { top: 8, right: 8, bottom: 10, left: 8 },
       series: [
         {
           type: 'bar',
@@ -60,8 +85,8 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           yName: 'Clean PnL',
           fill: '#2f6f87',
           stroke: '#2f6f87',
-          cornerRadius: 3,
-          maxWidth: 24,
+          cornerRadius: 2,
+          maxWidth: 22,
         },
         {
           type: 'line',
@@ -69,14 +94,14 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           yKey: 'varDisplay',
           yName: 'VaR',
           stroke: '#c8b26d',
-          strokeWidth: 2,
+          strokeWidth: 1.5,
           marker: {
             enabled: true,
             shape: 'circle',
-            size: 4.5,
+            size: 3.5,
             fill: '#ffffff',
             stroke: '#c8b26d',
-            strokeWidth: 2,
+            strokeWidth: 1.5,
           },
         },
         {
@@ -86,7 +111,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           yName: 'Threshold',
           showInLegend: false,
           stroke: '#cf7d38',
-          strokeWidth: 2,
+          strokeWidth: 1.6,
           marker: { enabled: false },
           lineDash: [],
         },
@@ -97,7 +122,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           position: 'bottom',
           line: { enabled: false },
           tick: { enabled: false },
-          label: { color: '#687687', fontSize: 11, rotation: -52 },
+          label: { color: '#687687', fontSize: 10, rotation: -52 },
           gridLine: { enabled: false },
         },
         y: {
@@ -121,32 +146,32 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           },
           gridLine: {
             enabled: true,
-            style: [{ stroke: '#d5dee8', lineDash: [3, 4] }],
+            style: [{ stroke: '#dce4ed', lineDash: [2, 4] }],
           },
         },
       },
       legend: {
         enabled: true,
         position: 'bottom',
-        spacing: 8,
+        spacing: 6,
         item: {
-          marker: { shape: 'circle', size: 7 },
+          marker: { shape: 'circle', size: 6 },
           label: { color: '#64748b', fontSize: 11 },
         },
       },
     }),
-    [chartData],
+    [chartData]
   );
 
   const renderActions = ({ expanded }: { expanded: boolean }) => (
-    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
       <Box
         sx={{
-          py: 0.2,
-          px: 0.5,
+          py: 0.15,
+          px: 0.35,
           borderRadius: 999,
-          backgroundColor: '#eef5ff',
-          border: '1px solid #deebf8',
+          backgroundColor: '#eff4fb',
+          border: '1px solid #dce4ed',
           boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.55)',
           display: 'flex',
           alignItems: 'center',
@@ -156,24 +181,24 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
         <IconButton
           size="small"
           sx={{
-            width: 52,
-            height: 32,
+            width: 36,
+            height: 24,
             borderRadius: 999,
             backgroundColor: '#ffffff',
-            color: '#2f8fe8',
+            color: '#2f87d9',
             boxShadow: '0 1px 3px rgba(35,94,165,0.18)',
             '&:hover': {
               backgroundColor: '#ffffff',
             },
           }}
         >
-          <EqualizerRoundedIcon fontSize="small" />
+          <EqualizerRoundedIcon sx={{ fontSize: 16 }} />
         </IconButton>
         <IconButton
           size="small"
           sx={{
-            width: 52,
-            height: 32,
+            width: 36,
+            height: 24,
             borderRadius: 999,
             color: '#6d6d6d',
             '&:hover': {
@@ -181,7 +206,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
             },
           }}
         >
-          <FormatListBulletedRoundedIcon fontSize="small" />
+          <FormatListBulletedRoundedIcon sx={{ fontSize: 16 }} />
         </IconButton>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.25 }}>
@@ -191,13 +216,13 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           onClick={() => setIsExpanded((current) => !current)}
         >
           {expanded ? (
-            <CloseFullscreenRoundedIcon fontSize="small" />
+            <CloseFullscreenRoundedIcon sx={{ fontSize: 16 }} />
           ) : (
-            <OpenInFullRoundedIcon fontSize="small" />
+            <OpenInFullRoundedIcon sx={{ fontSize: 16 }} />
           )}
         </IconButton>
         <IconButton size="small" sx={{ color: '#8b97a4' }}>
-          <MoreVertRoundedIcon fontSize="small" />
+          <MoreVertRoundedIcon sx={{ fontSize: 16 }} />
         </IconButton>
       </Box>
     </Box>
@@ -207,39 +232,77 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
     <>
       <Card
         sx={{
-          borderRadius: 2.5,
-          border: '1px solid #d9e1e8',
-          boxShadow: '0 2px 6px rgba(15, 23, 42, 0.08)',
+          borderRadius: 2.2,
+          border: '1px solid #d7dfe8',
+          boxShadow: '0 1px 4px rgba(15, 23, 42, 0.08)',
           height: '100%',
         }}
       >
-        <CardContent sx={{ p: 1.6, '&.MuiCardContent-root:last-child': { pb: 1.6 } }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 0.75 }}>
-            <Typography sx={{ fontSize: '1.12rem', fontWeight: 600, color: '#5b6a7f' }}>
+        <CardContent
+          sx={{ p: 1.3, '&.MuiCardContent-root:last-child': { pb: 1.3 } }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mb: 1.3,
+            }}
+          >
+            <Typography
+              sx={{ fontSize: '1.06rem', fontWeight: 600, color: '#5a6a80' }}
+            >
               Stress Max Loss
             </Typography>
             {renderActions({ expanded: false })}
           </Box>
 
-          <Box sx={{ width: '100%', height: 272 }}>
-            <AgCharts options={options} style={{ width: '100%', height: 272 }} />
+          <Box sx={{ width: '100%', height: 300 }}>
+            <AgCharts
+              options={options}
+              style={{ width: '100%', height: 300 }}
+            />
           </Box>
         </CardContent>
       </Card>
 
       <Dialog fullScreen open={isExpanded} onClose={() => setIsExpanded(false)}>
         <Box sx={{ minHeight: '100vh', backgroundColor: '#f8fafc', p: 3 }}>
-          <Card sx={{ borderRadius: 2.5, border: '1px solid #d9e1e8', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.08)' }}>
-            <CardContent sx={{ p: 2.25, '&.MuiCardContent-root:last-child': { pb: 2.25 } }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.25 }}>
-                <Typography sx={{ fontSize: '1.12rem', fontWeight: 600, color: '#5b6a7f' }}>
+          <Card
+            sx={{
+              borderRadius: 2.2,
+              border: '1px solid #d7dfe8',
+              boxShadow: '0 1px 4px rgba(15, 23, 42, 0.08)',
+            }}
+          >
+            <CardContent
+              sx={{ p: 2.25, '&.MuiCardContent-root:last-child': { pb: 2.25 } }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  mb: 1.25,
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: '1.06rem',
+                    fontWeight: 600,
+                    color: '#5a6a80',
+                  }}
+                >
                   Stress Max Loss
                 </Typography>
                 {renderActions({ expanded: true })}
               </Box>
 
               <Box sx={{ width: '100%', height: 'calc(100vh - 180px)' }}>
-                <AgCharts options={options} style={{ width: '100%', height: '100%' }} />
+                <AgCharts
+                  options={options}
+                  style={{ width: '100%', height: '100%' }}
+                />
               </Box>
             </CardContent>
           </Card>
