@@ -57,6 +57,7 @@ export default function VarBacktestingChart({ data }: VarBacktestingChartProps) 
           xKey: 'month',
           yKey: 'threshold',
           yName: 'Threshold',
+          showInLegend: false,
           stroke: '#cf7d38',
           strokeWidth: 2,
           marker: { enabled: false },
@@ -76,6 +77,8 @@ export default function VarBacktestingChart({ data }: VarBacktestingChartProps) 
           type: 'number',
           position: 'left',
           min: 0,
+          max: 300,
+          reverse: true,
           line: { enabled: false },
           tick: { enabled: false },
           label: {
@@ -85,23 +88,23 @@ export default function VarBacktestingChart({ data }: VarBacktestingChartProps) 
           },
           title: {
             enabled: true,
-            text: 'VaR / PnL',
+            text: 'VaR / Clean PnL',
             color: '#6c7888',
             fontSize: 11,
           },
           gridLine: {
             enabled: true,
-            style: [{ stroke: '#e4ebf2', lineDash: [3, 6] }],
+            style: [{ stroke: '#d5dee8', lineDash: [3, 4] }],
           },
         },
       },
       legend: {
         enabled: true,
         position: 'bottom',
-        spacing: 12,
+        spacing: 8,
         item: {
-          marker: { shape: 'circle', size: 8 },
-          label: { color: '#64748b', fontSize: 12 },
+          marker: { shape: 'circle', size: 7 },
+          label: { color: '#64748b', fontSize: 11 },
         },
       },
     }),
@@ -177,33 +180,33 @@ export default function VarBacktestingChart({ data }: VarBacktestingChartProps) 
     <>
       <Card
         sx={{
-          borderRadius: 3,
-          border: '1px solid #e0e0e0',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+          borderRadius: 2.5,
+          border: '1px solid #d9e1e8',
+          boxShadow: '0 2px 6px rgba(15, 23, 42, 0.08)',
           height: '100%',
         }}
       >
-        <CardContent sx={{ p: 2.25, '&.MuiCardContent-root:last-child': { pb: 2.25 } }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.25 }}>
-            <Typography sx={{ fontSize: '1.3rem', fontWeight: 500, color: '#3d516b' }}>
-              VaR Backtesting - CM Inc
+        <CardContent sx={{ p: 1.6, '&.MuiCardContent-root:last-child': { pb: 1.6 } }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 0.75 }}>
+            <Typography sx={{ fontSize: '1.12rem', fontWeight: 600, color: '#5b6a7f' }}>
+              VaR Backtesting
             </Typography>
             {renderActions({ expanded: false })}
           </Box>
 
-          <Box sx={{ width: '100%', height: 248 }}>
-            <AgCharts options={options} style={{ width: '100%', height: 248 }} />
+          <Box sx={{ width: '100%', height: 172 }}>
+            <AgCharts options={options} style={{ width: '100%', height: 172 }} />
           </Box>
         </CardContent>
       </Card>
 
       <Dialog fullScreen open={isExpanded} onClose={() => setIsExpanded(false)}>
         <Box sx={{ minHeight: '100vh', backgroundColor: '#f8fafc', p: 3 }}>
-          <Card sx={{ borderRadius: 3, border: '1px solid #e0e0e0', boxShadow: '0 2px 8px rgba(0,0,0,0.08)' }}>
+          <Card sx={{ borderRadius: 2.5, border: '1px solid #d9e1e8', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.08)' }}>
             <CardContent sx={{ p: 2.25, '&.MuiCardContent-root:last-child': { pb: 2.25 } }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.25 }}>
-                <Typography sx={{ fontSize: '1.3rem', fontWeight: 500, color: '#3d516b' }}>
-                  VaR Backtesting - CM Inc
+                <Typography sx={{ fontSize: '1.12rem', fontWeight: 600, color: '#5b6a7f' }}>
+                  VaR Backtesting
                 </Typography>
                 {renderActions({ expanded: true })}
               </Box>
