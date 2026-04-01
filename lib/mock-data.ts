@@ -36,6 +36,20 @@ export interface CleanPnlVarPoint {
   var: number;
 }
 
+export interface VarBacktestingChartPoint {
+  month: string;
+  var: number;
+  cleanPnl: number;
+  threshold: number;
+}
+
+export interface StressMaxLossChartPoint {
+  month: string;
+  var: number;
+  cleanPnl: number;
+  threshold: number;
+}
+
 export interface RiskDriverSeriesItem {
   name: string;
   changePct: string;
@@ -91,6 +105,42 @@ export const mockCleanPnlVarData: CleanPnlVarPoint[] = [
   { period: 'May', cleanPnl: 13, var: 14 },
   { period: 'Jun', cleanPnl: 7, var: 9 },
   { period: 'Jul', cleanPnl: 14, var: 16 },
+];
+
+export const mockVarBacktestingChartSeries: VarBacktestingChartPoint[] = [
+  { month: 'Jan-25', var: 120, cleanPnl: 245, threshold: 250 },
+  { month: 'Feb-25', var: 230, cleanPnl: 250, threshold: 250 },
+  { month: 'Mar-25', var: 210, cleanPnl: 260, threshold: 250 },
+  { month: 'Apr-25', var: 80, cleanPnl: 145, threshold: 250 },
+  { month: 'May-25', var: 95, cleanPnl: 170, threshold: 250 },
+  { month: 'Jun-25', var: 205, cleanPnl: 185, threshold: 250 },
+  { month: 'Jul-25', var: 75, cleanPnl: 220, threshold: 250 },
+  { month: 'Aug-25', var: 190, cleanPnl: 155, threshold: 250 },
+  { month: 'Sep-25', var: 65, cleanPnl: 175, threshold: 250 },
+  { month: 'Oct-25', var: 125, cleanPnl: 215, threshold: 250 },
+  { month: 'Nov-25', var: 70, cleanPnl: 155, threshold: 250 },
+  { month: 'Dec-25', var: 55, cleanPnl: 175, threshold: 250 },
+  { month: 'Jan-26', var: 160, cleanPnl: 210, threshold: 250 },
+  { month: 'Feb-26', var: 35, cleanPnl: 160, threshold: 250 },
+  { month: 'Mar-26', var: 100, cleanPnl: 210, threshold: 250 },
+];
+
+export const mockStressMaxLossChartSeries: StressMaxLossChartPoint[] = [
+  { month: 'Jan-25', var: 120, cleanPnl: 245, threshold: 250 },
+  { month: 'Feb-25', var: 230, cleanPnl: 250, threshold: 250 },
+  { month: 'Mar-25', var: 210, cleanPnl: 260, threshold: 250 },
+  { month: 'Apr-25', var: 80, cleanPnl: 145, threshold: 250 },
+  { month: 'May-25', var: 95, cleanPnl: 170, threshold: 250 },
+  { month: 'Jun-25', var: 205, cleanPnl: 185, threshold: 250 },
+  { month: 'Jul-25', var: 75, cleanPnl: 220, threshold: 250 },
+  { month: 'Aug-25', var: 190, cleanPnl: 155, threshold: 250 },
+  { month: 'Sep-25', var: 65, cleanPnl: 175, threshold: 250 },
+  { month: 'Oct-25', var: 125, cleanPnl: 215, threshold: 250 },
+  { month: 'Nov-25', var: 70, cleanPnl: 155, threshold: 250 },
+  { month: 'Dec-25', var: 55, cleanPnl: 175, threshold: 250 },
+  { month: 'Jan-26', var: 160, cleanPnl: 210, threshold: 250 },
+  { month: 'Feb-26', var: 35, cleanPnl: 160, threshold: 250 },
+  { month: 'Mar-26', var: 100, cleanPnl: 210, threshold: 250 },
 ];
 
 export const mockRiskDriverSeries: RiskDriverSeries[] = [

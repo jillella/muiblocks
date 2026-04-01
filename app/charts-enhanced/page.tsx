@@ -2,11 +2,8 @@
 
 import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
 import dynamic from 'next/dynamic';
-import type {
-  AttributionRow,
-  PerformancePoint,
-  StressTestingRow,
-} from '@/components/charts-enhanced';
+import type { AttributionRow, StressTestingRow } from '@/components/charts-enhanced';
+import { mockStressMaxLossChartSeries, mockVarBacktestingChartSeries } from '@/lib/mock-data';
 
 const VarAttributionTable = dynamic(() => import('@/components/charts-enhanced/VarAttributionTable'), {
   ssr: false,
@@ -37,24 +34,6 @@ const stressTestingRows: StressTestingRow[] = [
   { product: 'Other', mtm: 7.2, adScenario: 1, ccarDate: 8 },
 ];
 
-const monthlySeries: PerformancePoint[] = [
-  { month: 'Jan-25', var: 120, cleanPnl: 245, threshold: 250 },
-  { month: 'Feb-25', var: 230, cleanPnl: 250, threshold: 250 },
-  { month: 'Mar-25', var: 210, cleanPnl: 260, threshold: 250 },
-  { month: 'Apr-25', var: 80, cleanPnl: 145, threshold: 250 },
-  { month: 'May-25', var: 95, cleanPnl: 170, threshold: 250 },
-  { month: 'Jun-25', var: 205, cleanPnl: 185, threshold: 250 },
-  { month: 'Jul-25', var: 75, cleanPnl: 220, threshold: 250 },
-  { month: 'Aug-25', var: 190, cleanPnl: 155, threshold: 250 },
-  { month: 'Sep-25', var: 65, cleanPnl: 175, threshold: 250 },
-  { month: 'Oct-25', var: 125, cleanPnl: 215, threshold: 250 },
-  { month: 'Nov-25', var: 70, cleanPnl: 155, threshold: 250 },
-  { month: 'Dec-25', var: 55, cleanPnl: 175, threshold: 250 },
-  { month: 'Jan-26', var: 160, cleanPnl: 210, threshold: 250 },
-  { month: 'Feb-26', var: 35, cleanPnl: 160, threshold: 250 },
-  { month: 'Mar-26', var: 100, cleanPnl: 210, threshold: 250 },
-];
-
 const theme = createTheme({
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -81,8 +60,8 @@ export default function ChartsEnhancedPage() {
           >
             <VarAttributionTable rows={varAttributionRows} />
             <StressTestingTable rows={stressTestingRows} />
-            <VarBacktestingChart data={monthlySeries} />
-            <StressMaxLossChart data={monthlySeries} />
+            <VarBacktestingChart data={mockVarBacktestingChartSeries} />
+            <StressMaxLossChart data={mockStressMaxLossChartSeries} />
           </Box>
         </Container>
       </Box>

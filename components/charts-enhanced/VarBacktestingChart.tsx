@@ -9,12 +9,12 @@ import { Box, Card, CardContent, Dialog, IconButton, Typography } from '@mui/mat
 import { AgCharts } from 'ag-charts-react';
 import { useMemo, useState } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
-import type { PerformancePoint } from '@/components/charts-enhanced';
+import type { VarBacktestingChartPoint } from '@/lib/mock-data';
 
 registerAgModules();
 
 interface VarBacktestingChartProps {
-  data: PerformancePoint[];
+  data: VarBacktestingChartPoint[];
 }
 
 export default function VarBacktestingChart({ data }: VarBacktestingChartProps) {

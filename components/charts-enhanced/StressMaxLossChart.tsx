@@ -9,12 +9,12 @@ import { Box, Card, CardContent, Dialog, IconButton, Typography } from '@mui/mat
 import { AgCharts } from 'ag-charts-react';
 import { useMemo, useState } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
-import type { PerformancePoint } from '@/components/charts-enhanced';
+import type { StressMaxLossChartPoint } from '@/lib/mock-data';
 
 registerAgModules();
 
 interface StressMaxLossChartProps {
-  data: PerformancePoint[];
+  data: StressMaxLossChartPoint[];
 }
 
 export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
