@@ -246,11 +246,11 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              mb: 1.3,
+              mb: 1.5,
             }}
           >
             <Typography
-              sx={{ fontSize: '1.06rem', fontWeight: 600, color: '#5a6a80', mb: 1.3 }}
+              sx={{ fontSize: '1.3rem', fontWeight: 500, color: '#3d516b' }}
             >
               Stress Max Loss
             </Typography>
@@ -288,9 +288,9 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
               >
                 <Typography
                   sx={{
-                    fontSize: '1.06rem',
-                    fontWeight: 600,
-                    color: '#5a6a80',
+                    fontSize: '1.3rem',
+                    fontWeight: 500,
+                    color: '#3d516b',
                   }}
                 >
                   Stress Max Loss
