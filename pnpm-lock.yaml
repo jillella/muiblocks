@@ -111,11 +111,11 @@ importers:
         specifier: 1.6.1
         version: 1.6.1(next@16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       ag-charts-community:
-        specifier: ^13.1.0
-        version: 13.1.0
+        specifier: 12.1.0
+        version: 12.1.0
       ag-charts-react:
-        specifier: ^13.1.0
-        version: 13.1.0(react@19.2.4)
+        specifier: 12.1.0
+        version: 12.1.0(react@19.2.4)
       ag-grid-community:
         specifier: ^35.1.0
         version: 35.1.0
@@ -1477,19 +1477,22 @@ packages:
       vue-router:
         optional: true
 
-  ag-charts-community@13.1.0:
-    resolution: {integrity: sha512-w+uFTjxlAoTq1+8tgUORtB/zr9jm38ibXzbbWnkBP9Dep9yahi5a1jZL7yExAX35uq3g9QtjTh0Oj/QPDBQ9Ew==}
+  ag-charts-community@12.1.0:
+    resolution: {integrity: sha512-UEY5SAnW46sE/QNq0hTAz3VlpE2qNScP1DEqAcDzNlxO10y16/Q3E9m0uY0Jprn1jGDrkRTdAFhcSPbkqMZ+Aw==}
 
-  ag-charts-core@13.1.0:
-    resolution: {integrity: sha512-mLHJZ8oU5CPeLRURescdISCtMsiiA/m4d1iBr6aQBEgiTVogRMGpFpsYNtQiYtoW2sRh+62I9sN8fhC3JQjX/g==}
+  ag-charts-core@12.1.0:
+    resolution: {integrity: sha512-jfEqb9Ag1Bac7EoYOV8dtlGPL8AXce7+36ggL/2zfrvH/TgSflTYSh1lpGnfDkC0Q4zsl4L4StuBOK25y5/SSQ==}
 
-  ag-charts-locale@13.1.0:
-    resolution: {integrity: sha512-mPgJnVsOI4Cf17CAlRh8BvLz19e165sdQJeUXNaB7M+DPB+pxODOcfx4oqZlR4Wc8Zu++TGb/2ueHa/aeV2qeQ==}
+  ag-charts-locale@12.1.0:
+    resolution: {integrity: sha512-J7hO9oYAExsN/qv7MZRB6way+q+Z3ePoTXYBvCz+GA7NQ9dgpK/dnyZbWrakF2wlAW0OqasirzhSUM93PVB8kQ==}
 
-  ag-charts-react@13.1.0:
-    resolution: {integrity: sha512-Ke+Ra/k+Yr0OK2JY0YA4+P50yLydRP+8oZzHYX1ulkbTTzFmMkSFZJVXtgCkBsTxq7S1P+lymEG/RWg+eIcCmQ==}
+  ag-charts-react@12.1.0:
+    resolution: {integrity: sha512-V4RtA03zhUdqJNVAO/CUfCTpW2Q/Ior/cx5E6lKBtIDQkAfO0AxI/jTnukeOC3jflyiJWHe3kzGWYUhiGokjlg==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
+
+  ag-charts-types@12.1.0:
+    resolution: {integrity: sha512-qeODwJ1EqKjpwEbp0mQ2wQ0arRNYaZo2BafdAGfcuOwjOBlagSwJvUg5MCvAYZ/W/mg2uEmt7jKMNfDy4ul4+Q==}
 
   ag-charts-types@13.1.0:
     resolution: {integrity: sha512-DytRM3CXli+Y013SC1Mr8lQBrhVTACK+11ilDHOhwUM0sRpmGuR51XFGcBKOliW1Vas1AycP31Cm3Pp0jx3hqw==}
@@ -3335,22 +3338,24 @@ snapshots:
       next: 16.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
 
-  ag-charts-community@13.1.0:
+  ag-charts-community@12.1.0:
     dependencies:
-      ag-charts-core: 13.1.0
-      ag-charts-locale: 13.1.0
-      ag-charts-types: 13.1.0
+      ag-charts-core: 12.1.0
+      ag-charts-locale: 12.1.0
+      ag-charts-types: 12.1.0
 
-  ag-charts-core@13.1.0:
+  ag-charts-core@12.1.0:
     dependencies:
-      ag-charts-types: 13.1.0
+      ag-charts-types: 12.1.0
 
-  ag-charts-locale@13.1.0: {}
+  ag-charts-locale@12.1.0: {}
 
-  ag-charts-react@13.1.0(react@19.2.4):
+  ag-charts-react@12.1.0(react@19.2.4):
     dependencies:
-      ag-charts-community: 13.1.0
+      ag-charts-community: 12.1.0
       react: 19.2.4
+
+  ag-charts-types@12.1.0: {}
 
   ag-charts-types@13.1.0: {}
 
