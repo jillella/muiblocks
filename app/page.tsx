@@ -6,6 +6,7 @@ const links = [
   { href: '/charts-enhanced', label: 'charts-enhanced' },
   { href: '/filters', label: 'filters' },
   { href: '/tooltip', label: 'tooltip' },
+  { href: '/date', label: 'date' },
 ] as const;
 
 export default function HomePage() {
