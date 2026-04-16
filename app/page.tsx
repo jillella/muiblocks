@@ -4,8 +4,13 @@ const links = [
   { href: '/summary', label: 'summary' },
   { href: '/charts', label: 'charts' },
   { href: '/charts-enhanced', label: 'charts-enhanced' },
+  { href: '/svar-window-calibration', label: 'svar-window-calibration' },
   { href: '/filters', label: 'filters' },
   { href: '/tooltip', label: 'tooltip' },
+  { href: '/date', label: 'date' },
+  { href: '/calendar', label: 'calendar' },
+  { href: '/products-cards', label: 'products-cards' },
+  { href: '/ussparc', label: 'ussparc (header demo)' },
 ] as const;
 
 export default function HomePage() {

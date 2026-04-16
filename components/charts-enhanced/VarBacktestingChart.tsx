@@ -88,7 +88,6 @@ export default function VarBacktestingChart({
           fill: '#2f6f87',
           stroke: '#2f6f87',
           cornerRadius: 2,
-          maxWidth: 22,
         },
         {
           type: 'line',
@@ -118,8 +117,8 @@ export default function VarBacktestingChart({
           lineDash: [],
         },
       ],
-      axes: {
-        x: {
+      axes: [
+        {
           type: 'category',
           position: 'bottom',
           line: { enabled: false },
@@ -127,7 +126,7 @@ export default function VarBacktestingChart({
           label: { color: '#687687', fontSize: 11, rotation: -52 },
           gridLine: { enabled: false },
         },
-        y: {
+        {
           type: 'number',
           position: 'left',
           min: 0,
@@ -151,7 +150,7 @@ export default function VarBacktestingChart({
             style: [{ stroke: '#dce4ed', lineDash: [] }],
           },
         },
-      },
+      ],
       legend: {
         enabled: true,
         position: 'bottom',

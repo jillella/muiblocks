@@ -2,10 +2,7 @@ import {
   AllCommunityModule as AgGridAllCommunityModule,
   ModuleRegistry as AgGridModuleRegistry,
 } from 'ag-grid-community';
-import {
-  AllCommunityModule as AgChartsAllCommunityModule,
-  ModuleRegistry as AgChartsModuleRegistry,
-} from 'ag-charts-community';
+import * as AgChartsCommunity from 'ag-charts-community';
 
 let agModulesRegistered = false;
 
@@ -15,6 +12,18 @@ export function registerAgModules(): void {
   }
 
   AgGridModuleRegistry.registerModules([AgGridAllCommunityModule]);
-  AgChartsModuleRegistry.registerModules([AgChartsAllCommunityModule]);
+
+  const chartsModuleRegistry = (AgChartsCommunity as any).ModuleRegistry;
+  const chartsAllCommunityModule = (AgChartsCommunity as any).AllCommunityModule;
+  const chartsSetupCommunityModules = (AgChartsCommunity as any).setupCommunityModules;
+
+  // v13+ API: ModuleRegistry + AllCommunityModule
+  if (chartsModuleRegistry && chartsAllCommunityModule) {
+    chartsModuleRegistry.registerModules([chartsAllCommunityModule]);
+  } else if (typeof chartsSetupCommunityModules === 'function') {
+    // v12 API: setupCommunityModules helper
+    chartsSetupCommunityModules();
+  }
+
   agModulesRegistered = true;
 }
