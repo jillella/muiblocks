@@ -3,53 +3,27 @@
 import { Box } from '@mui/material';
 import type { ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { addDays, format } from 'date-fns';
 import { useMemo } from 'react';
+import {
+  mockSvarWindowCalibrationTableRows,
+  type SvarWindowCalibrationTableRow,
+} from '@/lib/mock-data';
 import { registerAgModules } from '@/lib/ag-modules';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 registerAgModules();
 
-const TABLE_COB_DATE = new Date(2026, 3, 7);
-const WINDOW_START_BASE = new Date(2007, 0, 3);
-const VAR_SCENARIO_BASE = new Date(2007, 10, 26);
-
-export type SvarWindowCalibrationTableRow = {
-  cobDate: string;
-  varScenarioDate: string;
-  windowStart: string;
-  windowEnd: string;
-  var: number;
-};
-
-function formatDateIso(date: Date) {
-  return format(date, 'yyyy-MM-dd');
-}
+export type { SvarWindowCalibrationTableRow };
 
 export type SvarWindowCalibrationTableProps = {
   height: number | string;
   rows?: SvarWindowCalibrationTableRow[];
 };
 
-function buildMockRows(): SvarWindowCalibrationTableRow[] {
-  return Array.from({ length: 4588 }, (_, idx) => {
-    const windowStart = addDays(WINDOW_START_BASE, idx);
-    const windowEnd = addDays(windowStart, 364);
-    const varScenarioDate = addDays(VAR_SCENARIO_BASE, -Math.floor(idx / 220));
-    return {
-      cobDate: formatDateIso(TABLE_COB_DATE),
-      varScenarioDate: formatDateIso(varScenarioDate),
-      windowStart: formatDateIso(windowStart),
-      windowEnd: formatDateIso(windowEnd),
-      var: idx === 0 ? 2_120_614_041.141 : 871_172_710.885 + ((idx % 17) - 8) * 125_000,
-    };
-  });
-}
-
 export default function SvarWindowCalibrationTable({ height, rows }: SvarWindowCalibrationTableProps) {
   const tableRows = useMemo<SvarWindowCalibrationTableRow[]>(
-    () => rows ?? buildMockRows(),
+    () => rows ?? mockSvarWindowCalibrationTableRows(),
     [rows],
   );
 

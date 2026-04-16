@@ -2,6 +2,8 @@
 
 import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
 import SvarWindowCalibrationChart from '@/components/svar-window-calibration/SvarWindowCalibrationChart';
+import TopContributorsChart from '@/components/svar-window-calibration/TopContributorsChart';
+import TopDriversChart from '@/components/svar-window-calibration/TopDriversChart';
 
 const theme = createTheme({
   typography: {
@@ -21,6 +23,17 @@ export default function SvarWindowCalibrationPage() {
       >
         <Container maxWidth="xl">
           <SvarWindowCalibrationChart />
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
+              gap: 3,
+              mt: 3,
+            }}
+          >
+            <TopDriversChart />
+            <TopContributorsChart />
+          </Box>
         </Container>
       </Box>
     </ThemeProvider>

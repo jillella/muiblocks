@@ -18,35 +18,20 @@ import {
   Typography,
 } from '@mui/material';
 import { AgCharts } from 'ag-charts-react';
-import { addDays, format } from 'date-fns';
 import { useMemo, useState } from 'react';
+import {
+  mockSvarWindowCalibrationPoints,
+  type SvarWindowCalibrationPoint,
+} from '@/lib/mock-data';
 import { registerAgModules } from '@/lib/ag-modules';
 import SvarWindowCalibrationTable from '@/components/svar-window-calibration/SvarWindowCalibrationTable';
 
 registerAgModules();
 
-const FRIDAY_START = new Date(2026, 2, 27);
-
-export type SvarWindowCalibrationPoint = {
-  date: string;
-  label: string;
-  svarBillions: number;
-};
+export type { SvarWindowCalibrationPoint };
 
 type SvarChartDatum = SvarWindowCalibrationPoint & { thresholdBillions: number };
 type ViewMode = 'chart' | 'table';
-
-const MOCK_POINTS: SvarWindowCalibrationPoint[] = (() => {
-  const svar = [18.2, 21.4, 19.8, 24.5, 27.9, 32.1, 30.4, 28.0, 25.3, 22.6, 20.1, 18.5];
-  return svar.map((value, i) => {
-    const d = addDays(FRIDAY_START, i * 7);
-    return {
-      date: d.toISOString(),
-      label: format(d, 'MMM d yyyy'),
-      svarBillions: value,
-    };
-  });
-})();
 
 const THRESHOLD_BILLIONS = 30;
 const BADGE_LABEL = '72.74';
@@ -116,7 +101,9 @@ export type SvarWindowCalibrationChartProps = {
   data?: SvarWindowCalibrationPoint[];
 };
 
-export default function SvarWindowCalibrationChart({ data = MOCK_POINTS }: SvarWindowCalibrationChartProps) {
+export default function SvarWindowCalibrationChart({
+  data = mockSvarWindowCalibrationPoints,
+}: SvarWindowCalibrationChartProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('chart');
 
