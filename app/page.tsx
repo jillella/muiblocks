@@ -7,6 +7,9 @@ const links = [
   { href: '/filters', label: 'filters' },
   { href: '/tooltip', label: 'tooltip' },
   { href: '/date', label: 'date' },
+  { href: '/calendar', label: 'calendar' },
+  { href: '/products-cards', label: 'products-cards' },
+  { href: '/ussparc', label: 'ussparc (header demo)' },
 ] as const;
 
 export default function HomePage() {
