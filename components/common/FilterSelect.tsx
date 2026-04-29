@@ -1,6 +1,8 @@
 'use client';
 
+import { useId, useState } from 'react';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import type { SelectProps } from '@mui/material/Select';
 import type { SxProps, Theme } from '@mui/material/styles';
@@ -56,10 +58,89 @@ export const filterSelectSx: SxProps<Theme> = {
   },
 };
 
-export default function FilterSelect<Value = unknown>(props: SelectProps<Value>) {
-  const { sx, IconComponent = KeyboardArrowDownRoundedIcon, ...rest } = props;
+type FilterSelectProps<Value = unknown> = SelectProps<Value> & {
+  floatingLabel?: string;
+};
+
+const hasAnyValue = (value: unknown): boolean => {
+  if (Array.isArray(value)) return value.length > 0;
+  return value !== '' && value != null;
+};
+
+export default function FilterSelect<Value = unknown>(props: FilterSelectProps<Value>) {
+  const {
+    sx,
+    IconComponent = KeyboardArrowDownRoundedIcon,
+    floatingLabel,
+    onFocus,
+    onBlur,
+    id,
+    labelId,
+    value,
+    ...rest
+  } = props;
+  const [isFocused, setIsFocused] = useState(false);
+  const generatedId = useId();
+  const selectId = id ?? `filter-select-${generatedId}`;
+  const computedLabelId = labelId ?? `${selectId}-label`;
+  const shouldShrink = floatingLabel ? isFocused || hasAnyValue(value) : false;
 
   const mergedSx = Array.isArray(sx) ? [filterSelectSx, ...sx] : [filterSelectSx, sx];
+  const mergedSxWithFloatingLabel = floatingLabel
+    ? [
+        ...mergedSx,
+        {
+          '& .MuiSelect-select': {
+            pt: 1.6,
+            pb: 0.25,
+          },
+        },
+      ]
+    : mergedSx;
 
-  return <Select IconComponent={IconComponent} sx={mergedSx} {...rest} />;
+  return (
+    <>
+      {floatingLabel ? (
+        <InputLabel
+          id={computedLabelId}
+          shrink={shouldShrink}
+          sx={{
+            color: '#acb6ca',
+            fontSize: '0.9rem',
+            fontWeight: 500,
+            transform: 'translate(27px, 12px) scale(1)',
+            transformOrigin: 'top left',
+            transition: (theme) =>
+              theme.transitions.create(['transform', 'color'], {
+                duration: theme.transitions.duration.shorter,
+              }),
+            '&.Mui-focused': { color: '#acb6ca' },
+            '&.MuiInputLabel-shrink': {
+              transform: 'translate(27px, 5px) scale(0.72)',
+              color: '#86aaa5',
+            },
+          }}
+        >
+          {floatingLabel}
+        </InputLabel>
+      ) : null}
+      <Select
+        id={selectId}
+        labelId={floatingLabel ? computedLabelId : labelId}
+        label={floatingLabel}
+        value={value}
+        onFocus={(event) => {
+          setIsFocused(true);
+          onFocus?.(event);
+        }}
+        onBlur={(event) => {
+          setIsFocused(false);
+          onBlur?.(event);
+        }}
+        IconComponent={IconComponent}
+        sx={mergedSxWithFloatingLabel}
+        {...rest}
+      />
+    </>
+  );
 }
