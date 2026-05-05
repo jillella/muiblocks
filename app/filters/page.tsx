@@ -295,10 +295,11 @@ export default function FiltersPage() {
               <FormControl sx={{ flex: '1 1 0', minWidth: 220 }}>
                 <FilterSelect
                   id="regulator-select"
+                  floatingLabel="Regulator"
                   value={selectedRegulator}
                   onChange={handleRegulatorChange}
                   displayEmpty
-                  renderValue={(selected) => (selected as string) || 'Regulator'}
+                  renderValue={(selected) => (selected as string) || ''}
                   MenuProps={{
                     PaperProps: {
                       sx: {
@@ -336,8 +337,11 @@ export default function FiltersPage() {
               <FormControl sx={{ flex: '1 1 0', minWidth: 240 }}>
                 <FilterSelect
                   id="market-risk-select"
+                  floatingLabel="Market Risk"
                   value={selectedMarketRisk}
                   onChange={handleMarketRiskChange}
+                  displayEmpty
+                  renderValue={(selected) => (selected as string) || ''}
                 >
                   {marketRiskOptions.map((option) => (
                     <MenuItem key={option} value={option}>
