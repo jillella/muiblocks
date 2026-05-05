@@ -28,6 +28,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const chartData = useMemo(() => {
+    const roundToOneDecimal = (value: number) => Number(value.toFixed(1));
     const minMax = (values: number[]) => ({
       min: Math.min(...values),
       max: Math.max(...values),
@@ -65,8 +66,8 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
       );
       return {
         ...d,
-        cleanPnlDisplay,
-        varDisplay,
+        cleanPnlDisplay: roundToOneDecimal(cleanPnlDisplay),
+        varDisplay: roundToOneDecimal(varDisplay),
         thresholdDisplay: 250,
       };
     });
