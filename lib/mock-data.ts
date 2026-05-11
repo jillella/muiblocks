@@ -38,18 +38,18 @@ export interface CleanPnlVarPoint {
   var: number;
 }
 
-export interface VarBacktestingChartPoint {
-  month: string;
-  var: number;
-  cleanPnl: number;
-  threshold: number;
+export interface VarBacktestingCobRow {
+  COB_DATE: string;
+  VAR_AM: string;
+  CLEANPNL: string;
+  limit: number;
 }
 
-export interface StressMaxLossChartPoint {
-  month: string;
-  var: number;
-  cleanPnl: number;
-  threshold: number;
+export interface StressMaxLossCobRow {
+  COB_DATE: string;
+  MAXLOSS: string;
+  CLEANPNL: number;
+  limit: number;
 }
 
 export interface RiskDriverSeriesItem {
@@ -109,40 +109,29 @@ export const mockCleanPnlVarData: CleanPnlVarPoint[] = [
   { period: 'Jul', cleanPnl: 14, var: 16 },
 ];
 
-export const mockVarBacktestingChartSeries: VarBacktestingChartPoint[] = [
-  { month: 'Jan-25', var: 120, cleanPnl: 245, threshold: 250 },
-  { month: 'Feb-25', var: 230, cleanPnl: 250, threshold: 250 },
-  { month: 'Mar-25', var: 210, cleanPnl: 260, threshold: 250 },
-  { month: 'Apr-25', var: 80, cleanPnl: 145, threshold: 250 },
-  { month: 'May-25', var: 95, cleanPnl: 170, threshold: 250 },
-  { month: 'Jun-25', var: 205, cleanPnl: 185, threshold: 250 },
-  { month: 'Jul-25', var: 75, cleanPnl: 220, threshold: 250 },
-  { month: 'Aug-25', var: 190, cleanPnl: 155, threshold: 250 },
-  { month: 'Sep-25', var: 65, cleanPnl: 175, threshold: 250 },
-  { month: 'Oct-25', var: 125, cleanPnl: 215, threshold: 250 },
-  { month: 'Nov-25', var: 70, cleanPnl: 155, threshold: 250 },
-  { month: 'Dec-25', var: 55, cleanPnl: 175, threshold: 250 },
-  { month: 'Jan-26', var: 160, cleanPnl: 210, threshold: 250 },
-  { month: 'Feb-26', var: 35, cleanPnl: 160, threshold: 250 },
-  { month: 'Mar-26', var: 100, cleanPnl: 210, threshold: 250 },
+export const mockVarBacktestingChartSeries: VarBacktestingCobRow[] = [
+  { COB_DATE: '2026-04-07', VAR_AM: '3756551.87', CLEANPNL: '1089884.18', limit: 250 },
+  { COB_DATE: '2026-04-06', VAR_AM: '3529136.06', CLEANPNL: '-627690.8', limit: 250 },
+  { COB_DATE: '2026-04-03', VAR_AM: '3559587.83', CLEANPNL: '-276687.87', limit: 250 },
+  { COB_DATE: '2026-04-02', VAR_AM: '3583356.05', CLEANPNL: '5514471.51', limit: 250 },
+  { COB_DATE: '2026-04-01', VAR_AM: '3301665.4', CLEANPNL: '-937976.6', limit: 250 },
+  { COB_DATE: '2026-03-31', VAR_AM: '3922026.37', CLEANPNL: '-2578974.3', limit: 250 },
+  { COB_DATE: '2026-03-30', VAR_AM: '4710327.81', CLEANPNL: '-5016843.8', limit: 250 },
+  { COB_DATE: '2026-03-27', VAR_AM: '4132442.12', CLEANPNL: '2073122.4', limit: 250 },
+  { COB_DATE: '2026-03-26', VAR_AM: '3640190.22', CLEANPNL: '1310033.1', limit: 250 },
+  { COB_DATE: '2026-03-25', VAR_AM: '3981121.55', CLEANPNL: '1400000.0', limit: 250 },
+  { COB_DATE: '2026-03-24', VAR_AM: '3487455.9', CLEANPNL: '-820991.4', limit: 250 },
+  { COB_DATE: '2026-03-23', VAR_AM: '4011330.01', CLEANPNL: '224411.8', limit: 250 },
 ];
 
-export const mockStressMaxLossChartSeries: StressMaxLossChartPoint[] = [
-  { month: 'Jan-25', var: 120, cleanPnl: 245, threshold: 250 },
-  { month: 'Feb-25', var: 230, cleanPnl: 250, threshold: 250 },
-  { month: 'Mar-25', var: 210, cleanPnl: 260, threshold: 250 },
-  { month: 'Apr-25', var: 80, cleanPnl: 145, threshold: 250 },
-  { month: 'May-25', var: 95, cleanPnl: 170, threshold: 250 },
-  { month: 'Jun-25', var: 205, cleanPnl: 185, threshold: 250 },
-  { month: 'Jul-25', var: 75, cleanPnl: 220, threshold: 250 },
-  { month: 'Aug-25', var: 190, cleanPnl: 155, threshold: 250 },
-  { month: 'Sep-25', var: 65, cleanPnl: 175, threshold: 250 },
-  { month: 'Oct-25', var: 125, cleanPnl: 215, threshold: 250 },
-  { month: 'Nov-25', var: 70, cleanPnl: 155, threshold: 250 },
-  { month: 'Dec-25', var: 55, cleanPnl: 175, threshold: 250 },
-  { month: 'Jan-26', var: 160, cleanPnl: 210, threshold: 250 },
-  { month: 'Feb-26', var: 35, cleanPnl: 160, threshold: 250 },
-  { month: 'Mar-26', var: 100, cleanPnl: 210, threshold: 250 },
+export const mockStressMaxLossChartSeries: StressMaxLossCobRow[] = [
+  { COB_DATE: '2026-04-03', MAXLOSS: '189826871.90', CLEANPNL: -276687.87, limit: 250 },
+  { COB_DATE: '2026-03-27', MAXLOSS: '260732942.80', CLEANPNL: -2805689.7, limit: 250 },
+  { COB_DATE: '2026-03-20', MAXLOSS: '294280645.50', CLEANPNL: -2022666.2, limit: 250 },
+  { COB_DATE: '2026-03-13', MAXLOSS: '153516767.70', CLEANPNL: 637673.26, limit: 250 },
+  { COB_DATE: '2026-03-06', MAXLOSS: '146241305.80', CLEANPNL: -2171977.0, limit: 250 },
+  { COB_DATE: '2026-02-27', MAXLOSS: '151353572.60', CLEANPNL: 3025456.68, limit: 250 },
+  { COB_DATE: '2026-02-20', MAXLOSS: '127296728.70', CLEANPNL: -634089.82, limit: 250 },
 ];
 
 export const mockRiskDriverSeries: RiskDriverSeries[] = [

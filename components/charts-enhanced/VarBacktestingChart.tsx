@@ -14,23 +14,26 @@ import {
   Typography,
 } from '@mui/material';
 import { AgCharts } from 'ag-charts-react';
+import { format, parseISO } from 'date-fns';
 import { useMemo, useState } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
-import type { VarBacktestingChartPoint } from '@/lib/mock-data';
+import type { VarBacktestingCobRow } from '@/lib/mock-data';
 
 registerAgModules();
 
 interface VarBacktestingChartProps {
-  data: VarBacktestingChartPoint[];
+  data: VarBacktestingCobRow[];
 }
 
 export default function VarBacktestingChart({
   data,
 }: VarBacktestingChartProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const formatTooltipDate = (value: Date) => format(value, 'MMM dd, yyyy');
 
   const chartData = useMemo(() => {
     const roundToOneDecimal = (value: number) => Number(value.toFixed(1));
+    const toMillions = (value: string) => Number(value) / 1_000_000;
     const minMax = (values: number[]) => ({
       min: Math.min(...values),
       max: Math.max(...values),
@@ -46,31 +49,34 @@ export default function VarBacktestingChart({
       return outMin + ((value - inMin) / (inMax - inMin)) * (outMax - outMin);
     };
 
-    const clean = data.map((d) => d.cleanPnl);
-    const varSeries = data.map((d) => d.var);
+    const clean = data.map((d) => toMillions(d.CLEANPNL));
+    const varSeries = data.map((d) => toMillions(d.VAR_AM));
     const cleanBounds = minMax(clean);
     const varBounds = minMax(varSeries);
 
     return data.map((d) => {
+      const cobDate = parseISO(d.COB_DATE);
+      const cleanPnlMm = toMillions(d.CLEANPNL);
+      const varMm = toMillions(d.VAR_AM);
       const cleanPnlDisplay = mapRange(
-        d.cleanPnl,
+        cleanPnlMm,
         cleanBounds.min,
         cleanBounds.max,
         60,
         140
       );
       const varDisplay = mapRange(
-        d.var,
+        varMm,
         varBounds.min,
         varBounds.max,
         100,
         235
       );
       return {
-        ...d,
+        cobDate,
         cleanPnlDisplay: roundToOneDecimal(cleanPnlDisplay),
         varDisplay: roundToOneDecimal(varDisplay),
-        thresholdDisplay: 250,
+        thresholdDisplay: d.limit,
       };
     });
   }, [data]);
@@ -80,19 +86,28 @@ export default function VarBacktestingChart({
       data: chartData,
       background: { fill: 'transparent' },
       padding: { top: 8, right: 8, bottom: 10, left: 8 },
+      tooltip: {
+        mode: 'shared',
+      },
       series: [
         {
           type: 'bar',
-          xKey: 'month',
+          xKey: 'cobDate',
           yKey: 'cleanPnlDisplay',
           yName: 'Clean PnL',
           fill: '#2f6f87',
           stroke: '#2f6f87',
           cornerRadius: 2,
+          tooltip: {
+            renderer: ({ datum, yName, yValue }: any) => ({
+              heading: formatTooltipDate(datum.cobDate as Date),
+              data: [{ label: yName, value: `${yValue}M` }],
+            }),
+          },
         },
         {
           type: 'line',
-          xKey: 'month',
+          xKey: 'cobDate',
           yKey: 'varDisplay',
           yName: 'VaR',
           stroke: '#c8b26d',
@@ -105,10 +120,16 @@ export default function VarBacktestingChart({
             stroke: '#c8b26d',
             strokeWidth: 2.2,
           },
+          tooltip: {
+            renderer: ({ datum, yName, yValue }: any) => ({
+              heading: formatTooltipDate(datum.cobDate as Date),
+              data: [{ label: yName, value: `${yValue}M` }],
+            }),
+          },
         },
         {
           type: 'line',
-          xKey: 'month',
+          xKey: 'cobDate',
           yKey: 'thresholdDisplay',
           yName: 'Threshold',
           showInLegend: false,
@@ -116,15 +137,27 @@ export default function VarBacktestingChart({
           strokeWidth: 2.4,
           marker: { enabled: false },
           lineDash: [],
+          tooltip: {
+            renderer: ({ datum, yName, yValue }: any) => ({
+              heading: formatTooltipDate(datum.cobDate as Date),
+              data: [{ label: yName, value: `${yValue}M` }],
+            }),
+          },
         },
       ],
       axes: [
         {
-          type: 'category',
+          type: 'time',
           position: 'bottom',
           line: { enabled: false },
           tick: { enabled: false },
-          label: { color: '#687687', fontSize: 11, rotation: -52 },
+          interval: { step: 'month' as any },
+          label: {
+            color: '#687687',
+            fontSize: 11,
+            rotation: -52,
+            formatter: ({ value }: { value: Date }) => format(value, 'MMM-yy'),
+          },
           gridLine: { enabled: false },
         },
         {

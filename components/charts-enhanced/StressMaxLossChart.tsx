@@ -14,21 +14,24 @@ import {
   Typography,
 } from '@mui/material';
 import { AgCharts } from 'ag-charts-react';
+import { format, parseISO } from 'date-fns';
 import { useMemo, useState } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
-import type { StressMaxLossChartPoint } from '@/lib/mock-data';
+import type { StressMaxLossCobRow } from '@/lib/mock-data';
 
 registerAgModules();
 
 interface StressMaxLossChartProps {
-  data: StressMaxLossChartPoint[];
+  data: StressMaxLossCobRow[];
 }
 
 export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const formatTooltipDate = (value: Date) => format(value, 'MMM dd, yyyy');
 
   const chartData = useMemo(() => {
     const roundToOneDecimal = (value: number) => Number(value.toFixed(1));
+    const toMillions = (value: number | string) => Number(value) / 1_000_000;
     const minMax = (values: number[]) => ({
       min: Math.min(...values),
       max: Math.max(...values),
@@ -44,31 +47,34 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
       return outMin + ((value - inMin) / (inMax - inMin)) * (outMax - outMin);
     };
 
-    const clean = data.map((d) => d.cleanPnl);
-    const varSeries = data.map((d) => d.var);
+    const clean = data.map((d) => toMillions(d.CLEANPNL));
+    const maxLossSeries = data.map((d) => toMillions(d.MAXLOSS));
     const cleanBounds = minMax(clean);
-    const varBounds = minMax(varSeries);
+    const maxLossBounds = minMax(maxLossSeries);
 
     return data.map((d) => {
+      const cobDate = parseISO(d.COB_DATE);
+      const cleanPnlMm = toMillions(d.CLEANPNL);
+      const maxLossMm = toMillions(d.MAXLOSS);
       const cleanPnlDisplay = mapRange(
-        d.cleanPnl,
+        cleanPnlMm,
         cleanBounds.min,
         cleanBounds.max,
         60,
         140
       );
       const varDisplay = mapRange(
-        d.var,
-        varBounds.min,
-        varBounds.max,
+        maxLossMm,
+        maxLossBounds.min,
+        maxLossBounds.max,
         100,
         235
       );
       return {
-        ...d,
+        cobDate,
         cleanPnlDisplay: roundToOneDecimal(cleanPnlDisplay),
         varDisplay: roundToOneDecimal(varDisplay),
-        thresholdDisplay: 250,
+        thresholdDisplay: d.limit,
       };
     });
   }, [data]);
@@ -78,21 +84,30 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
       data: chartData,
       background: { fill: 'transparent' },
       padding: { top: 8, right: 8, bottom: 10, left: 8 },
+      tooltip: {
+        mode: 'shared',
+      },
       series: [
         {
           type: 'bar',
-          xKey: 'month',
+          xKey: 'cobDate',
           yKey: 'cleanPnlDisplay',
           yName: 'Clean PnL',
           fill: '#2f6f87',
           stroke: '#2f6f87',
           cornerRadius: 2,
+          tooltip: {
+            renderer: ({ datum, yName, yValue }: any) => ({
+              heading: formatTooltipDate(datum.cobDate as Date),
+              data: [{ label: yName, value: `${yValue}M` }],
+            }),
+          },
         },
         {
           type: 'line',
-          xKey: 'month',
+          xKey: 'cobDate',
           yKey: 'varDisplay',
-          yName: 'VaR',
+          yName: 'Max Loss',
           stroke: '#c8b26d',
           strokeWidth: 2.4,
           marker: {
@@ -103,10 +118,16 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
             stroke: '#c8b26d',
             strokeWidth: 2.2,
           },
+          tooltip: {
+            renderer: ({ datum, yName, yValue }: any) => ({
+              heading: formatTooltipDate(datum.cobDate as Date),
+              data: [{ label: yName, value: `${yValue}M` }],
+            }),
+          },
         },
         {
           type: 'line',
-          xKey: 'month',
+          xKey: 'cobDate',
           yKey: 'thresholdDisplay',
           yName: 'Threshold',
           showInLegend: false,
@@ -114,15 +135,27 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
           strokeWidth: 2.4,
           marker: { enabled: false },
           lineDash: [],
+          tooltip: {
+            renderer: ({ datum, yName, yValue }: any) => ({
+              heading: formatTooltipDate(datum.cobDate as Date),
+              data: [{ label: yName, value: `${yValue}M` }],
+            }),
+          },
         },
       ],
       axes: [
         {
-          type: 'category',
+          type: 'time',
           position: 'bottom',
           line: { enabled: false },
           tick: { enabled: false },
-          label: { color: '#687687', fontSize: 10, rotation: -52 },
+          interval: { step: 'month' as any },
+          label: {
+            color: '#687687',
+            fontSize: 10,
+            rotation: -52,
+            formatter: ({ value }: { value: Date }) => format(value, 'MMM-yy'),
+          },
           gridLine: { enabled: false },
         },
         {
