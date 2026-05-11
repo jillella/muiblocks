@@ -41,11 +41,13 @@ const entityScopeGroups = [
 ];
 const regulators = ['JFSA', 'FRB', 'NFA', 'PRA'];
 const marketRiskOptions = ['Market Risk XVA', 'XVA'];
+const deskOptions = ['Front Office', 'Middle Office', 'Back Office'];
 
 export default function FiltersPage() {
   const [selectedEntityScopes, setSelectedEntityScopes] = useState<string[]>([]);
   const [selectedRegulator, setSelectedRegulator] = useState<string>('');
   const [selectedMarketRisk, setSelectedMarketRisk] = useState<string>(marketRiskOptions[0]);
+  const [selectedDesk, setSelectedDesk] = useState<string>('');
 
   const toggleEntityScopeChild = (child: string) => {
     setSelectedEntityScopes((prev) =>
@@ -78,6 +80,10 @@ export default function FiltersPage() {
 
   const handleMarketRiskChange = (event: SelectChangeEvent<string>) => {
     setSelectedMarketRisk(event.target.value);
+  };
+
+  const handleDeskChange = (event: SelectChangeEvent<string>) => {
+    setSelectedDesk(event.target.value);
   };
 
   return (
@@ -344,6 +350,22 @@ export default function FiltersPage() {
                   renderValue={(selected) => (selected as string) || ''}
                 >
                   {marketRiskOptions.map((option) => (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </FilterSelect>
+              </FormControl>
+
+              <FormControl sx={{ flex: '1 1 0', minWidth: 220 }}>
+                <FilterSelect
+                  id="desk-select"
+                  value={selectedDesk}
+                  onChange={handleDeskChange}
+                  displayEmpty
+                  renderValue={(selected) => (selected as string) || 'Desk'}
+                >
+                  {deskOptions.map((option) => (
                     <MenuItem key={option} value={option}>
                       {option}
                     </MenuItem>
