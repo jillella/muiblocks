@@ -91,7 +91,7 @@ export default function FilterSelect<Value = unknown>(props: FilterSelectProps<V
         ...mergedSx,
         {
           '& .MuiSelect-select': {
-            pt: 1.6,
+            pt: 2.05,
             pb: 0.25,
           },
         },

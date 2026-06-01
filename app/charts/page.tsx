@@ -3,7 +3,9 @@
 import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
 import dynamic from 'next/dynamic';
 import {
+  mockCdxIndexData,
   mockCleanPnlVarData,
+  mockFxSpotTopPerforming,
   mockRiskDriverSeries,
   mockVarSVarTableRows,
   mockVarSVarTrendData,
@@ -16,6 +18,10 @@ const TopRiskDataDriversChartCard = dynamic(
   () => import('@/components/charts/TopRiskDataDriversChartCard'),
   { ssr: false },
 );
+const FxSpotTopPerformingChartCard = dynamic(
+  () => import('@/components/charts/FxSpotTopPerformingChartCard'),
+  { ssr: false },
+);
 const VarSVarTrendLineChartCard = dynamic(
   () => import('@/components/charts/VarSVarTrendLineChartCard'),
   { ssr: false },
@@ -24,6 +30,9 @@ const CleanPnlVarAreaChartCard = dynamic(
   () => import('@/components/charts/CleanPnlVarAreaChartCard'),
   { ssr: false },
 );
+const CdxIndexChartCard = dynamic(() => import('@/components/charts/CdxIndexChartCard'), {
+  ssr: false,
+});
 
 const theme = createTheme({
   typography: {
@@ -51,8 +60,10 @@ export default function ChartsPage() {
           >
             <CmIncVarSVarTableCard rows={mockVarSVarTableRows} />
             <TopRiskDataDriversChartCard series={mockRiskDriverSeries} />
+            <FxSpotTopPerformingChartCard items={mockFxSpotTopPerforming} />
             <VarSVarTrendLineChartCard data={mockVarSVarTrendData} />
             <CleanPnlVarAreaChartCard data={mockCleanPnlVarData} />
+            <CdxIndexChartCard data={mockCdxIndexData} />
           </Box>
         </Container>
       </Box>

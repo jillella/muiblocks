@@ -13,60 +13,81 @@ interface TopRiskDataDriversChartCardProps {
   series: RiskDriverSeries[];
 }
 
-interface SparklineDatum {
-  point: string;
-  value: number;
-}
-
 registerAgModules();
 
-function toSparklineData(points: number[]): SparklineDatum[] {
-  return points.map((value, idx) => ({ point: `${idx + 1}`, value }));
+const sparklineContainerSx = {
+  width: '100%',
+  height: 28,
+  minWidth: 0,
+  overflow: 'hidden',
+  '& .ag-charts-wrapper': {
+    marginLeft: '-36px',
+    width: 'calc(100% + 36px) !important',
+    maxWidth: 'none !important',
+  },
+} as const;
+
+const hiddenSparklineAxis = {
+  line: { enabled: false },
+  tick: { enabled: false },
+  label: { enabled: false },
+  gridLine: { enabled: false },
+  crosshair: { enabled: false },
+  title: { enabled: false },
+};
+
+const sparklineAreaFill = {
+  type: 'gradient' as const,
+  rotation: 90,
+  colorStops: [
+    { color: 'rgba(131, 183, 157, 0.55)', stop: 0 },
+    { color: 'rgba(168, 207, 183, 0.2)', stop: 0.45 },
+    { color: 'rgba(255, 255, 255, 0)', stop: 1 },
+  ],
+};
+
+function buildSparklineChartOptions(points: number[]) {
+  const data = points.map((value, idx) => ({ point: `${idx + 1}`, value }));
+  const min = Math.min(...points);
+  const max = Math.max(...points);
+  const pad = Math.max((max - min) * 0.15, 0.5);
+
+  return {
+    data,
+    background: { fill: 'transparent' },
+    title: { enabled: false },
+    subtitle: { enabled: false },
+    padding: { top: 2, right: 2, bottom: 2, left: 0 },
+    axes: [
+      { type: 'category', position: 'bottom', ...hiddenSparklineAxis },
+      {
+        type: 'number',
+        position: 'left',
+        min: min - pad,
+        max: max + pad,
+        nice: false,
+        interval: { enabled: false },
+        ...hiddenSparklineAxis,
+      },
+    ],
+    series: [
+      {
+        type: 'area',
+        xKey: 'point',
+        yKey: 'value',
+        stroke: '#83b79d',
+        strokeWidth: 1.8,
+        fill: sparklineAreaFill,
+        marker: { enabled: false },
+        tooltip: { enabled: false },
+      },
+    ],
+    legend: { enabled: false },
+  };
 }
 
 function RiskSparkline({ points }: { points: number[] }) {
-  const options: any = useMemo(() => {
-    const data = toSparklineData(points);
-    return {
-      data,
-      background: { fill: 'transparent' },
-      title: { enabled: false },
-      subtitle: { enabled: false },
-      padding: { top: 0, right: 0, bottom: 0, left: 0 },
-      axes: {
-        x: {
-          type: 'category',
-          position: 'bottom',
-          line: { enabled: false },
-          tick: { enabled: false },
-          label: { enabled: false },
-          gridLine: { enabled: false },
-        },
-        y: {
-          type: 'number',
-          position: 'left',
-          line: { enabled: false },
-          tick: { enabled: false },
-          label: { enabled: false },
-          gridLine: { enabled: false },
-        },
-      },
-      series: [
-        {
-          type: 'area',
-          xKey: 'point',
-          yKey: 'value',
-          stroke: '#83b79d',
-          strokeWidth: 1.8,
-          fill: '#a8cfb7',
-          fillOpacity: 0.35,
-          marker: { enabled: false },
-          tooltip: { enabled: false },
-        },
-      ],
-      legend: { enabled: false },
-    };
-  }, [points]);
+  const options: any = useMemo(() => buildSparklineChartOptions(points), [points]);
 
   return <AgCharts options={options} style={{ width: '100%', height: 28 }} />;
 }
@@ -107,16 +128,7 @@ export default function TopRiskDataDriversChartCard({ series }: TopRiskDataDrive
                 >
                   <Typography sx={{ fontSize: '0.82rem', color: '#4d6178' }}>{item.name}</Typography>
 
-                  <Box
-                    sx={{
-                      width: '100%',
-                      height: 28,
-                      minWidth: 0,
-                      '& .ag-charts-axis, & .ag-charts-axis-label, & .ag-charts-axis-tick': {
-                        display: 'none !important',
-                      },
-                    }}
-                  >
+                  <Box sx={sparklineContainerSx}>
                     <RiskSparkline points={item.points} />
                   </Box>
 
