@@ -64,6 +64,12 @@ export interface RiskDriverSeries {
   items: RiskDriverSeriesItem[];
 }
 
+export interface FxSpotPerformingItem {
+  name: string;
+  changePct: string;
+  points: number[];
+}
+
 export const mockProducts: Product[] = [
   { name: 'Interest Rate Swaps', varValue: '$4.21M', svarValue: '$5.87M' },
   { name: 'Credit Default Swaps', varValue: '$3.19M', svarValue: '$4.49M' },
@@ -153,6 +159,13 @@ export const mockRiskDriverSeries: RiskDriverSeries[] = [
       { name: 'QRS USD', changePct: '-11%', points: [8, 11, 9, 10, 8, 9] },
     ],
   },
+];
+
+export const mockFxSpotTopPerforming: FxSpotPerformingItem[] = [
+  { name: 'ABC USD', changePct: '+5%', points: [4, 7, 5, 8, 6, 9, 7] },
+  { name: 'HIJ USD', changePct: '+5%', points: [5, 6, 8, 7, 9, 8, 10] },
+  { name: 'DEF USD', changePct: '+14', points: [3, 5, 7, 9, 8, 11, 12] },
+  { name: 'KLM USD', changePct: '+14', points: [4, 6, 8, 10, 9, 12, 13] },
 ];
 
 // --- SVaR Window Calibration (chart + calibration table)
