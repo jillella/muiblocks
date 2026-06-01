@@ -3,6 +3,7 @@
 import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
 import dynamic from 'next/dynamic';
 import {
+  mockCdxIndexData,
   mockCleanPnlVarData,
   mockFxSpotTopPerforming,
   mockRiskDriverSeries,
@@ -29,6 +30,9 @@ const CleanPnlVarAreaChartCard = dynamic(
   () => import('@/components/charts/CleanPnlVarAreaChartCard'),
   { ssr: false },
 );
+const CdxIndexChartCard = dynamic(() => import('@/components/charts/CdxIndexChartCard'), {
+  ssr: false,
+});
 
 const theme = createTheme({
   typography: {
@@ -59,6 +63,7 @@ export default function ChartsPage() {
             <FxSpotTopPerformingChartCard items={mockFxSpotTopPerforming} />
             <VarSVarTrendLineChartCard data={mockVarSVarTrendData} />
             <CleanPnlVarAreaChartCard data={mockCleanPnlVarData} />
+            <CdxIndexChartCard data={mockCdxIndexData} />
           </Box>
         </Container>
       </Box>

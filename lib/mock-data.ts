@@ -168,6 +168,28 @@ export const mockFxSpotTopPerforming: FxSpotPerformingItem[] = [
   { name: 'KLM USD', changePct: '+14', points: [4, 6, 8, 10, 9, 12, 13] },
 ];
 
+// --- CDX Index (grouped bar chart)
+// API contract: pass the same shape to CdxIndexChartCard `data` (map response in the fetch layer if needed).
+
+export interface CdxIndexRow {
+  /** ISO date (YYYY-MM-DD), e.g. API period / COB */
+  asOfDate: string;
+  legendOne: number;
+  legendTwo: number;
+  legendThree: number;
+  legendFour: number;
+  legendFive: number;
+}
+
+export const mockCdxIndexData: CdxIndexRow[] = [
+  { asOfDate: '2025-07-01', legendOne: 2, legendTwo: 11, legendThree: 3, legendFour: 8, legendFive: 2 },
+  { asOfDate: '2025-08-01', legendOne: 3, legendTwo: 7, legendThree: 5, legendFour: 6, legendFive: 3 },
+  { asOfDate: '2025-09-01', legendOne: 2, legendTwo: 6, legendThree: 3, legendFour: 10, legendFive: 4 },
+  { asOfDate: '2025-10-01', legendOne: 4, legendTwo: 9, legendThree: 7, legendFour: 3, legendFive: 5 },
+  { asOfDate: '2025-11-01', legendOne: 5, legendTwo: 3, legendThree: 9, legendFour: 8, legendFive: 2 },
+  { asOfDate: '2025-12-01', legendOne: 3, legendTwo: 10, legendThree: 2, legendFour: 11, legendFive: 4 },
+];
+
 // --- SVaR Window Calibration (chart + calibration table)
 
 export interface SvarWindowCalibrationPoint {
