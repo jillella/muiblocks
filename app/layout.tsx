@@ -1,11 +1,16 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Roboto } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-roboto',
+});
 
 export const metadata: Metadata = {
   title: 'Cards App',
@@ -34,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={roboto.variable}>
       <body className="font-sans antialiased">
         <AppRouterCacheProvider>
           {children}

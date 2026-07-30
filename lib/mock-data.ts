@@ -334,3 +334,138 @@ export function buildMockTopContributorRows(): TopContributorRow[] {
     return { month, ir, fx, fxVol, irVol };
   });
 }
+
+// --- VaR > Analysis : Risk attribution by risk factor (donut)
+
+export interface RiskFactorAttributionSlice {
+  factor: string;
+  value: number;
+  color: string;
+}
+
+export const mockRiskFactorAttribution: RiskFactorAttributionSlice[] = [
+  { factor: 'IR Base Exchange', value: 34.5, color: '#AA936C' },
+  { factor: 'IR Vol Caplet', value: 20.4, color: '#E1C281' },
+  { factor: 'IR Vol Swaption', value: 8.6, color: '#7A988D' },
+  { factor: 'Credit Spread', value: 6.9, color: '#387F97' },
+  { factor: 'IR Base OTC', value: 7.8, color: '#D7D5CE' },
+  { factor: 'IR Basis XCCY Basis', value: 5.2, color: '#7F7F7F' },
+  { factor: 'IR Basis Index Basis', value: 5.6, color: '#674B77' },
+  { factor: 'IR Basis Tenor Basis', value: 2.6, color: '#BFB189' },
+  { factor: 'IR Base Inflation', value: 3.4, color: '#88ACD5' },
+  { factor: 'IR Vol Cap', value: 5.0, color: '#344972' },
+];
+
+// --- VaR > Analysis : Risk attribution by product type (diverging bar)
+
+export interface ProductTypeAttributionRow {
+  product: string;
+  value: number;
+}
+
+export const mockProductTypeAttribution: ProductTypeAttributionRow[] = [
+  { product: 'Treasury Bond Repo', value: 52000 },
+  { product: 'FX Forward or Swap', value: 43000 },
+  { product: 'Cross Currency Swap', value: -14000 },
+  { product: 'Swaption', value: 61000 },
+  { product: 'Treasury Bond Collateral', value: -35000 },
+  { product: 'Treasury Bond', value: 14000 },
+  { product: 'Bond Future', value: -44000 },
+];
+
+// --- VaR > Analysis : Risk attribution by product type (bubble / risk grade)
+
+export interface RiskGradeBubblePoint {
+  grade: number;
+  exposure: number;
+  size: number;
+  product: string;
+  color: string;
+}
+
+export const mockRiskGradeBubbles: RiskGradeBubblePoint[] = [
+  { grade: 8.2, exposure: 74, size: 22, product: 'Treasury Bond Repo', color: '#e2cf9f' },
+  { grade: 6.4, exposure: 66, size: 34, product: 'FX Forward or Swap', color: '#d8c9a6' },
+  { grade: 11.8, exposure: 70, size: 30, product: 'Swaption', color: '#8fb8cf' },
+  { grade: 21.4, exposure: 80, size: 42, product: 'Treasury Bond', color: '#9dc3d8' },
+  { grade: 26.8, exposure: 88, size: 20, product: 'Bond Future', color: '#7fa8c4' },
+  { grade: 45.2, exposure: 62, size: 28, product: 'Cross Currency Swap', color: '#6f4f8a' },
+  { grade: 51.6, exposure: 74, size: 24, product: 'Treasury Bond Collateral', color: '#8aa9c2' },
+  { grade: 55.4, exposure: 48, size: 58, product: 'IR Vol Caplet', color: '#e5d3a4' },
+  { grade: 63.8, exposure: 40, size: 44, product: 'IR Base OTC', color: '#e0cd9c' },
+  { grade: 66.2, exposure: 60, size: 26, product: 'IR Basis XCCY Basis', color: '#9cc0d5' },
+  { grade: 71.4, exposure: 66, size: 32, product: 'IR Basis Index Basis', color: '#6f9ec0' },
+  { grade: 74.8, exposure: 30, size: 22, product: 'IR Basis Tenor Basis', color: '#a8cfe0' },
+  { grade: 82.6, exposure: 84, size: 40, product: 'Credit Spread', color: '#8b93b8' },
+  { grade: 86.4, exposure: 78, size: 24, product: 'IR Base Inflation', color: '#dcc998' },
+  { grade: 93.2, exposure: 90, size: 26, product: 'IR Vol Swaption', color: '#7e5f96' },
+  { grade: 36.8, exposure: 44, size: 26, product: 'FX Vol', color: '#7fa8c4' },
+  { grade: 15.4, exposure: 52, size: 24, product: 'Equity Option', color: '#9db4c9' },
+  { grade: 4.6, exposure: 34, size: 36, product: 'Commodity Swap', color: '#7c5e94' },
+];
+
+// --- VaR > Analysis : Top risk contributor (grid)
+
+export interface TopRiskContributorRow {
+  riskClass: string;
+  riskSubClass: string;
+  subClassColor: string;
+  riskType: string;
+  product: string;
+  productTwo: string;
+  ticker: string;
+  tickerValue: number;
+}
+
+export const mockTopRiskContributorRows: TopRiskContributorRow[] = [
+  {
+    riskClass: 'IR',
+    riskSubClass: 'Base',
+    subClassColor: '#2f3f7c',
+    riskType: 'Exchange',
+    product: 'Treasury Bond',
+    productTwo: 'Treasury Bond',
+    ticker: 'MR CM Exchange (T1)',
+    tickerValue: 12772,
+  },
+  {
+    riskClass: 'IR',
+    riskSubClass: 'Base',
+    subClassColor: '#2f9e6f',
+    riskType: 'Exchange',
+    product: 'Treasury Bond',
+    productTwo: 'Treasury Bond',
+    ticker: 'MR CM Exchange (T2)',
+    tickerValue: 12772,
+  },
+  {
+    riskClass: 'IR',
+    riskSubClass: 'Base',
+    subClassColor: '#3faa72',
+    riskType: 'Exchange',
+    product: 'Treasury Bond',
+    productTwo: 'Treasury Bond',
+    ticker: 'MR CM Exchange (T120)',
+    tickerValue: 143127,
+  },
+  {
+    riskClass: 'IR',
+    riskSubClass: 'Base',
+    subClassColor: '#ef8c2b',
+    riskType: 'Exchange',
+    product: 'Treasury Bond',
+    productTwo: 'Treasury Bond',
+    ticker: 'MR CM Exchange (T1800)',
+    tickerValue: 123721,
+  },
+  {
+    riskClass: 'IR',
+    riskSubClass: 'Base',
+    subClassColor: '#4bb3e8',
+    riskType: 'Exchange',
+    product: 'Treasury Bond',
+    productTwo: 'Treasury Bond',
+    ticker: 'MR CM Exchange (T12600)',
+    tickerValue: 18467,
+  },
+];

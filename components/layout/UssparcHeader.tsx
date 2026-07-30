@@ -48,9 +48,11 @@ function LogoMark({ sx }: { sx?: object }) {
 
 function NavMenu({
   label,
+  active,
   children,
 }: {
   label: string
+  active?: boolean
   children: React.ReactNode
 }) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -78,6 +80,9 @@ function NavMenu({
           minWidth: 'auto',
           px: { xs: 1, xl: 1.25 },
           py: 0.75,
+          borderRadius: 0,
+          borderBottom: '2px solid',
+          borderColor: active ? 'common.white' : 'transparent',
           '&:hover': { bgcolor: 'rgba(255,255,255,0.1)' },
           ...(open && { bgcolor: 'rgba(255,255,255,0.1)' }),
         }}
@@ -255,12 +260,20 @@ function MobileNested({
   )
 }
 
-function MobileLink({ children }: { children: React.ReactNode }) {
+function MobileLink({
+  children,
+  href,
+}: {
+  children: React.ReactNode
+  href?: string
+}) {
   return (
     <ListItemButton
       component="a"
-      href="#"
-      onClick={(e) => e.preventDefault()}
+      href={href ?? '#'}
+      onClick={(e) => {
+        if (!href) e.preventDefault()
+      }}
       sx={{ borderRadius: 1, py: 1, px: 1.5 }}
     >
       <ListItemText
@@ -271,7 +284,12 @@ function MobileLink({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function UssparcHeader() {
+export type UssparcHeaderProps = {
+  /** Highlights the matching top-level nav item, e.g. "VaR". */
+  activeNav?: 'DASHBOARD' | 'VaR' | 'STRESS' | 'SUPPORT'
+}
+
+export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
   const theme = useTheme()
   const isLgUp = useMediaQuery(theme.breakpoints.up('lg'))
   const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -355,13 +373,16 @@ export function UssparcHeader() {
               gap: { lg: 0.5, xl: 1 },
             }}
           >
-            <NavMenu label="DASHBOARD">
+            <NavMenu label="DASHBOARD" active={activeNav === 'DASHBOARD'}>
               <MenuItem>VaR</MenuItem>
               <MenuItem>Market Data</MenuItem>
               <MenuItem>SVaR Window Calibration</MenuItem>
             </NavMenu>
 
-            <NavMenu label="VaR">
+            <NavMenu label="VaR" active={activeNav === 'VaR'}>
+              <MenuItem component="a" href="/var/analysis">
+                Analysis
+              </MenuItem>
               <MenuItem>Calculator</MenuItem>
               <NestedMenuItem label="Risk Factor">
                 <MenuItem>Mappings</MenuItem>
@@ -371,12 +392,12 @@ export function UssparcHeader() {
               <MenuItem>Benchmarking</MenuItem>
             </NavMenu>
 
-            <NavMenu label="STRESS">
+            <NavMenu label="STRESS" active={activeNav === 'STRESS'}>
               <MenuItem>Scenario Viewer</MenuItem>
               <MenuItem>Shock Rates</MenuItem>
             </NavMenu>
 
-            <NavMenu label="SUPPORT">
+            <NavMenu label="SUPPORT" active={activeNav === 'SUPPORT'}>
               <MenuItem>Runs</MenuItem>
               <MenuItem>DQ Reports</MenuItem>
               <MenuItem>Job Trigger</MenuItem>
@@ -454,6 +475,7 @@ export function UssparcHeader() {
             <MobileLink>SVaR Window Calibration</MobileLink>
           </MobileSection>
           <MobileSection title="VaR">
+            <MobileLink href="/var/analysis">Analysis</MobileLink>
             <MobileLink>Calculator</MobileLink>
             <MobileNested label="Risk Factor">
               <MobileLink>Mappings</MobileLink>
