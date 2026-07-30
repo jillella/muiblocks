@@ -56,11 +56,11 @@ export default function RiskFactorAttributionChart({
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: 'center',
-          gap: { xs: 2, sm: 3 },
+          gap: { xs: 2, sm: 5 },
           minHeight: height,
         }}
       >
-        <Box sx={{ width: { xs: '100%', sm: '50%' }, height, minWidth: 0 }}>
+        <Box sx={{ width: { xs: '100%', sm: '46%' }, height, minWidth: 0 }}>
           <AgCharts options={chartOptions} style={{ width: '100%', height: '100%' }} />
         </Box>
 
