@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
 import { mockProductTypeAttribution, type ProductTypeAttributionRow } from '@/lib/mock-data';
 import AnalysisPanel from '@/components/var-analysis/AnalysisPanel';
+import { useChartFontFamily } from '@/components/var-analysis/useChartFontFamily';
 
 registerAgModules();
 
@@ -22,12 +23,13 @@ export default function ProductTypeAttributionChart({
   height = 300,
 }: ProductTypeAttributionChartProps) {
   const rows = useMemo(() => rowsProp ?? mockProductTypeAttribution, [rowsProp]);
+  const fontFamily = useChartFontFamily();
 
   const chartOptions = useMemo<any>(
     () => ({
       data: rows,
       background: { fill: 'transparent' },
-      padding: { top: 6, right: 14, bottom: 6, left: 2 },
+      padding: { top: 6, right: 26, bottom: 6, left: 2 },
       series: [
         {
           type: 'bar',
@@ -57,7 +59,13 @@ export default function ProductTypeAttributionChart({
           tick: { enabled: false },
           gridLine: { enabled: false },
           paddingInner: 0.55,
-          label: { color: '#374151', fontSize: 12, avoidCollisions: false },
+          label: {
+            color: '#000',
+            fontFamily,
+            fontSize: 14,
+            fontWeight: 400,
+            avoidCollisions: false,
+          },
         },
         {
           type: 'number',
@@ -72,13 +80,14 @@ export default function ProductTypeAttributionChart({
           label: {
             color: '#6b7280',
             fontSize: 11,
+            avoidCollisions: false,
             formatter: ({ value }: { value: number }) => value.toLocaleString('en-US'),
           },
         },
       ],
       legend: { enabled: false },
     }),
-    [rows],
+    [rows, fontFamily],
   );
 
   return (
