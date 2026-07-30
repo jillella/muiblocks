@@ -34,6 +34,7 @@ export default function RiskFactorAttributionChart({
           calloutLabel: { enabled: false },
           sectorLabel: { enabled: false },
           strokeWidth: 0,
+          sectorSpacing: 0,
           fills: slices.map((slice) => slice.color),
           strokes: slices.map((slice) => slice.color),
           tooltip: {
