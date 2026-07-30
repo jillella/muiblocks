@@ -1,0 +1,74 @@
+name: Mirror to stitchui/muiblocks
+
+# Mirrors this repository (jillella/muiblocks) to stitchui/muiblocks.
+#
+# jillella/muiblocks is the SOURCE OF TRUTH. stitchui/muiblocks is a read-only
+# mirror: this workflow force-pushes over it, so any commit that exists only on
+# the mirror will be destroyed. Never commit directly to stitchui/muiblocks.
+#
+# Setup (one time):
+#   1. Create a fine-grained PAT or classic PAT with write access to
+#      stitchui/muiblocks (classic: `repo` scope).
+#   2. In jillella/muiblocks go to
+#      Settings > Secrets and variables > Actions > New repository secret
+#      and add it as MIRROR_TOKEN.
+
+on:
+  # Mirror every branch push.
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
+  # Mirror branch/tag deletions too.
+  delete:
+  # Allow a manual re-sync from the Actions tab.
+  workflow_dispatch:
+
+# Never run two mirror pushes at once - concurrent force-pushes can interleave
+# and leave the mirror in an inconsistent state.
+concurrency:
+  group: mirror-to-stitchui
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    # Skip on forks, which do not have access to MIRROR_TOKEN.
+    if: github.repository == 'jillella/muiblocks'
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          # A mirror push needs every ref and all history, not a shallow clone.
+          fetch-depth: 0
+          # Do not leave the default GITHUB_TOKEN in .git/config, or it would be
+          # sent to the destination remote.
+          persist-credentials: false
+
+      - name: Verify MIRROR_TOKEN is configured
+        env:
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          if [ -z "$MIRROR_TOKEN" ]; then
+            echo "::error::MIRROR_TOKEN secret is not set. Add a PAT with write access to stitchui/muiblocks under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      - name: Push mirror to stitchui/muiblocks
+        env:
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          # Fetch all remote branches as local branches so --mirror sends them.
+          git fetch origin '+refs/heads/*:refs/heads/*' --prune --tags --force
+
+          git remote add mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/stitchui/muiblocks.git"
+
+          # --mirror makes the destination an exact copy: it force-updates
+          # existing refs and deletes refs that no longer exist here.
+          git push --mirror mirror
+
+          echo "Mirrored $(git rev-parse --short HEAD) to stitchui/muiblocks"
