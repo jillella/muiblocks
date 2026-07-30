@@ -30,7 +30,7 @@ const gridShellSx = {
   border: 'none',
   overflow: 'hidden',
   '& .ag-root-wrapper': { border: 'none' },
-  '& .ag-header': { borderBottom: '1px solid #e5eaf0' },
+  '& .ag-header': { borderTop: '1px solid #e5eaf0', borderBottom: '1px solid #e5eaf0' },
   '& .ag-header-cell-label': { fontWeight: 500, fontSize: '0.88rem' },
   '& .ag-cell': { fontSize: '0.88rem', display: 'flex', alignItems: 'center' },
 } as const;
