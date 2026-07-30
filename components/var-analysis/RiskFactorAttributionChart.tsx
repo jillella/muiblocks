@@ -56,11 +56,11 @@ export default function RiskFactorAttributionChart({
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: 'center',
-          gap: { xs: 2, sm: 1 },
+          gap: { xs: 2, sm: 3 },
           minHeight: height,
         }}
       >
-        <Box sx={{ width: { xs: '100%', sm: '52%' }, height, minWidth: 0 }}>
+        <Box sx={{ width: { xs: '100%', sm: '50%' }, height, minWidth: 0 }}>
           <AgCharts options={chartOptions} style={{ width: '100%', height: '100%' }} />
         </Box>
 
@@ -68,7 +68,9 @@ export default function RiskFactorAttributionChart({
           component="ul"
           aria-label="Risk factor legend"
           sx={{
-            width: { xs: '100%', sm: '48%' },
+            width: { xs: '100%', sm: 'auto' },
+            flex: { sm: '1 1 0' },
+            minWidth: 0,
             m: 0,
             p: 0,
             listStyle: 'none',
