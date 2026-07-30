@@ -9,8 +9,8 @@ import AnalysisPanel from '@/components/var-analysis/AnalysisPanel';
 
 registerAgModules();
 
-const POSITIVE_FILL = '#4b7f9c';
-const NEGATIVE_FILL = '#a51f1f';
+const POSITIVE_FILL = '#387f97';
+const NEGATIVE_FILL = '#A81008';
 
 export type ProductTypeAttributionChartProps = {
   rows?: ProductTypeAttributionRow[];
