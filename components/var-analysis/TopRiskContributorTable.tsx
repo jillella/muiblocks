@@ -7,7 +7,7 @@ import { AgGridReact } from 'ag-grid-react';
 import { useMemo } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
 import { mockTopRiskContributorRows, type TopRiskContributorRow } from '@/lib/mock-data';
-import { ANALYSIS_TITLE_COLOR } from '@/components/var-analysis/AnalysisPanel';
+import { analysisTitleSx } from '@/components/var-analysis/AnalysisPanel';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
@@ -96,13 +96,7 @@ export default function TopRiskContributorTable({ rows: rowsProp }: TopRiskContr
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
         <Typography
           component="h2"
-          sx={{
-            fontWeight: 500,
-            color: ANALYSIS_TITLE_COLOR,
-            textTransform: 'uppercase',
-            letterSpacing: '0.02em',
-            fontSize: { xs: '0.95rem', md: '1.1rem', xl: '1.2rem' },
-          }}
+          sx={analysisTitleSx}
         >
           Top Risk Contributor
         </Typography>

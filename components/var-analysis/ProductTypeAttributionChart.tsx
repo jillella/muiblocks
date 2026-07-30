@@ -86,7 +86,7 @@ export default function ProductTypeAttributionChart({
       showDivider
     >
       <Box sx={{ width: '100%', minWidth: 0, overflowX: 'auto' }}>
-        <Box sx={{ height, minWidth: 420 }}>
+        <Box sx={{ height, minWidth: 480 }}>
           <AgCharts options={chartOptions} style={{ width: '100%', height: '100%' }} />
         </Box>
       </Box>
