@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 import { registerAgModules } from '@/lib/ag-modules';
 import { mockRiskGradeBubbles, type RiskGradeBubblePoint } from '@/lib/mock-data';
 import AnalysisPanel from '@/components/var-analysis/AnalysisPanel';
+import { useChartFontFamily } from '@/components/var-analysis/useChartFontFamily';
 
 registerAgModules();
 
@@ -24,6 +25,7 @@ export type RiskGradeBubbleChartProps = {
 
 export default function RiskGradeBubbleChart({ points: pointsProp, height = 300 }: RiskGradeBubbleChartProps) {
   const points = useMemo(() => pointsProp ?? mockRiskGradeBubbles, [pointsProp]);
+  const fontFamily = useChartFontFamily();
 
   const chartOptions = useMemo<any>(
     () => ({
@@ -68,7 +70,15 @@ export default function RiskGradeBubbleChart({ points: pointsProp, height = 300 
             fontSize: 11,
             formatter: ({ value }: { value: number }) => GRADE_TICKS[value] ?? '',
           },
-          title: { enabled: true, text: 'Risk Grade', color: '#1f2937', fontSize: 14, fontWeight: 500, spacing: 8 },
+          title: {
+            enabled: true,
+            text: 'Risk Grade',
+            color: '#000',
+            fontFamily,
+            fontSize: 16,
+            fontWeight: 400,
+            spacing: 8,
+          },
         },
         {
           type: 'number',
@@ -85,7 +95,7 @@ export default function RiskGradeBubbleChart({ points: pointsProp, height = 300 
       ],
       legend: { enabled: false },
     }),
-    [points],
+    [points, fontFamily],
   );
 
   return (
