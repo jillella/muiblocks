@@ -78,8 +78,10 @@ export default function ProductTypeAttributionChart({
           tick: { enabled: false },
           gridLine: { enabled: false },
           label: {
-            color: '#6b7280',
-            fontSize: 11,
+            color: '#000',
+            fontFamily,
+            fontSize: 12,
+            fontWeight: 400,
             avoidCollisions: false,
             formatter: ({ value }: { value: number }) => value.toLocaleString('en-US'),
           },
