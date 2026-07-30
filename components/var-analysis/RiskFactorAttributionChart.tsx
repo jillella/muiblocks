@@ -92,7 +92,15 @@ export default function RiskFactorAttributionChart({
                   flexShrink: 0,
                 }}
               />
-              <Typography sx={{ fontSize: '0.8rem', color: '#3f4b5b', whiteSpace: 'nowrap' }}>
+              <Typography
+                sx={{
+                  fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+                  fontSize: '13px',
+                  fontWeight: 400,
+                  color: '#181d1f',
+                  whiteSpace: 'nowrap',
+                }}
+              >
                 {slice.factor}
               </Typography>
             </Box>
