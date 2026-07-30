@@ -353,6 +353,7 @@ export const mockRiskFactorAttribution: RiskFactorAttributionSlice[] = [
   { factor: 'IR Basis Index Basis', value: 5.6, color: '#674B77' },
   { factor: 'IR Basis Tenor Basis', value: 2.6, color: '#BFB189' },
   { factor: 'IR Base Inflation', value: 3.4, color: '#88ACD5' },
+  { factor: 'IR Vol Cap', value: 5.0, color: '#344972' },
 ];
 
 // --- VaR > Analysis : Risk attribution by product type (diverging bar)
