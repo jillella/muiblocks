@@ -35,7 +35,9 @@ export default function ProductTypeAttributionChart({
           xKey: 'product',
           yKey: 'value',
           yName: 'Attribution',
-          cornerRadius: 2,
+          // Large radius is clamped to half the bar thickness, giving a full
+          // pill cap on the outer end only (the end at zero stays square).
+          cornerRadius: 100,
           itemStyler: ({ datum }: { datum: ProductTypeAttributionRow }) => ({
             fill: datum.value < 0 ? NEGATIVE_FILL : POSITIVE_FILL,
           }),
