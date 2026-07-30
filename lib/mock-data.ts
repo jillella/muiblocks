@@ -344,15 +344,16 @@ export interface RiskFactorAttributionSlice {
 }
 
 export const mockRiskFactorAttribution: RiskFactorAttributionSlice[] = [
-  { factor: 'IR Base Exchange', value: 34.5, color: '#a99168' },
-  { factor: 'IR Vol Caplet', value: 20.4, color: '#d8c48c' },
-  { factor: 'IR Vol Swaption', value: 8.6, color: '#7fa79b' },
-  { factor: 'Credit Spread', value: 6.9, color: '#3d7f9d' },
-  { factor: 'IR Base OTC', value: 7.8, color: '#d9dbd6' },
-  { factor: 'IR Basis XCCY Basis', value: 5.2, color: '#8a9491' },
-  { factor: 'IR Basis Index Basis', value: 5.6, color: '#5c3f74' },
-  { factor: 'IR Basis Tenor Basis', value: 2.6, color: '#b0975f' },
-  { factor: 'IR Base Inflation', value: 3.4, color: '#7ba7dc' },
+  { factor: 'IR Base Exchange', value: 34.5, color: '#AA936C' },
+  { factor: 'IR Vol Caplet', value: 20.4, color: '#E1C281' },
+  { factor: 'IR Vol Swaption', value: 8.6, color: '#7A988D' },
+  { factor: 'Credit Spread', value: 6.9, color: '#387F97' },
+  { factor: 'IR Base OTC', value: 7.8, color: '#D7D5CE' },
+  { factor: 'IR Basis XCCY Basis', value: 5.2, color: '#7F7F7F' },
+  { factor: 'IR Basis Index Basis', value: 5.6, color: '#674B77' },
+  { factor: 'IR Basis Tenor Basis', value: 2.6, color: '#BFB189' },
+  { factor: 'IR Base Inflation', value: 3.4, color: '#88ACD5' },
+  { factor: 'IR Vol Cap', value: 5.0, color: '#344972' },
 ];
 
 // --- VaR > Analysis : Risk attribution by product type (diverging bar)
