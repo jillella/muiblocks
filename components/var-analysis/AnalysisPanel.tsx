@@ -35,7 +35,7 @@ export default function AnalysisPanel({ title, info, children, showDivider }: An
           alignItems: 'flex-start',
           gap: 0.5,
           mb: 1,
-          minHeight: { lg: 56 },
+          minHeight: { lg: 44, xl: 34 },
         }}
       >
         <Typography
@@ -47,8 +47,8 @@ export default function AnalysisPanel({ title, info, children, showDivider }: An
             color: ANALYSIS_TITLE_COLOR,
             textTransform: 'uppercase',
             letterSpacing: '0.02em',
-            fontSize: { xs: '0.95rem', md: '1.05rem', xl: '1.15rem' },
-            lineHeight: 1.25,
+            fontSize: { xs: '0.95rem', lg: '0.875rem', xl: '1.0625rem' },
+            lineHeight: 1.3,
             textWrap: 'balance',
           }}
         >

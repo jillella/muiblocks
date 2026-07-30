@@ -19,7 +19,7 @@ export default function VarAnalysisPage() {
     <ThemeProvider theme={theme}>
       <Box component="main" sx={{ minHeight: '100vh', backgroundColor: '#f4f5f6' }}>
         <Box sx={{ backgroundColor: '#004d2c', pb: { xs: 6, md: 8 } }}>
-          <UssparcHeader />
+          <UssparcHeader activeNav="VaR" />
           <Container maxWidth={false} sx={{ maxWidth: 1920, px: { xs: 2, sm: 3, md: 4 }, pt: { xs: 2, md: 2.5 } }}>
             <AnalysisFilterBar />
           </Container>
@@ -49,7 +49,7 @@ export default function VarAnalysisPage() {
                 display: 'grid',
                 gridTemplateColumns: {
                   xs: '1fr',
-                  lg: 'minmax(0, 0.95fr) minmax(0, 1.1fr) minmax(0, 0.95fr)',
+                  lg: 'minmax(0, 0.88fr) minmax(0, 1.24fr) minmax(0, 0.88fr)',
                 },
                 columnGap: { lg: 1 },
                 rowGap: 4,

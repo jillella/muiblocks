@@ -55,7 +55,7 @@ export default function ProductTypeAttributionChart({
           tick: { enabled: false },
           gridLine: { enabled: false },
           paddingInner: 0.55,
-          label: { color: '#374151', fontSize: 12 },
+          label: { color: '#374151', fontSize: 12, avoidCollisions: false },
         },
         {
           type: 'number',
@@ -85,8 +85,10 @@ export default function ProductTypeAttributionChart({
       info="Positive and negative VaR attribution by product type"
       showDivider
     >
-      <Box sx={{ width: '100%', height, minWidth: 0 }}>
-        <AgCharts options={chartOptions} style={{ width: '100%', height: '100%' }} />
+      <Box sx={{ width: '100%', minWidth: 0, overflowX: 'auto' }}>
+        <Box sx={{ height, minWidth: 420 }}>
+          <AgCharts options={chartOptions} style={{ width: '100%', height: '100%' }} />
+        </Box>
       </Box>
     </AnalysisPanel>
   );

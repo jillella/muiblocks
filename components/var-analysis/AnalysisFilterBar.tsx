@@ -28,7 +28,7 @@ function CobPicker() {
   const open = Boolean(anchorEl);
 
   return (
-    <Box sx={{ flex: '1 1 0', minWidth: 240 }}>
+    <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 220 } }}>
       <Box
         role="button"
         tabIndex={0}
@@ -90,17 +90,12 @@ export default function AnalysisFilterBar() {
       <Stack
         direction="row"
         spacing={2}
-        sx={{
-          flexWrap: 'nowrap',
-          overflowX: 'auto',
-          pb: 0.5,
-          '&::-webkit-scrollbar': { display: 'none' },
-          scrollbarWidth: 'none',
-        }}
+        useFlexGap
+        sx={{ flexWrap: { xs: 'wrap', md: 'nowrap' }, pb: 0.5 }}
       >
         <CobPicker />
 
-        <FormControl sx={{ flex: '1 1 0', minWidth: 240 }}>
+        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 220 } }}>
           <FilterSelect
             id="scenario-type-select"
             value={scenarioType}
@@ -117,7 +112,7 @@ export default function AnalysisFilterBar() {
           </FilterSelect>
         </FormControl>
 
-        <FormControl sx={{ flex: '1 1 0', minWidth: 240 }}>
+        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 220 } }}>
           <FilterSelect
             id="scenario-name-select"
             value={scenarioName}
