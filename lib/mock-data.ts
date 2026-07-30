@@ -367,7 +367,7 @@ export const mockProductTypeAttribution: ProductTypeAttributionRow[] = [
   { product: 'Treasury Bond Repo', value: 52000 },
   { product: 'FX Forward or Swap', value: 43000 },
   { product: 'Cross Currency Swap', value: -14000 },
-  { product: 'Swaption', value: 61000 },
+  { product: 'Swaption', value: 58000 },
   { product: 'Treasury Bond Collateral', value: -35000 },
   { product: 'Treasury Bond', value: 14000 },
   { product: 'Bond Future', value: -44000 },
