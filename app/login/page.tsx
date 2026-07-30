@@ -1,15 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Box, Card, CardContent, TextField, Button, Typography, Alert } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
+  );
+}
+
+function LoginForm() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get('from');
+  // Only follow internal paths so a crafted link can't redirect off-site.
+  const destination = from && from.startsWith('/') && !from.startsWith('//') ? from : '/';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +35,7 @@ export default function LoginPage() {
     });
 
     if (res.ok) {
-      router.push('/');
+      router.push(destination);
       router.refresh();
     } else {
       setError('Incorrect password');
