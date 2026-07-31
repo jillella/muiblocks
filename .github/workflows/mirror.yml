@@ -38,15 +38,6 @@ jobs:
     if: github.repository == 'jillella/muiblocks'
 
     steps:
-      - name: Checkout full history
-        uses: actions/checkout@v4
-        with:
-          # A mirror push needs every ref and all history, not a shallow clone.
-          fetch-depth: 0
-          # Do not leave the default GITHUB_TOKEN in .git/config, or it would be
-          # sent to the destination remote.
-          persist-credentials: false
-
       - name: Verify MIRROR_TOKEN is configured
         env:
           MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
@@ -58,17 +49,24 @@ jobs:
 
       - name: Push mirror to stitchui/muiblocks
         env:
+          SOURCE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
           set -euo pipefail
 
-          # Fetch all remote branches as local branches so --mirror sends them.
-          git fetch origin '+refs/heads/*:refs/heads/*' --prune --tags --force
+          # Clone bare: no working tree, so no branch is "checked out" and every
+          # branch/tag can be updated freely. actions/checkout is deliberately
+          # not used here - it leaves main checked out, which makes git refuse to
+          # fetch into refs/heads/main.
+          git clone --bare "https://x-access-token:${SOURCE_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" source.git
+          cd source.git
 
-          git remote add mirror "https://x-access-token:${MIRROR_TOKEN}@github.com/stitchui/muiblocks.git"
-
-          # --mirror makes the destination an exact copy: it force-updates
-          # existing refs and deletes refs that no longer exist here.
-          git push --mirror mirror
+          # Push branches and tags explicitly with --prune instead of --mirror.
+          # --mirror would also try to push GitHub's read-only refs/pull/* refs,
+          # which the destination rejects as hidden refs.
+          git push --prune --force \
+            "https://x-access-token:${MIRROR_TOKEN}@github.com/stitchui/muiblocks.git" \
+            '+refs/heads/*:refs/heads/*' \
+            '+refs/tags/*:refs/tags/*'
 
           echo "Mirrored $(git rev-parse --short HEAD) to stitchui/muiblocks"
