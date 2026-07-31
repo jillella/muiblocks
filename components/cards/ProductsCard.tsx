@@ -31,7 +31,7 @@ export default function ProductsCard({ products }: ProductsCardProps) {
               <Typography variant="h6" sx={dashboardCard.cardTitle}>
                 PRODUCTS
               </Typography>
-              <IconButton size="small" sx={dashboardCard.toolbarIcon}>
+              <IconButton size="small" sx={dashboardCard.toolbarIconAccent}>
                 <InfoOutlinedIcon fontSize="small" />
               </IconButton>
             </Box>

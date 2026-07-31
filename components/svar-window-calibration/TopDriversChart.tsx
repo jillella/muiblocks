@@ -139,7 +139,7 @@ export default function TopDriversChart({ rows: rowsProp }: TopDriversChartProps
           Top Drivers
         </Typography>
         <MuiTooltip title="Calibration drivers summary">
-          <IconButton size="small" sx={{ color: '#8b97a4', p: 0.25 }} aria-label="Info">
+          <IconButton size="small" sx={{ color: '#486c94', p: 0.25 }} aria-label="Info">
             <InfoOutlinedIcon sx={{ fontSize: 20 }} />
           </IconButton>
         </MuiTooltip>
@@ -149,7 +149,7 @@ export default function TopDriversChart({ rows: rowsProp }: TopDriversChartProps
         <IconButton size="small" sx={{ color: '#8b97a4' }} onClick={() => setIsExpanded((v) => !v)}>
           {isExpanded ? <CloseFullscreenRoundedIcon fontSize="small" /> : <OpenInFullRoundedIcon fontSize="small" />}
         </IconButton>
-        <IconButton size="small" sx={{ color: '#8b97a4' }} aria-label="More options">
+        <IconButton size="small" sx={{ color: '#486c94' }} aria-label="More options">
           <MoreVertRoundedIcon fontSize="small" />
         </IconButton>
       </Box>

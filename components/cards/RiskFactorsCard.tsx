@@ -31,7 +31,7 @@ export default function RiskFactorsCard({ riskFactors }: RiskFactorsCardProps) {
               <Typography variant="h6" sx={dashboardCard.cardTitle}>
                 RISK FACTORS
               </Typography>
-              <IconButton size="small" sx={dashboardCard.toolbarIcon}>
+              <IconButton size="small" sx={dashboardCard.toolbarIconAccent}>
                 <InfoOutlinedIcon fontSize="small" />
               </IconButton>
             </Box>

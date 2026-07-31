@@ -112,7 +112,7 @@ export default function TooltipPage() {
             >
               <IconButton
                 sx={{
-                  color: '#6b7280',
+                  color: '#486c94',
                   border: '1px solid #d6dee8',
                   backgroundColor: '#fff',
                 }}
