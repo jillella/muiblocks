@@ -70,7 +70,7 @@ export default function AnalysisPanel({ title, info, children, showDivider }: An
                   verticalAlign: 'super',
                   display: 'inline-flex',
                   cursor: 'help',
-                  color: '#7fa0c6',
+                  color: '#486c94',
                 }}
               >
                 <InfoOutlinedIcon sx={{ fontSize: 16 }} />
@@ -78,7 +78,7 @@ export default function AnalysisPanel({ title, info, children, showDivider }: An
             </MuiTooltip>
           ) : null}
         </Typography>
-        <IconButton size="small" aria-label={`${title} options`} sx={{ color: '#5b7ea8', mt: -0.25 }}>
+        <IconButton size="small" aria-label={`${title} options`} sx={{ color: '#486c94', mt: -0.25 }}>
           <MoreVertRoundedIcon fontSize="small" />
         </IconButton>
       </Box>

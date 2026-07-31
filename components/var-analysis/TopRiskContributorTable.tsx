@@ -100,7 +100,7 @@ export default function TopRiskContributorTable({ rows: rowsProp }: TopRiskContr
         >
           Top Risk Contributor
         </Typography>
-        <IconButton size="small" aria-label="Top risk contributor options" sx={{ color: '#5b7ea8' }}>
+        <IconButton size="small" aria-label="Top risk contributor options" sx={{ color: '#486c94' }}>
           <MoreVertRoundedIcon fontSize="small" />
         </IconButton>
       </Box>
