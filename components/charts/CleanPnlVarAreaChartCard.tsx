@@ -144,7 +144,7 @@ export default function CleanPnlVarAreaChartCard({ data }: CleanPnlVarAreaChartC
             <OpenInFullRoundedIcon fontSize="small" />
           )}
         </IconButton>
-        <IconButton size="small" sx={{ color: '#486c94' }}>
+        <IconButton size="small" sx={{ color: '#8b97a4' }}>
           <MoreVertRoundedIcon fontSize="small" />
         </IconButton>
       </Box>

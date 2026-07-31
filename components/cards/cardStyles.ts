@@ -7,7 +7,6 @@ export const cardTokens = {
   title: '#486c94',
   bodyStrong: '#121b2c',
   mutedIcon: '#9ca3af',
-  actionIcon: '#486c94',
   gridLine: '#d8e2eb',
   metricShadow: '2px 3px 5px -2px rgba(30, 56, 88, 0.28)',
   metricCorner: '#2b9a93',
@@ -95,11 +94,6 @@ const cardTitle: SxProps<Theme> = {
 
 const toolbarIcon: SxProps<Theme> = {
   color: cardTokens.mutedIcon,
-};
-
-/** Info / tooltip trigger and "more options" (vertical dots) icons. */
-const toolbarIconAccent: SxProps<Theme> = {
-  color: cardTokens.actionIcon,
 };
 
 const metricGrid: SxProps<Theme> = {
@@ -229,7 +223,6 @@ export const dashboardCard = {
   titleToolbarActions,
   cardTitle,
   toolbarIcon,
-  toolbarIconAccent,
   iconInAvatar,
   metricGrid,
   metricCell,

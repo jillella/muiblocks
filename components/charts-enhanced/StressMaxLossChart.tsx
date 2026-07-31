@@ -254,7 +254,7 @@ export default function StressMaxLossChart({ data }: StressMaxLossChartProps) {
             <OpenInFullRoundedIcon sx={{ fontSize: 16 }} />
           )}
         </IconButton>
-        <IconButton size="small" sx={{ color: '#486c94' }}>
+        <IconButton size="small" sx={{ color: '#8b97a4' }}>
           <MoreVertRoundedIcon sx={{ fontSize: 16 }} />
         </IconButton>
       </Box>

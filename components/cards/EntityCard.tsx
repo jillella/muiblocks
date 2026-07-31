@@ -29,7 +29,7 @@ export default function EntityCard({ metrics }: EntityCardProps) {
                 <IconButton size="small" sx={dashboardCard.toolbarIcon}>
                   <AutorenewRoundedIcon fontSize="small" />
                 </IconButton>
-                <IconButton size="small" sx={dashboardCard.toolbarIconAccent}>
+                <IconButton size="small" sx={dashboardCard.toolbarIcon}>
                   <InfoOutlinedIcon fontSize="small" />
                 </IconButton>
               </Box>

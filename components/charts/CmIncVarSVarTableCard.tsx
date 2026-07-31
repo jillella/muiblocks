@@ -100,7 +100,7 @@ export default function CmIncVarSVarTableCard({ rows }: CmIncVarSVarTableCardPro
               <IconButton size="small" sx={{ color: '#8b97a4' }} onClick={() => setIsExpanded(true)}>
                 <OpenInFullRoundedIcon fontSize="small" />
               </IconButton>
-              <IconButton size="small" sx={{ color: '#486c94' }}>
+              <IconButton size="small" sx={{ color: '#8b97a4' }}>
                 <MoreVertRoundedIcon fontSize="small" />
               </IconButton>
             </Box>
@@ -122,7 +122,7 @@ export default function CmIncVarSVarTableCard({ rows }: CmIncVarSVarTableCardPro
                   <IconButton size="small" sx={{ color: '#8b97a4' }} onClick={() => setIsExpanded(false)}>
                     <CloseFullscreenRoundedIcon fontSize="small" />
                   </IconButton>
-                  <IconButton size="small" sx={{ color: '#486c94' }}>
+                  <IconButton size="small" sx={{ color: '#8b97a4' }}>
                     <MoreVertRoundedIcon fontSize="small" />
                   </IconButton>
                 </Box>
