@@ -14,13 +14,15 @@ name: Mirror to stitchui/muiblocks
 #      and add it as MIRROR_TOKEN.
 
 on:
-  # Mirror every branch push.
+  # Only main is mirrored, so only main pushes need to trigger a run. Short-lived
+  # branches (v0/*, feature branches) are deliberately ignored - they would just
+  # clutter the mirror and burn Actions minutes.
   push:
     branches:
-      - '**'
+      - main
     tags:
       - '**'
-  # Mirror branch/tag deletions too.
+  # Mirror tag deletions.
   delete:
   # Allow a manual re-sync from the Actions tab.
   workflow_dispatch:
@@ -61,12 +63,16 @@ jobs:
           git clone --bare "https://x-access-token:${SOURCE_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" source.git
           cd source.git
 
-          # Push branches and tags explicitly with --prune instead of --mirror.
-          # --mirror would also try to push GitHub's read-only refs/pull/* refs,
-          # which the destination rejects as hidden refs.
+          # Mirror ONLY main plus tags. Explicit refspecs are used instead of
+          # --mirror because --mirror would copy every branch (including throwaway
+          # v0/* branches) and would also try to push GitHub's read-only
+          # refs/pull/* refs, which the destination rejects as hidden refs.
+          #
+          # --prune is scoped to the refspecs listed below, so it cleans up deleted
+          # tags but never touches unrelated branches on the destination.
           git push --prune --force \
             "https://x-access-token:${MIRROR_TOKEN}@github.com/stitchui/muiblocks.git" \
-            '+refs/heads/*:refs/heads/*' \
+            '+refs/heads/main:refs/heads/main' \
             '+refs/tags/*:refs/tags/*'
 
           echo "Mirrored $(git rev-parse --short HEAD) to stitchui/muiblocks"
