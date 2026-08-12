@@ -274,13 +274,14 @@ export default function RiskCalcConfigSelect({
           // The icon swaps between up/down glyphs, so drop the shared 180deg flip.
           '&& .MuiSelect-iconOpen': { transform: 'translateY(-50%)' },
           '& .MuiOutlinedInput-notchedOutline': {
-            border: '1px solid transparent',
+            border: '1px solid',
+            // Focus moves into the panel's search field on open, so Mui-focused can't drive this.
+            borderColor: open ? '#acb6ca80' : 'transparent',
             transition: (theme) =>
               theme.transitions.create('border-color', { duration: theme.transitions.duration.shorter }),
           },
-          // Hover state is lost once the pointer moves into the panel, so keep the outline while open.
           '&:hover .MuiOutlinedInput-notchedOutline, &.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            border: '1px solid #acb6ca80',
+            borderColor: '#acb6ca80',
           },
         },
       ]}

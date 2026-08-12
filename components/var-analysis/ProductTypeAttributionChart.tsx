@@ -77,6 +77,15 @@ export default function ProductTypeAttributionChart({
           line: { enabled: false },
           tick: { enabled: false },
           gridLine: { enabled: false },
+          crossLines: [
+            {
+              type: 'line',
+              value: 0,
+              stroke: '#c9ced6',
+              strokeWidth: 1,
+              strokeOpacity: 1,
+            },
+          ],
           label: {
             color: '#000',
             fontFamily,
