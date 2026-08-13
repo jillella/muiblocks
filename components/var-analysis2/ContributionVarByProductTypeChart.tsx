@@ -232,7 +232,7 @@ export default function ContributionVarByProductTypeChart({
           <Typography
             key={stat.label}
             sx={{
-              fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+              fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
               fontSize: '12.5px',
               color: '#6b7280',
             }}

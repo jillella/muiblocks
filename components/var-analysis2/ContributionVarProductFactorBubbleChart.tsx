@@ -50,7 +50,7 @@ function LegendItem({ children, marker }: { children: string; marker: ReactNode 
       {marker}
       <Typography
         sx={{
-          fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+          fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
           fontSize: '12px',
           color: '#374151',
           whiteSpace: 'nowrap',

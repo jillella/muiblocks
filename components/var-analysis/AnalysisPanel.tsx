@@ -9,7 +9,7 @@ export const ANALYSIS_TITLE_COLOR = '#285b6c';
 
 /** Shared type style for every panel/section title on the Analysis page. */
 export const analysisTitleSx = {
-  fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+  fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
   fontSize: '22px',
   fontWeight: 400,
   color: ANALYSIS_TITLE_COLOR,

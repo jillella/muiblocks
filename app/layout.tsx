@@ -1,16 +1,12 @@
 import type { Metadata } from 'next'
-import { Roboto } from 'next/font/google'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 import theme from '@/lib/theme'
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
-  display: 'swap',
-  variable: '--font-roboto',
-});
 
 export const metadata: Metadata = {
   title: 'Cards App',
@@ -39,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={roboto.variable}>
-      <body className={roboto.className}>
+    <html lang="en">
+      <body>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />

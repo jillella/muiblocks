@@ -332,7 +332,6 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
           <Box
             component="span"
             sx={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
               fontSize: { xs: '1.125rem', sm: '1.25rem' },
               fontWeight: 400,
               letterSpacing: '0.04em',
@@ -444,7 +443,6 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
             py: 2,
             bgcolor: HEADER_BG,
             color: 'common.white',
-            fontFamily: 'Georgia, "Times New Roman", serif',
             fontSize: '1.125rem',
             letterSpacing: '0.04em',
           }}

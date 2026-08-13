@@ -17,7 +17,7 @@ function SummaryChip({ label, count, color }: { label: string; count: number; co
         display: 'inline-flex',
         alignItems: 'baseline',
         gap: 0.75,
-        fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+        fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
         fontSize: '13px',
         fontWeight: 700,
         color,
@@ -111,7 +111,7 @@ export default function ContributionVarMovementPanel({ rows: rowsProp }: Contrib
                 />
                 <Typography
                   sx={{
-                    fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+                    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
                     fontSize: '13px',
                     color: '#181d1f',
                     whiteSpace: 'nowrap',

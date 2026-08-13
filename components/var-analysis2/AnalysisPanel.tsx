@@ -9,7 +9,7 @@ export const ANALYSIS_TITLE_COLOR = '#285b6c';
 
 /** Shared type style for every panel/section title on the Analysis 2 page. */
 export const analysisTitleSx = {
-  fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+  fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
   fontSize: '22px',
   fontWeight: 400,
   color: ANALYSIS_TITLE_COLOR,
@@ -19,7 +19,7 @@ export const analysisTitleSx = {
 } as const;
 
 export const panelNoteSx = {
-  fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+  fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
   fontSize: '12px',
   color: '#8b96a5',
   lineHeight: 1.6,

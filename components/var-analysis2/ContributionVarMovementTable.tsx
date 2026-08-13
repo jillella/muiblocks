@@ -34,7 +34,7 @@ export function buildFactorMovements(
 }
 
 const cellSx = {
-  fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+  fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
   fontSize: '12.5px',
   py: 0.85,
   px: 1.25,

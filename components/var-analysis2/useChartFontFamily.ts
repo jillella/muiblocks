@@ -1,22 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ROBOTO_FONT_FAMILY } from '@/lib/theme';
 
-const FALLBACK = 'Roboto, Helvetica, Arial, sans-serif';
-
-/**
- * `next/font` exposes Roboto under a hashed family name via `--font-roboto`,
- * which SVG `font-family` cannot resolve from a CSS variable at paint time in
- * every browser, so read the resolved value once on mount and fall back to the
- * plain family during SSR / before hydration.
- */
+/** AG Charts / SVG labels need a real family name, not a CSS variable. */
 export function useChartFontFamily() {
-  const [fontFamily, setFontFamily] = useState(FALLBACK);
-
-  useEffect(() => {
-    const resolved = getComputedStyle(document.documentElement).getPropertyValue('--font-roboto').trim();
-    if (resolved) setFontFamily(`${resolved}, ${FALLBACK}`);
-  }, []);
-
-  return fontFamily;
+  return ROBOTO_FONT_FAMILY;
 }

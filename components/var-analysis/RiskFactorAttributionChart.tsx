@@ -94,7 +94,7 @@ export default function RiskFactorAttributionChart({
               />
               <Typography
                 sx={{
-                  fontFamily: 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
+                  fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
                   fontSize: '13px',
                   fontWeight: 400,
                   color: '#181d1f',
