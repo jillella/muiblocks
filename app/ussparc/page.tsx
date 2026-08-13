@@ -3,7 +3,7 @@ import Container from '@mui/material/Container'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
-import { UssparcHeader } from '@/components/layout/UssparcHeader'
+// import { UssparcHeader } from '@/components/layout/UssparcHeader'
 
 export default function UssparcPage() {
   return (

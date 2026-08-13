@@ -328,7 +328,7 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
             color: 'inherit',
           }}
         >
-          <LogoMark sx={{ width: { xs: 28, sm: 32 }, height: { xs: 32, sm: 36 } }} />
+          {/* <LogoMark sx={{ width: { xs: 28, sm: 32 }, height: { xs: 32, sm: 36 } }} /> */}
           <Box
             component="span"
             sx={{
@@ -341,23 +341,7 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
               textOverflow: 'ellipsis',
             }}
           >
-            US SPARC
-          </Box>
-          <Box
-            component="span"
-            sx={{
-              flexShrink: 0,
-              bgcolor: ACCENT,
-              color: 'common.white',
-              px: { xs: 0.5, sm: 0.75 },
-              py: 0.25,
-              borderRadius: 0.5,
-              fontSize: { xs: '8px', sm: '10px' },
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-            }}
-          >
-            REL
+            {/* Logo */}
           </Box>
         </Box>
 
