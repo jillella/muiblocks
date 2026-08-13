@@ -15,7 +15,7 @@ export type { TopDriverRow };
 export { buildMockTopDriverRows, mockTopDriverRows } from '@/lib/mock-data';
 
 const gridShellSx = {
-  '--ag-font-family': '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+  '--ag-font-family': 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
   '--ag-borders': 'none',
   '--ag-row-border-style': 'solid',
   '--ag-row-border-color': '#eef2f6',

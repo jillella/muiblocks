@@ -1,21 +1,14 @@
 'use client';
 
-import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import EntityCard from '@/components/cards/EntityCard';
 import ProductsCard from '@/components/cards/ProductsCard';
 import RiskFactorsCard from '@/components/cards/RiskFactorsCard';
 import { mockProducts, mockRiskFactors, mockEntityMetrics } from '@/lib/mock-data';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
-
 export default function DashboardPage() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box
+    <Box
         sx={{
           minHeight: '100vh',
           backgroundColor: '#f8fafc',
@@ -42,7 +35,6 @@ export default function DashboardPage() {
           </Box>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }
 

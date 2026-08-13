@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono, Roboto } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter'
-import './globals.css'
+import CssBaseline from '@mui/material/CssBaseline'
+import { ThemeProvider } from '@mui/material/styles'
+import theme from '@/lib/theme'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
 const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['300', '400', '500', '700'],
+  display: 'swap',
   variable: '--font-roboto',
 });
 
@@ -40,10 +41,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={roboto.variable}>
-      <body className="font-sans antialiased">
+      <body className={roboto.className}>
         <AppRouterCacheProvider>
-          {children}
-          <Analytics />
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {children}
+            <Analytics />
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Container, Paper, ThemeProvider, createTheme } from '@mui/material';
+import { Box, Container, Paper } from '@mui/material';
 import { UssparcHeader } from '@/components/layout/UssparcHeader';
 import AnalysisFilterBar from '@/components/var-analysis/AnalysisFilterBar';
 import ProductTypeAttributionChart from '@/components/var-analysis/ProductTypeAttributionChart';
@@ -8,16 +8,9 @@ import RiskFactorAttributionChart from '@/components/var-analysis/RiskFactorAttr
 import RiskGradeBubbleChart from '@/components/var-analysis/RiskGradeBubbleChart';
 import TopRiskContributorTable from '@/components/var-analysis/TopRiskContributorTable';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
-
 export default function VarAnalysisPage() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box component="main" sx={{ minHeight: '100vh', backgroundColor: '#f4f5f6' }}>
+    <Box component="main" sx={{ minHeight: '100vh', backgroundColor: '#f4f5f6' }}>
         <Box sx={{ backgroundColor: '#004d2c', pb: { xs: 6, md: 8 } }}>
           <UssparcHeader activeNav="VaR" />
           <Container maxWidth={false} sx={{ maxWidth: 1920, px: { xs: 2, sm: 3, md: 4 }, pt: { xs: 2, md: 2.5 } }}>
@@ -66,6 +59,5 @@ export default function VarAnalysisPage() {
           </Paper>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }

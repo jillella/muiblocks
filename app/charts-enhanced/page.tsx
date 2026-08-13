@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import dynamic from 'next/dynamic';
 import type { AttributionRow, StressTestingRow } from '@/components/charts-enhanced';
 import { mockStressMaxLossChartSeries, mockVarBacktestingChartSeries } from '@/lib/mock-data';
@@ -34,16 +34,9 @@ const stressTestingRows: StressTestingRow[] = [
   { product: 'Other', mtm: 7.2, adScenario: 1, ccarDate: 8 },
 ];
 
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
-
 export default function ChartsEnhancedPage() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box
+    <Box
         sx={{
           minHeight: '100vh',
           backgroundColor: '#f3f6fb',
@@ -65,6 +58,5 @@ export default function ChartsEnhancedPage() {
           </Box>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }

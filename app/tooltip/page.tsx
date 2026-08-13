@@ -7,17 +7,9 @@ import {
   Container,
   Divider,
   IconButton,
-  ThemeProvider,
   Tooltip,
   Typography,
-  createTheme,
 } from '@mui/material';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
 
 function MarketRiskTooltipBody() {
   return (
@@ -82,8 +74,7 @@ function MarketRiskTooltipBody() {
 
 export default function TooltipPage() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box
+    <Box
         sx={{
           minHeight: '100vh',
           backgroundColor: '#f8fafc',
@@ -123,6 +114,5 @@ export default function TooltipPage() {
           </Box>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }

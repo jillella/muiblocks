@@ -55,7 +55,7 @@ export default function SvarWindowCalibrationTable({ height, rows }: SvarWindowC
     <Box
       className="ag-theme-quartz"
       sx={{
-        '--ag-font-family': '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+        '--ag-font-family': 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
         '--ag-borders': 'none',
         '--ag-row-border-style': 'solid',
         '--ag-row-border-color': '#ebedf0',

@@ -1,15 +1,11 @@
 'use client';
 
-import { Box, Container, FormControl, MenuItem, Stack, ThemeProvider, Typography, createTheme } from '@mui/material';
+import { Box, Container, FormControl, MenuItem, Stack, Typography } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 import FilterSelect from '@/components/common/FilterSelect';
 import RiskCalcConfigSelect from '@/components/var-analytics/RiskCalcConfigSelect';
 import type { ConfigOption, ConfigSelection } from '@/components/var-analytics/RiskCalcConfigSelect';
-
-const theme = createTheme({
-  typography: { fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif' },
-});
 
 const productionNames = [
   'CM Inc VaR',
@@ -78,8 +74,7 @@ export default function VarAnalyticsDemoPage() {
   const [business, setBusiness] = useState('');
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box component="main" sx={{ minHeight: '100vh', backgroundColor: '#f4f5f6', py: 6 }}>
+    <Box component="main" sx={{ minHeight: '100vh', backgroundColor: '#f4f5f6', py: 6 }}>
         <Container maxWidth="md">
           <RiskCalcConfigSelect
             productionConfigs={productionConfigs}
@@ -132,6 +127,5 @@ export default function VarAnalyticsDemoPage() {
           </Typography>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }

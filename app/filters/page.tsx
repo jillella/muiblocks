@@ -11,19 +11,11 @@ import {
   ListItemText,
   MenuItem,
   Stack,
-  ThemeProvider,
   Typography,
-  createTheme,
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import { useState } from 'react';
 import FilterSelect from '@/components/common/FilterSelect';
-
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
 
 const entityScopeGroups = [
   {
@@ -87,8 +79,7 @@ export default function FiltersPage() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box
+    <Box
         sx={{
           minHeight: '100vh',
           backgroundColor: '#f8fafc',
@@ -376,6 +367,5 @@ export default function FiltersPage() {
           </Box>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }

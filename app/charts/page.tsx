@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import dynamic from 'next/dynamic';
 import {
   mockCdxIndexData,
@@ -34,16 +34,9 @@ const CdxIndexChartCard = dynamic(() => import('@/components/charts/CdxIndexChar
   ssr: false,
 });
 
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
-
 export default function ChartsPage() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box
+    <Box
         sx={{
           minHeight: '100vh',
           backgroundColor: '#f8fafc',
@@ -67,6 +60,5 @@ export default function ChartsPage() {
           </Box>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }

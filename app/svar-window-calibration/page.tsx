@@ -1,20 +1,13 @@
 'use client';
 
-import { Box, Container, ThemeProvider, createTheme } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import SvarWindowCalibrationChart from '@/components/svar-window-calibration/SvarWindowCalibrationChart';
 import TopContributorsChart from '@/components/svar-window-calibration/TopContributorsChart';
 import TopDriversChart from '@/components/svar-window-calibration/TopDriversChart';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
-
 export default function SvarWindowCalibrationPage() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box
+    <Box
         sx={{
           minHeight: '100vh',
           backgroundColor: '#f8f9fa',
@@ -36,6 +29,5 @@ export default function SvarWindowCalibrationPage() {
           </Box>
         </Container>
       </Box>
-    </ThemeProvider>
   );
 }

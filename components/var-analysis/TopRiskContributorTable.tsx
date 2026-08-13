@@ -14,7 +14,7 @@ import 'ag-grid-community/styles/ag-theme-quartz.css';
 registerAgModules();
 
 const gridShellSx = {
-  '--ag-font-family': '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+  '--ag-font-family': 'var(--font-roboto), Roboto, Helvetica, Arial, sans-serif',
   '--ag-borders': 'none',
   '--ag-row-border-style': 'solid',
   '--ag-row-border-color': '#eef2f6',
