@@ -28,6 +28,8 @@ import AccountCircleOutlined from '@mui/icons-material/AccountCircleOutlined'
 
 const HEADER_BG = '#004d2c'
 const ACCENT = '#8dc63f'
+/** Flip to true to restore primary nav + utility icons. */
+const SHOW_NAV_AND_UTILS = false
 
 function LogoMark({ sx }: { sx?: object }) {
   return (
@@ -344,7 +346,7 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
           </Box>
         </Box>
 
-        {isLgUp && (
+        {SHOW_NAV_AND_UTILS && isLgUp && (
           <Box
             component="nav"
             aria-label="Primary"
@@ -394,6 +396,7 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
           </Box>
         )}
 
+        {SHOW_NAV_AND_UTILS && (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.25, sm: 0.5 } }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <UtilityIconButton label="Language">
@@ -422,10 +425,12 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
             </IconButton>
           )}
         </Box>
+        )}
       </Toolbar>
 
       <Divider sx={{ borderColor: ACCENT, opacity: 1, borderBottomWidth: 1 }} />
 
+      {SHOW_NAV_AND_UTILS && (
       <Drawer
         anchor="right"
         open={mobileOpen}
@@ -484,6 +489,7 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
           </MobileSection>
         </List>
       </Drawer>
+      )}
     </AppBar>
   )
 }
