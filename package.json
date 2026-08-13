@@ -16,7 +16,6 @@
     "@mui/material": "^6.4.0",
     "@mui/material-nextjs": "^7.3.9",
     "@mui/x-date-pickers": "^8.27.2",
-    "@vercel/analytics": "1.6.1",
     "ag-charts-community": "12.1.0",
     "ag-charts-react": "12.1.0",
     "ag-grid-community": "^35.1.0",

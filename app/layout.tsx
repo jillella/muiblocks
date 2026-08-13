@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
@@ -46,7 +45,6 @@ export default function RootLayout({
           <ThemeProvider theme={theme}>
             <CssBaseline />
             {children}
-            <Analytics />
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
