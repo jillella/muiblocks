@@ -14,9 +14,10 @@ const links = [
   { href: '/tooltip', label: 'tooltip' },
   { href: '/date', label: 'date' },
   { href: '/calendar', label: 'calendar' },
-  { href: '/products-cards', label: 'products-cards' },
-  { href: '/ussparc', label: 'ussparc (header demo)' },
 ] as const;
+
+/** Flip to true to restore the demo page links. */
+const SHOW_PAGE_LINKS = false;
 
 export default function HomePage() {
   return (
@@ -38,6 +39,7 @@ export default function HomePage() {
         muiblocks
       </Typography>
 
+      {SHOW_PAGE_LINKS && (
       <Box
         component="nav"
         sx={{
@@ -61,6 +63,7 @@ export default function HomePage() {
           </Link>
         ))}
       </Box>
+      )}
     </Box>
   );
 }
