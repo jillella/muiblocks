@@ -43,7 +43,7 @@ const DEFAULT_ENTITY = entityValue('CM-DPG', 'SMBC CAPITAL MARKETS INC');
 
 const entityMenuPaperSx = {
   mt: 1,
-  minWidth: 360,
+  minWidth: 380,
   borderRadius: 2,
   border: '1px solid #d9dfe5',
   backgroundColor: '#f7f9fa',
@@ -122,7 +122,7 @@ export default function AnalysisFilterBar() {
       >
         <CobPicker />
 
-        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 260 } }}>
+        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 380 } }}>
           <FilterSelect
             id="entity-scope-select"
             floatingLabel="Entity Scope"
