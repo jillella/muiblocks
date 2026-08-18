@@ -27,27 +27,25 @@ export default function ProductTypeAttributionChart({
       data: rows,
       background: { fill: 'transparent' },
       padding: { top: 6, right: 26, bottom: 6, left: 2 },
-      series: [
-        {
-          type: 'bar',
-          direction: 'horizontal',
-          xKey: 'product',
-          yKey: 'value',
-          yName: 'Attribution',
-          // Large radius is clamped to half the bar thickness, giving a full
-          // pill cap on the outer end only (the end at zero stays square).
-          cornerRadius: 100,
-          itemStyler: ({ datum }: { datum: ProductTypeAttributionRow }) => ({
-            fill: datum.color,
+      series: rows.map((row) => ({
+        type: 'bar',
+        direction: 'horizontal',
+        xKey: 'product',
+        yKey: 'value',
+        yName: 'Attribution',
+        data: [row],
+        fill: row.color,
+        stroke: row.color,
+        strokeWidth: 0,
+        grouped: false,
+        cornerRadius: 100,
+        tooltip: {
+          renderer: () => ({
+            title: row.product,
+            content: row.value.toLocaleString('en-US'),
           }),
-          tooltip: {
-            renderer: ({ datum }: { datum: ProductTypeAttributionRow }) => ({
-              title: datum.product,
-              content: datum.value.toLocaleString('en-US'),
-            }),
-          },
         },
-      ],
+      })),
       axes: [
         {
           type: 'category',

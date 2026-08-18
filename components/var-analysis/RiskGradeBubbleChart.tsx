@@ -27,33 +27,35 @@ export default function RiskGradeBubbleChart({ points: pointsProp, height = 300 
   const points = useMemo(() => pointsProp ?? mockRiskGradeBubbles, [pointsProp]);
   const fontFamily = useChartFontFamily();
 
-  const chartOptions = useMemo<any>(
-    () => ({
+  const chartOptions = useMemo<any>(() => {
+    const sizes = points.map((point) => point.size);
+    const sizeDomain: [number, number] = [Math.min(...sizes), Math.max(...sizes)];
+
+    return {
       data: points,
       background: { fill: 'transparent' },
       padding: { top: 6, right: 12, bottom: 0, left: 16 },
-      series: [
-        {
-          type: 'bubble',
-          xKey: 'grade',
-          yKey: 'exposure',
-          sizeKey: 'size',
-          labelKey: 'product',
-          size: 14,
-          maxSize: 62,
-          fillOpacity: 0.7,
-          strokeWidth: 0,
-          itemStyler: ({ datum }: { datum: RiskGradeBubblePoint }) => ({
-            fill: datum.color,
+      series: points.map((point) => ({
+        type: 'bubble',
+        xKey: 'grade',
+        yKey: 'exposure',
+        sizeKey: 'size',
+        labelKey: 'product',
+        data: [point],
+        fill: point.color,
+        stroke: point.color,
+        strokeWidth: 0,
+        fillOpacity: 0.7,
+        size: 14,
+        maxSize: 62,
+        domain: sizeDomain,
+        tooltip: {
+          renderer: () => ({
+            title: point.product,
+            content: `Risk grade ${point.grade.toFixed(0)} · utilization ${point.exposure}%`,
           }),
-          tooltip: {
-            renderer: ({ datum }: { datum: RiskGradeBubblePoint }) => ({
-              title: datum.product,
-              content: `Risk grade ${datum.grade.toFixed(0)} · utilization ${datum.exposure}%`,
-            }),
-          },
         },
-      ],
+      })),
       axes: [
         {
           type: 'number',
@@ -94,9 +96,8 @@ export default function RiskGradeBubbleChart({ points: pointsProp, height = 300 
         },
       ],
       legend: { enabled: false },
-    }),
-    [points, fontFamily],
-  );
+    };
+  }, [points, fontFamily]);
 
   return (
     <AnalysisPanel title="Risk Attribution By Product Type" info="Exposure concentration against risk grade">
