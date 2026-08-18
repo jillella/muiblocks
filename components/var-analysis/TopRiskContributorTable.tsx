@@ -71,13 +71,7 @@ export default function TopRiskContributorTable({ rows: rowsProp }: TopRiskContr
         cellRenderer: SubClassCellRenderer,
       },
       { field: 'riskType', headerName: 'Risk Type', flex: 1, minWidth: 120 },
-      {
-        field: 'product',
-        headerName: 'Product',
-        flex: 1.2,
-        minWidth: 150,
-        cellStyle: { fontWeight: 600, color: '#1f2937' },
-      },
+      { field: 'product', headerName: 'Product', flex: 1.2, minWidth: 150 },
       { field: 'productTwo', headerName: 'Product Two', flex: 1.2, minWidth: 150 },
       { field: 'ticker', headerName: 'Ticker US SPARC', flex: 1.5, minWidth: 190 },
       {

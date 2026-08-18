@@ -57,7 +57,7 @@ export default function ProductTypeAttributionChart({
           label: {
             color: '#000',
             fontFamily,
-            fontSize: 14,
+            fontSize: 13,
             fontWeight: 400,
             avoidCollisions: false,
           },
