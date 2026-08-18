@@ -42,7 +42,7 @@ export default function VarAnalysisPage() {
                 display: 'grid',
                 gridTemplateColumns: {
                   xs: '1fr',
-                  lg: 'minmax(0, 0.88fr) minmax(0, 1.24fr) minmax(0, 0.88fr)',
+                  lg: 'minmax(0, 1.2fr) minmax(0, 1.15fr) minmax(0, 0.8fr)',
                 },
                 columnGap: { lg: 1 },
                 rowGap: 4,

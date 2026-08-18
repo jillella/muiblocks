@@ -22,7 +22,7 @@ export type RiskFactorAttributionChartProps = {
 
 export default function RiskFactorAttributionChart({
   slices: slicesProp,
-  height = 300,
+  height = 260,
 }: RiskFactorAttributionChartProps) {
   const slices = useMemo(() => slicesProp ?? mockRiskFactorAttribution, [slicesProp]);
   const fontFamily = useChartFontFamily();
@@ -112,19 +112,26 @@ export default function RiskFactorAttributionChart({
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
+          flexWrap: 'nowrap',
           alignItems: 'center',
-          gap: { xs: 2, sm: 5 },
-          minHeight: height,
+          gap: { xs: 2, sm: 2.5 },
         }}
       >
-        <Box sx={{ width: { xs: '100%', sm: '46%' }, minWidth: 0 }}>
+        <Box
+          sx={{
+            flex: `0 1 ${height}px`,
+            width: height,
+            minWidth: 240,
+            maxWidth: 280,
+          }}
+        >
           <Typography sx={{ fontSize: '11px', color: '#8b96a5', lineHeight: 1.4 }}>
             Inner ring = Prior week Contribution VaR
           </Typography>
           <Typography sx={{ fontSize: '11px', fontWeight: 700, color: '#5b6672', lineHeight: 1.4, mb: 0.5 }}>
             Outer ring = Current week Contribution VaR
           </Typography>
-          <Box sx={{ height, minWidth: 0 }}>
+          <Box sx={{ width: '100%', aspectRatio: '1' }}>
             <AgCharts options={chartOptions} style={{ width: '100%', height: '100%' }} />
           </Box>
         </Box>
@@ -133,9 +140,7 @@ export default function RiskFactorAttributionChart({
           component="ul"
           aria-label="Risk factor legend"
           sx={{
-            width: { xs: '100%', sm: 'auto' },
-            flex: { sm: '1 1 0' },
-            minWidth: 0,
+            flex: '0 0 auto',
             m: 0,
             p: 0,
             listStyle: 'none',
