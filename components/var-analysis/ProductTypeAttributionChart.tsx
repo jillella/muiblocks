@@ -10,9 +10,6 @@ import { useChartFontFamily } from '@/components/var-analysis/useChartFontFamily
 
 registerAgModules();
 
-const POSITIVE_FILL = '#387f97';
-const NEGATIVE_FILL = '#A81008';
-
 export type ProductTypeAttributionChartProps = {
   rows?: ProductTypeAttributionRow[];
   height?: number;
@@ -41,7 +38,7 @@ export default function ProductTypeAttributionChart({
           // pill cap on the outer end only (the end at zero stays square).
           cornerRadius: 100,
           itemStyler: ({ datum }: { datum: ProductTypeAttributionRow }) => ({
-            fill: datum.value < 0 ? NEGATIVE_FILL : POSITIVE_FILL,
+            fill: datum.color,
           }),
           tooltip: {
             renderer: ({ datum }: { datum: ProductTypeAttributionRow }) => ({
@@ -104,7 +101,7 @@ export default function ProductTypeAttributionChart({
   return (
     <AnalysisPanel
       title="Risk Attribution - By Product Type"
-      info="Positive and negative VaR attribution by product type"
+      info="VaR attribution by product type"
       showDivider
     >
       <Box sx={{ width: '100%', minWidth: 0, overflowX: 'auto' }}>

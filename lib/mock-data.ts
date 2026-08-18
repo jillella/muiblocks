@@ -365,16 +365,17 @@ export const mockRiskFactorAttribution: RiskFactorAttributionSlice[] = [
 export interface ProductTypeAttributionRow {
   product: string;
   value: number;
+  color: string;
 }
 
 export const mockProductTypeAttribution: ProductTypeAttributionRow[] = [
-  { product: 'Treasury Bond Repo', value: 52000 },
-  { product: 'FX Forward or Swap', value: 43000 },
-  { product: 'Cross Currency Swap', value: -14000 },
-  { product: 'Swaption', value: 58000 },
-  { product: 'Treasury Bond Collateral', value: -35000 },
-  { product: 'Treasury Bond', value: 14000 },
-  { product: 'Bond Future', value: -44000 },
+  { product: 'Treasury Bond Repo', value: 52000, color: '#344972' },
+  { product: 'FX Forward or Swap', value: 43000, color: '#E1C281' },
+  { product: 'Cross Currency Swap', value: -14000, color: '#88ACD5' },
+  { product: 'Swaption', value: 58000, color: '#7A988D' },
+  { product: 'Treasury Bond Collateral', value: -35000, color: '#856F92' },
+  { product: 'Treasury Bond', value: 14000, color: '#387F97' },
+  { product: 'Bond Future', value: -44000, color: '#AA936C' },
 ];
 
 // --- VaR > Analysis : Risk attribution by product type (bubble / risk grade)
