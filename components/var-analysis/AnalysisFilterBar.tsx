@@ -9,6 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import FilterSelect from '@/components/common/FilterSelect';
+import ComparisonPeriodToggle, { type ComparisonPeriod } from '@/components/var-analysis/ComparisonPeriodToggle';
 
 const entityScopeGroups = [
   {
@@ -111,6 +112,7 @@ function CobPicker() {
 
 export default function AnalysisFilterBar() {
   const [entity, setEntity] = useState(DEFAULT_ENTITY);
+  const [comparisonPeriod, setComparisonPeriod] = useState<ComparisonPeriod>('wow');
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -169,9 +171,9 @@ export default function AnalysisFilterBar() {
           </FilterSelect>
         </FormControl>
 
-        <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', lg: 'block' } }} aria-hidden />
-        <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', lg: 'block' } }} aria-hidden />
-        <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', lg: 'block' } }} aria-hidden />
+        <ComparisonPeriodToggle value={comparisonPeriod} onChange={setComparisonPeriod} />
+
+        <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', xl: 'block' } }} aria-hidden />
       </Stack>
     </LocalizationProvider>
   );
