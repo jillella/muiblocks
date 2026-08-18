@@ -6,7 +6,6 @@ import AnalysisFilterBar from '@/components/var-analysis/AnalysisFilterBar';
 import ContributionVarByProductTypeChart from '@/components/var-analysis2/ContributionVarByProductTypeChart';
 import ContributionVarMovementPanel from '@/components/var-analysis2/ContributionVarMovementPanel';
 import ContributionVarProductFactorBubbleChart from '@/components/var-analysis2/ContributionVarProductFactorBubbleChart';
-import ContributionVarOverlayBars from '@/components/var-analysis2/ContributionVarOverlayBars';
 import ContributionVarRankedBars from '@/components/var-analysis2/ContributionVarRankedBars';
 
 export default function VarAnalysis2Page() {
@@ -43,10 +42,6 @@ export default function VarAnalysis2Page() {
             <Divider sx={{ my: { xs: 3.5, md: 4.5 }, borderColor: '#eef1f5' }} />
 
             <ContributionVarRankedBars />
-
-            <Divider sx={{ my: { xs: 3.5, md: 4.5 }, borderColor: '#eef1f5' }} />
-
-            <ContributionVarOverlayBars />
 
             <Divider sx={{ my: { xs: 3.5, md: 4.5 }, borderColor: '#eef1f5' }} />
 

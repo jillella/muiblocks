@@ -10,9 +10,9 @@ import { arrowFor, formatSigned, mixHex } from '@/components/var-analysis2/varFo
 
 registerAgModules();
 
-/** Prior week ring sits inside the current week ring, with a white gap between them. */
-const CURRENT_RING = { outerRadiusRatio: 1, innerRadiusRatio: 0.76 };
-const PRIOR_RING = { outerRadiusRatio: 0.7, innerRadiusRatio: 0.46 };
+/** Thick inner (prior) ring, thin outer (current) ring, white gap between them. */
+const CURRENT_RING = { outerRadiusRatio: 1, innerRadiusRatio: 0.88 };
+const PRIOR_RING = { outerRadiusRatio: 0.82, innerRadiusRatio: 0.42 };
 
 export type ContributionVarDonutProps = {
   rows: ContributionVarFactorRow[];
@@ -31,8 +31,7 @@ export default function ContributionVarDonut({
 
   const chartOptions = useMemo<any>(() => {
     const fills = rows.map((row) => row.color);
-    // The prior ring is the same palette washed out, so the pairing reads at a glance.
-    const priorFills = rows.map((row) => mixHex(row.color, '#ffffff', 0.55));
+    const priorFills = rows.map((row) => mixHex(row.color, '#FFFFFF', 0.55));
 
     return {
       background: { fill: 'transparent' },

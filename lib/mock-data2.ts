@@ -19,11 +19,11 @@ export interface ContributionVarFactorRow {
 
 /** Prior total $80.5MM, current total $83.0MM. */
 export const mockContributionVarFactors: ContributionVarFactorRow[] = [
-  { factor: 'Interest Rate', priorMm: 28.0, currentMm: 25.0, color: '#34558b' },
-  { factor: 'Interest Rate Vol', priorMm: 9.5, currentMm: 12.5, color: '#a8c8e8' },
-  { factor: 'FX Spot', priorMm: 14.0, currentMm: 13.0, color: '#2e8b52' },
-  { factor: 'FX Vol', priorMm: 7.0, currentMm: 8.5, color: '#7fc98a' },
-  { factor: 'Credit Spread', priorMm: 22.0, currentMm: 24.0, color: '#d0342c' },
+  { factor: 'Interest Rate', priorMm: 28.0, currentMm: 25.0, color: '#39609D' },
+  { factor: 'Interest Rate Vol', priorMm: 9.5, currentMm: 12.5, color: '#B5A881' },
+  { factor: 'FX Spot', priorMm: 14.0, currentMm: 13.0, color: '#929E4E' },
+  { factor: 'FX Vol', priorMm: 7.0, currentMm: 8.5, color: '#7FC98A' },
+  { factor: 'Credit Spread', priorMm: 22.0, currentMm: 24.0, color: '#D0342C' },
 ];
 
 // --- Contribution VaR by product type (diverging bars)
