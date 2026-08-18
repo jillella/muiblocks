@@ -42,9 +42,9 @@ export default function VarAnalysisPage() {
                 display: 'grid',
                 gridTemplateColumns: {
                   xs: '1fr',
-                  lg: 'minmax(0, 1.2fr) minmax(0, 1.15fr) minmax(0, 0.8fr)',
+                  lg: 'max-content minmax(0, 1fr) minmax(0, 1fr)',
                 },
-                columnGap: { lg: 1 },
+                columnGap: { lg: 2 },
                 rowGap: 4,
               }}
             >
