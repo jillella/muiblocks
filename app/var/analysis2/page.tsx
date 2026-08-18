@@ -2,7 +2,7 @@
 
 import { Box, Container, Divider, Paper } from '@mui/material';
 import { UssparcHeader } from '@/components/layout/UssparcHeader';
-import AnalysisFilterBar from '@/components/var-analysis2/AnalysisFilterBar';
+import AnalysisFilterBar from '@/components/var-analysis/AnalysisFilterBar';
 import ContributionVarByProductTypeChart from '@/components/var-analysis2/ContributionVarByProductTypeChart';
 import ContributionVarMovementPanel from '@/components/var-analysis2/ContributionVarMovementPanel';
 import ContributionVarProductFactorBubbleChart from '@/components/var-analysis2/ContributionVarProductFactorBubbleChart';

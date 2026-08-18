@@ -1,7 +1,7 @@
 'use client';
 
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import { Box, FormControl, MenuItem, Popover, Stack } from '@mui/material';
+import { Box, Divider, FormControl, ListSubheader, MenuItem, Popover, Stack } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
@@ -10,12 +10,40 @@ import { format } from 'date-fns';
 import { useState } from 'react';
 import FilterSelect from '@/components/common/FilterSelect';
 
-const scenarioTypes = ['Historical', 'Hypothetical', 'Regulatory', 'Ad Hoc'];
-const scenarioNames = ['2008 Credit Crisis', '2011 Sovereign Stress', '2020 Covid Shock', 'Rates Up 200bps'];
+const entityScopeGroups = [
+  {
+    parent: 'CM-DPG',
+    children: [
+      'NON-CUSO ENTITY',
+      'Non BHC',
+      'SMBC NIKKO SECURITIES AMERICA INC',
+      'SMBC DERIVATIVES PRODUCTS LTD',
+      'SMBC NIKKO CAPITAL MARKETS LTD',
+      'CUSO ENTITY',
+      'BHC',
+      'SMBC CAPITAL MARKETS INC',
+    ],
+  },
+  {
+    parent: 'Non-DPG',
+    children: [
+      'CUSO ENTITY',
+      'BHC',
+      'SMBC NIKKO SECURITIES AMERICA, INC.',
+      'SMBC NIKKO SECURITIES AMERICA INC',
+      'Non BHC',
+      'SMBC NY BRANCH',
+    ],
+  },
+] as const;
 
-const menuPaperSx = {
+const entityValue = (group: string, child: string) => `${group}::${child}`;
+const entityLabel = (value: string) => value.split('::').slice(1).join('::');
+const DEFAULT_ENTITY = entityValue('CM-DPG', 'SMBC CAPITAL MARKETS INC');
+
+const entityMenuPaperSx = {
   mt: 1,
-  minWidth: 240,
+  minWidth: 360,
   borderRadius: 2,
   border: '1px solid #d9dfe5',
   backgroundColor: '#f7f9fa',
@@ -82,8 +110,7 @@ function CobPicker() {
 }
 
 export default function AnalysisFilterBar() {
-  const [scenarioType, setScenarioType] = useState('');
-  const [scenarioName, setScenarioName] = useState('');
+  const [entity, setEntity] = useState(DEFAULT_ENTITY);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -95,40 +122,54 @@ export default function AnalysisFilterBar() {
       >
         <CobPicker />
 
-        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 220 } }}>
+        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 260 } }}>
           <FilterSelect
-            id="scenario-type-select"
-            value={scenarioType}
-            onChange={(event: SelectChangeEvent<unknown>) => setScenarioType(event.target.value as string)}
+            id="entity-scope-select"
+            floatingLabel="Entity Scope"
+            value={entity}
+            onChange={(event: SelectChangeEvent<unknown>) => setEntity(event.target.value as string)}
             displayEmpty
-            renderValue={(selected) => (selected as string) || 'Scenario Type'}
-            MenuProps={{ PaperProps: { sx: menuPaperSx }, MenuListProps: { sx: { py: 0.5 } } }}
+            renderValue={(selected) => entityLabel(selected as string)}
+            MenuProps={{ PaperProps: { sx: entityMenuPaperSx }, MenuListProps: { sx: { py: 0.5 } } }}
           >
-            {scenarioTypes.map((option) => (
-              <MenuItem key={option} value={option} sx={{ minHeight: 46, fontSize: '0.95rem' }}>
-                {option}
-              </MenuItem>
-            ))}
+            {entityScopeGroups.flatMap((group, groupIndex) => {
+              const items = [
+                <ListSubheader
+                  key={`${group.parent}-header`}
+                  disableSticky
+                  sx={{
+                    fontWeight: 700,
+                    fontSize: '0.88rem',
+                    color: '#1d2329',
+                    lineHeight: '36px',
+                    backgroundColor: '#f7f9fa',
+                  }}
+                >
+                  {group.parent}
+                </ListSubheader>,
+                ...group.children.map((child) => (
+                  <MenuItem
+                    key={entityValue(group.parent, child)}
+                    value={entityValue(group.parent, child)}
+                    sx={{ minHeight: 42, fontSize: '0.9rem', pl: 2.5 }}
+                  >
+                    {child}
+                  </MenuItem>
+                )),
+              ];
+
+              if (groupIndex < entityScopeGroups.length - 1) {
+                items.push(
+                  <Divider key={`${group.parent}-divider`} sx={{ my: 0.5, borderColor: '#d4d9de' }} />,
+                );
+              }
+
+              return items;
+            })}
           </FilterSelect>
         </FormControl>
 
-        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 220 } }}>
-          <FilterSelect
-            id="scenario-name-select"
-            value={scenarioName}
-            onChange={(event: SelectChangeEvent<unknown>) => setScenarioName(event.target.value as string)}
-            displayEmpty
-            renderValue={(selected) => (selected as string) || 'Scenario Name'}
-            MenuProps={{ PaperProps: { sx: menuPaperSx }, MenuListProps: { sx: { py: 0.5 } } }}
-          >
-            {scenarioNames.map((option) => (
-              <MenuItem key={option} value={option} sx={{ minHeight: 46, fontSize: '0.95rem' }}>
-                {option}
-              </MenuItem>
-            ))}
-          </FilterSelect>
-        </FormControl>
-
+        <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', lg: 'block' } }} aria-hidden />
         <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', lg: 'block' } }} aria-hidden />
         <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', lg: 'block' } }} aria-hidden />
       </Stack>

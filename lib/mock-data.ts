@@ -335,25 +335,29 @@ export function buildMockTopContributorRows(): TopContributorRow[] {
   });
 }
 
-// --- VaR > Analysis : Risk attribution by risk factor (donut)
+// --- VaR > Analysis : Risk attribution by risk factor (nested donut)
+// Same encoding as Analysis 2: inner ring = prior week, outer ring = current week.
 
 export interface RiskFactorAttributionSlice {
   factor: string;
-  value: number;
+  /** Prior week contribution VaR, USD MM. */
+  priorMm: number;
+  /** Current week contribution VaR, USD MM. */
+  currentMm: number;
   color: string;
 }
 
 export const mockRiskFactorAttribution: RiskFactorAttributionSlice[] = [
-  { factor: 'IR Base Exchange', value: 34.5, color: '#AA936C' },
-  { factor: 'IR Vol Caplet', value: 20.4, color: '#E1C281' },
-  { factor: 'IR Vol Swaption', value: 8.6, color: '#7A988D' },
-  { factor: 'Credit Spread', value: 6.9, color: '#387F97' },
-  { factor: 'IR Base OTC', value: 7.8, color: '#D7D5CE' },
-  { factor: 'IR Basis XCCY Basis', value: 5.2, color: '#7F7F7F' },
-  { factor: 'IR Basis Index Basis', value: 5.6, color: '#674B77' },
-  { factor: 'IR Basis Tenor Basis', value: 2.6, color: '#BFB189' },
-  { factor: 'IR Base Inflation', value: 3.4, color: '#88ACD5' },
-  { factor: 'IR Vol Cap', value: 5.0, color: '#344972' },
+  { factor: 'IR Base Exchange', priorMm: 32.0, currentMm: 34.5, color: '#AA936C' },
+  { factor: 'IR Vol Caplet', priorMm: 22.1, currentMm: 20.4, color: '#E1C281' },
+  { factor: 'IR Vol Swaption', priorMm: 7.8, currentMm: 8.6, color: '#7A988D' },
+  { factor: 'Credit Spread', priorMm: 8.4, currentMm: 6.9, color: '#387F97' },
+  { factor: 'IR Base OTC', priorMm: 7.0, currentMm: 7.8, color: '#D7D5CE' },
+  { factor: 'IR Basis XCCY Basis', priorMm: 5.8, currentMm: 5.2, color: '#7F7F7F' },
+  { factor: 'IR Basis Index Basis', priorMm: 5.0, currentMm: 5.6, color: '#674B77' },
+  { factor: 'IR Basis Tenor Basis', priorMm: 3.1, currentMm: 2.6, color: '#BFB189' },
+  { factor: 'IR Base Inflation', priorMm: 3.8, currentMm: 3.4, color: '#88ACD5' },
+  { factor: 'IR Vol Cap', priorMm: 4.5, currentMm: 5.0, color: '#344972' },
 ];
 
 // --- VaR > Analysis : Risk attribution by product type (diverging bar)

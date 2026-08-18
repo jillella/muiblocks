@@ -10,7 +10,7 @@ import { arrowFor, formatSigned, mixHex } from '@/components/var-analysis2/varFo
 
 registerAgModules();
 
-/** Prior week ring sits inside the current week ring, sharing the same centre. */
+/** Prior week ring sits inside the current week ring, with a white gap between them. */
 const CURRENT_RING = { outerRadiusRatio: 1, innerRadiusRatio: 0.76 };
 const PRIOR_RING = { outerRadiusRatio: 0.7, innerRadiusRatio: 0.46 };
 
@@ -46,8 +46,8 @@ export default function ContributionVarDonut({
           ...PRIOR_RING,
           fills: priorFills,
           strokes: priorFills,
-          strokeWidth: 2,
-          sectorSpacing: 2,
+          strokeWidth: 0,
+          sectorSpacing: 0,
           calloutLabel: { enabled: false },
           sectorLabel: { enabled: false },
           tooltip: {
@@ -66,8 +66,8 @@ export default function ContributionVarDonut({
           ...CURRENT_RING,
           fills,
           strokes: fills,
-          strokeWidth: 2,
-          sectorSpacing: 2,
+          strokeWidth: 0,
+          sectorSpacing: 0,
           calloutLabel: {
             enabled: true,
             fontFamily,
