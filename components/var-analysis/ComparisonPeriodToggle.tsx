@@ -58,7 +58,7 @@ export default function ComparisonPeriodToggle({ value, onChange }: ComparisonPe
               height: 32,
               px: 1.5,
               borderRadius: '999px',
-              backgroundColor: selected ? '#d4e6c8' : 'transparent',
+              backgroundColor: selected ? '#d0efcb' : 'transparent',
               color: selected ? '#033928' : '#e6ebf2',
               fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
               fontSize: '0.82rem',
@@ -68,7 +68,7 @@ export default function ComparisonPeriodToggle({ value, onChange }: ComparisonPe
               flexShrink: 0,
               transition: 'background-color 140ms ease, color 140ms ease',
               '&:hover': {
-                backgroundColor: selected ? '#d4e6c8' : 'rgba(255,255,255,0.06)',
+                backgroundColor: selected ? '#d0efcb' : 'rgba(255,255,255,0.06)',
               },
               '&:focus-visible': { outline: '2px solid #8dc63f', outlineOffset: 2 },
             }}
