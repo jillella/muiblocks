@@ -409,6 +409,55 @@ export const mockRiskGradeBubbles: RiskGradeBubblePoint[] = [
   { grade: 4.6, exposure: 34, size: 36, product: 'Commodity Swap', color: '#7c5e94' },
 ];
 
+// --- VaR > Analysis : Risk attribution by product type (signed contribution bubbles)
+
+export type ProductTypeVarBubbleKind = 'currentPositive' | 'currentNegative' | 'prior';
+
+export interface ProductTypeVarBubblePoint {
+  product: string;
+  /** Signed contribution VaR, USD MM. */
+  value: number;
+  kind: ProductTypeVarBubbleKind;
+}
+
+/** Category order matches the mock (left → right). Size is |value|. */
+export const mockProductTypeVarBubbles: ProductTypeVarBubblePoint[] = [
+  { product: 'Cap Floor', value: 0.14, kind: 'currentPositive' },
+  { product: 'Cap Floor', value: 0.2, kind: 'prior' },
+  { product: 'Cap Floor', value: -0.08, kind: 'currentNegative' },
+  { product: 'Cap Floor', value: -0.06, kind: 'prior' },
+
+  { product: 'IR Swaption', value: 0.22, kind: 'currentPositive' },
+  { product: 'IR Swaption', value: 0.34, kind: 'prior' },
+  { product: 'IR Swaption', value: -0.3, kind: 'currentNegative' },
+  { product: 'IR Swaption', value: -0.24, kind: 'prior' },
+
+  { product: 'IR Swap', value: 0.72, kind: 'currentPositive' },
+  { product: 'IR Swap', value: 0.52, kind: 'prior' },
+  { product: 'IR Swap', value: -0.58, kind: 'currentNegative' },
+  { product: 'IR Swap', value: -0.46, kind: 'prior' },
+
+  { product: 'Corporate Bonds', value: 0.4, kind: 'currentPositive' },
+  { product: 'Corporate Bonds', value: 0.28, kind: 'prior' },
+  { product: 'Corporate Bonds', value: -0.22, kind: 'currentNegative' },
+  { product: 'Corporate Bonds', value: -0.16, kind: 'prior' },
+
+  { product: 'Treasury Bonds', value: 0.18, kind: 'currentPositive' },
+  { product: 'Treasury Bonds', value: 0.24, kind: 'prior' },
+  { product: 'Treasury Bonds', value: -0.14, kind: 'currentNegative' },
+  { product: 'Treasury Bonds', value: -0.2, kind: 'prior' },
+
+  { product: 'CDS', value: 0.62, kind: 'currentPositive' },
+  { product: 'CDS', value: 0.48, kind: 'prior' },
+  { product: 'CDS', value: -0.34, kind: 'currentNegative' },
+  { product: 'CDS', value: -0.28, kind: 'prior' },
+
+  { product: 'TIPs', value: 0.1, kind: 'currentPositive' },
+  { product: 'TIPs', value: 0.16, kind: 'prior' },
+  { product: 'TIPs', value: -0.2, kind: 'currentNegative' },
+  { product: 'TIPs', value: -0.14, kind: 'prior' },
+];
+
 // --- VaR > Analysis : Top risk contributor (grid)
 
 export interface TopRiskContributorRow {

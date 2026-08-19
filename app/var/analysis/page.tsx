@@ -4,6 +4,7 @@ import { Box, Container, Paper } from '@mui/material';
 import { UssparcHeader } from '@/components/layout/UssparcHeader';
 import AnalysisFilterBar from '@/components/var-analysis/AnalysisFilterBar';
 import ProductTypeAttributionChart from '@/components/var-analysis/ProductTypeAttributionChart';
+import ProductTypeVarBubbleChart from '@/components/var-analysis/ProductTypeVarBubbleChart';
 import RiskFactorAttributionChart from '@/components/var-analysis/RiskFactorAttributionChart';
 import RiskGradeBubbleChart from '@/components/var-analysis/RiskGradeBubbleChart';
 import TopRiskContributorTable from '@/components/var-analysis/TopRiskContributorTable';
@@ -51,6 +52,10 @@ export default function VarAnalysisPage() {
               <RiskFactorAttributionChart />
               <ProductTypeAttributionChart />
               <RiskGradeBubbleChart />
+            </Box>
+
+            <Box sx={{ mt: { xs: 4, md: 5 } }}>
+              <ProductTypeVarBubbleChart />
             </Box>
 
             <Box sx={{ mt: { xs: 4, md: 5 } }}>
