@@ -7,42 +7,77 @@ import { registerAgModules } from '@/lib/ag-modules';
 import { mockProductTypeVarBubbles, type ProductTypeVarBubblePoint } from '@/lib/mock-data';
 import AnalysisPanel from '@/components/var-analysis/AnalysisPanel';
 import { useChartFontFamily } from '@/components/var-analysis/useChartFontFamily';
-import { formatSignedMm, NEGATIVE_COLOR, POSITIVE_COLOR } from '@/components/var-analysis2/varFormat';
+import { formatSignedMm } from '@/components/var-analysis2/varFormat';
 
 registerAgModules();
 
-const PRIOR_COLOR = '#c9b07a';
-const CURRENT_POSITIVE_COLOR = POSITIVE_COLOR;
-const CURRENT_NEGATIVE_COLOR = NEGATIVE_COLOR;
-
-const Y_TICK = 0.2;
-const MIN_DIAMETER = 16;
-const MAX_DIAMETER = 56;
+/** Figma bubble fills are linear, not radial. Alpha lives in the stops; series opacity is 0.8. */
+const linearFill = (
+  rotation: number,
+  from: string,
+  fromStop: number,
+  to: string,
+  toStop: number,
+) => ({
+  type: 'gradient' as const,
+  gradient: 'linear' as const,
+  bounds: 'item' as const,
+  rotation,
+  colorStops: [
+    { color: from, stop: 0 },
+    { color: from, stop: fromStop },
+    { color: to, stop: toStop },
+    { color: to, stop: 1 },
+  ],
+});
 
 const SERIES = [
   {
+    kind: 'prior' as const,
+    yName: 'Prior Value',
+    fill: linearFill(132, 'rgba(214, 167, 71, 0.60)', 0.2617, 'rgba(112, 87, 37, 0.60)', 0.8127),
+  },
+  {
     kind: 'currentPositive' as const,
-    yName: 'Current',
-    fill: CURRENT_POSITIVE_COLOR,
+    yName: 'Current VaR',
+    fill: linearFill(113, 'rgba(122, 152, 141, 0.60)', 0.2445, 'rgba(0, 72, 49, 0.60)', 0.6777),
   },
   {
     kind: 'currentNegative' as const,
     yName: 'Current Negative VaR',
-    fill: CURRENT_NEGATIVE_COLOR,
+    // Figma snippet for red was a paste of the green fill; same 113deg structure, coral stops.
+    fill: linearFill(113, 'rgba(232, 120, 110, 0.60)', 0.2445, 'rgba(140, 36, 32, 0.60)', 0.6777),
+  },
+];
+
+const LEGEND = [
+  {
+    kind: 'currentPositive' as const,
+    yName: 'Current VaR',
+    swatch: 'linear-gradient(113deg, rgba(122, 152, 141, 0.60) 24.45%, rgba(0, 72, 49, 0.60) 67.77%)',
+  },
+  {
+    kind: 'currentNegative' as const,
+    yName: 'Current Negative VaR',
+    swatch: 'linear-gradient(113deg, rgba(232, 120, 110, 0.60) 24.45%, rgba(140, 36, 32, 0.60) 67.77%)',
   },
   {
     kind: 'prior' as const,
-    yName: 'Prior Week Value',
-    fill: PRIOR_COLOR,
+    yName: 'Prior Value',
+    swatch: 'linear-gradient(132deg, rgba(214, 167, 71, 0.60) 26.17%, rgba(112, 87, 37, 0.60) 81.27%)',
   },
 ];
+
+const Y_TICK = 0.2;
+const MIN_DIAMETER = 22;
+const MAX_DIAMETER = 72;
 
 type BubbleDatum = ProductTypeVarBubblePoint & {
   x: number;
   size: number;
 };
 
-function LegendItem({ color, label }: { color: string; label: string }) {
+function LegendItem({ swatch, label }: { swatch: string; label: string }) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.25 }}>
       <Box
@@ -51,7 +86,8 @@ function LegendItem({ color, label }: { color: string; label: string }) {
           width: 12,
           height: 12,
           borderRadius: '50%',
-          backgroundColor: color,
+          background: swatch,
+          opacity: 0.8,
           flexShrink: 0,
         }}
       />
@@ -109,9 +145,8 @@ export default function ProductTypeVarBubbleChart({
         sizeKey: 'size',
         yName: series.yName,
         fill: series.fill,
-        stroke: series.fill,
         strokeWidth: 0,
-        fillOpacity: 0.72,
+        fillOpacity: 0.8,
         ...sizing,
         tooltip: {
           renderer: ({ datum }: { datum: BubbleDatum }) => ({
@@ -150,7 +185,7 @@ export default function ProductTypeVarBubbleChart({
           line: { enabled: true, stroke: '#c9d3de' },
           tick: { enabled: false },
           gridLine: { enabled: true, style: [{ stroke: '#eceff3' }] },
-          crossLines: [{ type: 'line', value: 0, stroke: '#1f2937', strokeWidth: 1.5, strokeOpacity: 1 }],
+          crossLines: [{ type: 'line', value: 0, stroke: '#111827', strokeWidth: 1.6, strokeOpacity: 1 }],
           label: {
             color: '#6b7280',
             fontFamily,
@@ -166,7 +201,7 @@ export default function ProductTypeVarBubbleChart({
   return (
     <AnalysisPanel
       title="Risk Attribution By Product Type"
-      info="Green is current positive VaR, red is current negative VaR, gold is prior week"
+      info="Green is current VaR, red is current negative VaR, gold is prior value"
     >
       <Box
         sx={{
@@ -194,9 +229,9 @@ export default function ProductTypeVarBubbleChart({
             alignSelf: { xs: 'flex-start', sm: 'center' },
           }}
         >
-          {SERIES.map((series) => (
-            <Box component="li" key={series.kind}>
-              <LegendItem color={series.fill} label={series.yName} />
+          {LEGEND.map((item) => (
+            <Box component="li" key={item.kind}>
+              <LegendItem swatch={item.swatch} label={item.yName} />
             </Box>
           ))}
         </Box>
