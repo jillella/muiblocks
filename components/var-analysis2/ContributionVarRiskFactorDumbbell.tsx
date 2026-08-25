@@ -31,6 +31,7 @@ const PRIOR_LABEL_COLOR = '#6b7280';
 /** Prior and current read as one pair: colour is the only difference between them. */
 const VALUE_LABEL_FONT_SIZE = 11;
 const VALUE_LABEL_FONT_WEIGHT = 700;
+const AXIS_LABEL_FONT_WEIGHT = 700;
 /**
  * Scatter labels ignore `padding`, so the value/change labels are anchored to offset
  * y-values instead. Offsets are declared in px and converted to mm against the y scale.
@@ -287,6 +288,7 @@ export default function ContributionVarRiskFactorDumbbell({
               color: ANALYSIS_TITLE_COLOR,
               fontFamily,
               fontSize: 11,
+              fontWeight: AXIS_LABEL_FONT_WEIGHT,
               formatter: ({ value }: { value: number }) => String(value),
             },
             title: {
@@ -314,6 +316,7 @@ export default function ContributionVarRiskFactorDumbbell({
               color: ANALYSIS_TITLE_COLOR,
               fontFamily,
               fontSize: 11,
+              fontWeight: AXIS_LABEL_FONT_WEIGHT,
               spacing: 4,
               autoRotate: false,
             },
