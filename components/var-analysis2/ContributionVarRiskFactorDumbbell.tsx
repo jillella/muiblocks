@@ -32,6 +32,7 @@ const PRIOR_LABEL_COLOR = '#6b7280';
 const VALUE_LABEL_FONT_SIZE = 11;
 const VALUE_LABEL_FONT_WEIGHT = 700;
 const AXIS_LABEL_FONT_WEIGHT = 700;
+const FOOTER_FONT_WEIGHT = 600;
 /**
  * Scatter labels ignore `padding`, so the value/change labels are anchored to offset
  * y-values instead. Offsets are declared in px and converted to mm against the y scale.
@@ -385,10 +386,14 @@ export default function ContributionVarRiskFactorDumbbell({
         <Box />
         {categories.map((row: DumbbellDatum) => (
           <Box key={row.factor} sx={{ textAlign: 'center', px: 0.25 }}>
-            <Typography sx={{ fontSize: '10px', color: PRIOR_LABEL_COLOR, lineHeight: 1.3 }}>
+            <Typography
+              sx={{ fontSize: '10px', fontWeight: FOOTER_FONT_WEIGHT, color: PRIOR_LABEL_COLOR, lineHeight: 1.3 }}
+            >
               Prior {row.priorMm.toFixed(1)}
             </Typography>
-            <Typography sx={{ fontSize: '10px', color: CURRENT_MARKER, lineHeight: 1.3 }}>
+            <Typography
+              sx={{ fontSize: '10px', fontWeight: FOOTER_FONT_WEIGHT, color: CURRENT_MARKER, lineHeight: 1.3 }}
+            >
               Current {row.currentMm.toFixed(1)}
             </Typography>
           </Box>
