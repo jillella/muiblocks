@@ -2,128 +2,64 @@
 
 import { Box, Typography } from '@mui/material';
 import { useMemo } from 'react';
-import { mockContributionVarFactors, type ContributionVarFactorRow } from '@/lib/mock-data2';
-import AnalysisPanel from '@/components/var-analysis2/AnalysisPanel';
-import ContributionVarDonut from '@/components/var-analysis2/ContributionVarDonut';
-import ContributionVarMovementTable, {
-  buildFactorMovements,
-} from '@/components/var-analysis2/ContributionVarMovementTable';
-import { NEGATIVE_COLOR, NEUTRAL_COLOR, POSITIVE_COLOR } from '@/components/var-analysis2/varFormat';
+import { mockRiskFactorDumbbell } from '@/lib/mock-data2';
+import AnalysisPanel, { ANALYSIS_TITLE_COLOR } from '@/components/var-analysis2/AnalysisPanel';
+import ContributionVarRiskFactorDumbbell, {
+  summarizeRiskFactorDumbbell,
+} from '@/components/var-analysis2/ContributionVarRiskFactorDumbbell';
+import { directionColor, formatSigned, INCREASE_COLOR } from '@/components/var-analysis2/varFormat';
 
-function SummaryChip({ label, count, color }: { label: string; count: number; color: string }) {
+export default function ContributionVarMovementPanel() {
+  const totals = useMemo(() => summarizeRiskFactorDumbbell(mockRiskFactorDumbbell), []);
+
   return (
-    <Box
-      sx={{
-        display: 'inline-flex',
-        alignItems: 'baseline',
-        gap: 0.75,
-        fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-        fontSize: '13px',
-        fontWeight: 700,
-        color,
-      }}
+    <AnalysisPanel
+      title="Risk Attribution by Risk Factor"
+      info={<TotalVarTooltip totals={totals} />}
     >
-      <Box component="span">{label}:</Box>
-      <Box component="span">{count}</Box>
+      <ContributionVarRiskFactorDumbbell />
+    </AnalysisPanel>
+  );
+}
+
+function TotalVarTooltip({
+  totals,
+}: {
+  totals: ReturnType<typeof summarizeRiskFactorDumbbell>;
+}) {
+  const formatMm = (value: number) => `${value.toFixed(1)} mm`;
+
+  return (
+    <Box sx={{ minWidth: 168 }}>
+      <Typography
+        sx={{
+          fontSize: '11px',
+          fontWeight: 700,
+          letterSpacing: '0.04em',
+          color: ANALYSIS_TITLE_COLOR,
+          mb: 0.75,
+        }}
+      >
+        TOTAL VaR
+      </Typography>
+      <TooltipRow label="Prior Total" value={formatMm(totals.priorTotalMm)} />
+      <TooltipRow label="Current Total" value={formatMm(totals.currentTotalMm)} valueColor={INCREASE_COLOR} />
+      <TooltipRow
+        label="Change"
+        value={`${formatSigned(totals.deltaMm, 1)} mm (${formatSigned(totals.deltaPct, 1)}%)`}
+        valueColor={directionColor(totals.deltaMm)}
+      />
     </Box>
   );
 }
 
-export type ContributionVarMovementPanelProps = {
-  rows?: ContributionVarFactorRow[];
-};
-
-export default function ContributionVarMovementPanel({ rows: rowsProp }: ContributionVarMovementPanelProps) {
-  const rows = useMemo(() => rowsProp ?? mockContributionVarFactors, [rowsProp]);
-
-  const { currentTotalMm, priorTotalMm, movements, upCount, downCount, flatCount } = useMemo(() => {
-    const currentTotal = rows.reduce((total, row) => total + row.currentMm, 0);
-    const priorTotal = rows.reduce((total, row) => total + row.priorMm, 0);
-    const factorMovements = buildFactorMovements(rows, currentTotal, priorTotal);
-
-    return {
-      currentTotalMm: currentTotal,
-      priorTotalMm: priorTotal,
-      movements: factorMovements,
-      upCount: factorMovements.filter((movement) => movement.deltaMm > 0).length,
-      downCount: factorMovements.filter((movement) => movement.deltaMm < 0).length,
-      flatCount: factorMovements.filter((movement) => movement.deltaMm === 0).length,
-    };
-  }, [rows]);
-
+function TooltipRow({ label, value, valueColor }: { label: string; value: string; valueColor?: string }) {
   return (
-    <AnalysisPanel
-      title="Contribution VaR by Risk Factor: Week-over-Week"
-      info="Ring size shows each risk factor's share of total contribution VaR; labels show the absolute amount"
-      headerRight={
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5, flexWrap: 'wrap' }}>
-          <SummaryChip label="VaR Up" count={upCount} color={POSITIVE_COLOR} />
-          <SummaryChip label="VaR Down" count={downCount} color={NEGATIVE_COLOR} />
-          <SummaryChip label="Flat" count={flatCount} color={NEUTRAL_COLOR} />
-        </Box>
-      }
-      footnote="Illustrative values only. Donut segment size is based on each risk factor contribution VaR share; labels and table show absolute Contribution VaR in USD MM."
-    >
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 1.05fr) minmax(0, 1fr)' },
-          columnGap: 4,
-          rowGap: 3,
-          alignItems: 'center',
-        }}
-      >
-        <Box sx={{ minWidth: 0 }}>
-          <Box sx={{ pl: { lg: 2 } }}>
-            <Typography sx={{ fontSize: '12px', color: '#8b96a5' }}>
-              Inner ring = Prior week Contribution VaR
-            </Typography>
-            <Typography sx={{ fontSize: '12px', fontWeight: 700, color: '#5b6672' }}>
-              Outer ring = Current week Contribution VaR
-            </Typography>
-          </Box>
-          <Box sx={{ px: { xs: 1, sm: 3, lg: 2 }, mt: 1 }}>
-            <ContributionVarDonut rows={rows} currentTotalMm={currentTotalMm} priorTotalMm={priorTotalMm} />
-          </Box>
-        </Box>
-
-        <Box sx={{ minWidth: 0 }}>
-          <ContributionVarMovementTable movements={movements} />
-
-          <Box
-            component="ul"
-            aria-label="Risk factor legend"
-            sx={{
-              m: 0,
-              mt: 2.5,
-              p: 0,
-              listStyle: 'none',
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(auto-fit, minmax(150px, max-content))' },
-              gap: 1,
-            }}
-          >
-            {rows.map((row) => (
-              <Box component="li" key={row.factor} sx={{ display: 'flex', alignItems: 'center', gap: 1.25 }}>
-                <Box
-                  aria-hidden
-                  sx={{ width: 16, height: 12, borderRadius: 0.25, backgroundColor: row.color, flexShrink: 0 }}
-                />
-                <Typography
-                  sx={{
-                    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
-                    fontSize: '13px',
-                    color: '#181d1f',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {row.factor}
-                </Typography>
-              </Box>
-            ))}
-          </Box>
-        </Box>
-      </Box>
-    </AnalysisPanel>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, lineHeight: 1.55 }}>
+      <Typography sx={{ fontSize: '11.5px', color: '#6b7280' }}>{label}</Typography>
+      <Typography sx={{ fontSize: '11.5px', fontWeight: 700, color: valueColor ?? '#374151', whiteSpace: 'nowrap' }}>
+        {value}
+      </Typography>
+    </Box>
   );
 }

@@ -26,6 +26,26 @@ export const mockContributionVarFactors: ContributionVarFactorRow[] = [
   { factor: 'Credit Spread', priorMm: 22.0, currentMm: 24.0, color: '#D0342C' },
 ];
 
+// --- Risk-factor dumbbell (separate series from the donut; donut mock above is unchanged)
+
+export interface RiskFactorDumbbellRow {
+  factor: string;
+  priorMm: number;
+  currentMm: number;
+}
+
+/**
+ * Chart sorts by currentMm descending at render time.
+ * Spreads are ≥ 4mm so the stem stays visible between the two markers.
+ */
+export const mockRiskFactorDumbbell: RiskFactorDumbbellRow[] = [
+  { factor: 'Interest Rate', priorMm: 29.0, currentMm: 25.0 },
+  { factor: 'Credit Spread', priorMm: 19.5, currentMm: 24.0 },
+  { factor: 'FX Spot', priorMm: 17.5, currentMm: 13.0 },
+  { factor: 'Interest Rate Vol', priorMm: 8.0, currentMm: 12.5 },
+  { factor: 'FX Vol', priorMm: 4.5, currentMm: 8.5 },
+];
+
 // --- Contribution VaR by product type (diverging bars)
 
 export interface ContributionVarProductRow {

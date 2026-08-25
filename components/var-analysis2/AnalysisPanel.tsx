@@ -27,7 +27,7 @@ export const panelNoteSx = {
 
 export type AnalysisPanelProps = {
   title: string;
-  info?: string;
+  info?: ReactNode;
   /** Small caption under the title explaining the encoding used by the chart. */
   subtitle?: ReactNode;
   /** Rendered on the title row, left of the overflow button (summary chips, legends). */
@@ -59,7 +59,27 @@ export default function AnalysisPanel({
         <Typography component="h2" sx={{ ...analysisTitleSx, flex: 1, minWidth: 0, textWrap: 'balance' }}>
           {title}
           {info ? (
-            <MuiTooltip title={info} arrow>
+            <MuiTooltip
+              title={info}
+              arrow
+              slotProps={
+                typeof info === 'string'
+                  ? undefined
+                  : {
+                      tooltip: {
+                        sx: {
+                          bgcolor: '#fff',
+                          color: '#374151',
+                          border: '1px solid #e6eaef',
+                          boxShadow: '0 1px 4px rgba(15, 42, 30, 0.10)',
+                          p: 1.5,
+                          maxWidth: 280,
+                        },
+                      },
+                      arrow: { sx: { color: '#fff' } },
+                    }
+              }
+            >
               <Box
                 component="span"
                 tabIndex={0}
