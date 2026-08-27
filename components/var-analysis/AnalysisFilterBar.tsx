@@ -1,7 +1,15 @@
 'use client';
 
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import { Box, Divider, FormControl, ListSubheader, MenuItem, Popover, Stack } from '@mui/material';
+import {
+  Box,
+  Divider,
+  FormControl,
+  ListSubheader,
+  MenuItem,
+  Popover,
+  Stack,
+} from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
@@ -9,7 +17,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import FilterSelect from '@/components/common/FilterSelect';
-import ComparisonPeriodToggle, { type ComparisonPeriod } from '@/components/var-analysis/ComparisonPeriodToggle';
+import ComparisonPeriodToggle, {
+  type ComparisonPeriod,
+} from '@/components/var-analysis/ComparisonPeriodToggle';
 
 const entityScopeGroups = [
   {
@@ -96,7 +106,15 @@ function CobPicker() {
         onClose={() => setAnchorEl(null)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        slotProps={{ paper: { sx: { mt: 1, borderRadius: 2, boxShadow: '0 8px 22px rgba(0,0,0,0.16)' } } }}
+        slotProps={{
+          paper: {
+            sx: {
+              mt: 1,
+              borderRadius: 2,
+              boxShadow: '0 8px 22px rgba(0,0,0,0.16)',
+            },
+          },
+        }}
       >
         <DateCalendar
           value={cob}
@@ -110,9 +128,20 @@ function CobPicker() {
   );
 }
 
-export default function AnalysisFilterBar() {
+export interface AnalysisFilterBarProps {
+  /**
+   * Point-in-time views such as the drilldown grid have nothing to compare
+   * against, so they hide the comparison period toggle.
+   */
+  showComparisonPeriod?: boolean;
+}
+
+export default function AnalysisFilterBar({
+  showComparisonPeriod = true,
+}: AnalysisFilterBarProps = {}) {
   const [entity, setEntity] = useState(DEFAULT_ENTITY);
-  const [comparisonPeriod, setComparisonPeriod] = useState<ComparisonPeriod>('wow');
+  const [comparisonPeriod, setComparisonPeriod] =
+    useState<ComparisonPeriod>('wow');
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -124,15 +153,22 @@ export default function AnalysisFilterBar() {
       >
         <CobPicker />
 
-        <FormControl sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 380 } }}>
+        <FormControl
+          sx={{ flex: { xs: '1 1 100%', md: '1 1 0' }, minWidth: { md: 380 } }}
+        >
           <FilterSelect
             id="entity-scope-select"
             floatingLabel="Entity Scope"
             value={entity}
-            onChange={(event: SelectChangeEvent<unknown>) => setEntity(event.target.value as string)}
+            onChange={(event: SelectChangeEvent<unknown>) =>
+              setEntity(event.target.value as string)
+            }
             displayEmpty
             renderValue={(selected) => entityLabel(selected as string)}
-            MenuProps={{ PaperProps: { sx: entityMenuPaperSx }, MenuListProps: { sx: { py: 0.5 } } }}
+            MenuProps={{
+              PaperProps: { sx: entityMenuPaperSx },
+              MenuListProps: { sx: { py: 0.5 } },
+            }}
           >
             {entityScopeGroups.flatMap((group, groupIndex) => {
               const items = [
@@ -162,7 +198,10 @@ export default function AnalysisFilterBar() {
 
               if (groupIndex < entityScopeGroups.length - 1) {
                 items.push(
-                  <Divider key={`${group.parent}-divider`} sx={{ my: 0.5, borderColor: '#d4d9de' }} />,
+                  <Divider
+                    key={`${group.parent}-divider`}
+                    sx={{ my: 0.5, borderColor: '#d4d9de' }}
+                  />
                 );
               }
 
@@ -171,9 +210,21 @@ export default function AnalysisFilterBar() {
           </FilterSelect>
         </FormControl>
 
-        <ComparisonPeriodToggle value={comparisonPeriod} onChange={setComparisonPeriod} />
+        {showComparisonPeriod && (
+          <ComparisonPeriodToggle
+            value={comparisonPeriod}
+            onChange={setComparisonPeriod}
+          />
+        )}
 
-        <Box sx={{ flex: '1 1 0', minWidth: 0, display: { xs: 'none', xl: 'block' } }} aria-hidden />
+        <Box
+          sx={{
+            flex: '1 1 0',
+            minWidth: 0,
+            display: { xs: 'none', xl: 'block' },
+          }}
+          aria-hidden
+        />
       </Stack>
     </LocalizationProvider>
   );
