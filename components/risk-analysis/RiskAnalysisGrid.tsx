@@ -19,7 +19,6 @@ import {
   Stack,
   Switch,
   Tooltip,
-  Typography,
 } from '@mui/material';
 import type {
   ColDef,
@@ -252,23 +251,16 @@ export default function RiskAnalysisGrid() {
       }}
     >
       <Stack
-        direction={{ xs: 'column', sm: 'row' }}
-        spacing={1.5}
+        direction="row"
+        spacing={1}
         sx={{
-          alignItems: { sm: 'center' },
-          justifyContent: 'space-between',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
           flexShrink: 0,
           mb: 1.5,
         }}
       >
-        <Typography
-          sx={{ fontSize: '1.05rem', fontWeight: 600, color: TEXT_PRIMARY }}
-        >
-          Risk Sensitivity Attribution Drill Down
-        </Typography>
-
-        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-          <Button
+        <Button
             size="small"
             startIcon={<UnfoldMoreRoundedIcon fontSize="small" />}
             onClick={() => apiRef.current?.expandAll()}
@@ -328,7 +320,6 @@ export default function RiskAnalysisGrid() {
               }}
             />
           </Tooltip>
-        </Stack>
       </Stack>
 
       <Box

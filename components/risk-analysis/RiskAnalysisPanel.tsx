@@ -1,81 +1,72 @@
 'use client';
 
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { Box, Chip, Paper, Stack, Tooltip, Typography } from '@mui/material';
+import { Box, Chip, Paper, Stack, Typography } from '@mui/material';
 import AttributePanel from '@/components/risk-analysis/AttributePanel';
 import { useDrilldown } from '@/components/risk-analysis/RiskAnalysisContext';
 import DrilldownSummaryCards from '@/components/risk-analysis/DrilldownSummaryCards';
 import RiskAnalysisGrid from '@/components/risk-analysis/RiskAnalysisGrid';
 import { dimensionFieldById } from '@/components/risk-analysis/drilldownFields';
-import {
-  TEXT_PRIMARY,
-  TEXT_SECONDARY,
-} from '@/components/risk-analysis/drilldownFormat';
+import { TEXT_SECONDARY } from '@/components/risk-analysis/drilldownFormat';
 
-export default function RiskAnalysisPanel() {
+function DrilldownPathBar() {
   const { hierarchy, drilldownEnabled } = useDrilldown();
 
   return (
-    <Box>
-      <Stack
-        direction="row"
-        spacing={1}
-        sx={{ alignItems: 'center', mb: 0.5, flexWrap: 'wrap' }}
-      >
+    <Stack
+      direction="row"
+      spacing={0.75}
+      sx={{
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        rowGap: 0.75,
+        flexShrink: 0,
+        mb: 1.25,
+      }}
+    >
+      <Typography sx={{ fontSize: '0.76rem', color: TEXT_SECONDARY }}>
+        Drilldown path:
+      </Typography>
+      {!drilldownEnabled || hierarchy.length === 0 ? (
         <Typography
-          sx={{ fontSize: '1.35rem', fontWeight: 600, color: TEXT_PRIMARY }}
+          sx={{ fontSize: '0.76rem', fontWeight: 600, color: TEXT_SECONDARY }}
         >
-          Risk Analysis
+          Flat rows (no grouping)
         </Typography>
-        <Tooltip title="Drag attributes from the right-hand panel to change how the grid drills down. Every level aggregates the additive measures.">
-          <InfoOutlinedIcon sx={{ fontSize: 17, color: '#9aa6b2' }} />
-        </Tooltip>
-      </Stack>
-
-      <Stack
-        direction="row"
-        spacing={0.75}
-        sx={{ alignItems: 'center', mb: 2, flexWrap: 'wrap', rowGap: 0.75 }}
-      >
-        <Typography sx={{ fontSize: '0.76rem', color: TEXT_SECONDARY }}>
-          Drilldown path:
-        </Typography>
-        {!drilldownEnabled || hierarchy.length === 0 ? (
-          <Typography
-            sx={{ fontSize: '0.76rem', fontWeight: 600, color: TEXT_SECONDARY }}
+      ) : (
+        hierarchy.map((fieldId, index) => (
+          <Stack
+            key={fieldId}
+            direction="row"
+            spacing={0.75}
+            sx={{ alignItems: 'center' }}
           >
-            Flat rows (no grouping)
-          </Typography>
-        ) : (
-          hierarchy.map((fieldId, index) => (
-            <Stack
-              key={fieldId}
-              direction="row"
-              spacing={0.75}
-              sx={{ alignItems: 'center' }}
-            >
-              {index > 0 && (
-                <Typography sx={{ fontSize: '0.76rem', color: '#b6c0cb' }}>
-                  ›
-                </Typography>
-              )}
-              <Chip
-                size="small"
-                label={dimensionFieldById.get(fieldId)?.label ?? fieldId}
-                sx={{
-                  height: 22,
-                  fontSize: '0.72rem',
-                  fontWeight: 500,
-                  backgroundColor: '#eef4e6',
-                  color: '#28532f',
-                  border: '1px solid #d7e6c4',
-                }}
-              />
-            </Stack>
-          ))
-        )}
-      </Stack>
+            {index > 0 && (
+              <Typography sx={{ fontSize: '0.76rem', color: '#b6c0cb' }}>
+                ›
+              </Typography>
+            )}
+            <Chip
+              size="small"
+              label={dimensionFieldById.get(fieldId)?.label ?? fieldId}
+              sx={{
+                height: 22,
+                fontSize: '0.72rem',
+                fontWeight: 500,
+                backgroundColor: '#eef4e6',
+                color: '#28532f',
+                border: '1px solid #d7e6c4',
+              }}
+            />
+          </Stack>
+        ))
+      )}
+    </Stack>
+  );
+}
 
+export default function RiskAnalysisPanel() {
+  return (
+    <Box>
       <DrilldownSummaryCards />
 
       <Box
@@ -96,8 +87,7 @@ export default function RiskAnalysisPanel() {
           // tiles and page padding above/below this row.
           height: {
             xs: 'auto',
-            md: 'calc(100vh - 480px)',
-            xl: 'calc(100vh - 405px)',
+            md: 'calc(100vh - 375px)',
           },
           minHeight: { xs: 0, md: 520 },
         }}
@@ -113,6 +103,7 @@ export default function RiskAnalysisPanel() {
             flexDirection: 'column',
           }}
         >
+          <DrilldownPathBar />
           <RiskAnalysisGrid />
         </Paper>
 
