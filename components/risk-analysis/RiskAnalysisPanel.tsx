@@ -3,7 +3,7 @@
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Box, Chip, Paper, Stack, Tooltip, Typography } from '@mui/material';
 import AttributePanel from '@/components/risk-analysis/AttributePanel';
-import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
+import { useDrilldown } from '@/components/risk-analysis/RiskAnalysisContext';
 import DrilldownSummaryCards from '@/components/risk-analysis/DrilldownSummaryCards';
 import RiskAnalysisGrid from '@/components/risk-analysis/RiskAnalysisGrid';
 import { dimensionFieldById } from '@/components/risk-analysis/drilldownFields';

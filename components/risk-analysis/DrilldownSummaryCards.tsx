@@ -7,7 +7,7 @@
  */
 
 import { Box, Paper, Stack, Tooltip, Typography } from '@mui/material';
-import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
+import { useDrilldown } from '@/components/risk-analysis/RiskAnalysisContext';
 import {
   amountColor,
   formatCompact,

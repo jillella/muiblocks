@@ -26,7 +26,7 @@ import AttributeItem from '@/components/risk-analysis/AttributeItem';
 import DrilldownHierarchyZone, {
   type DragPayload,
 } from '@/components/risk-analysis/DrilldownHierarchyZone';
-import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
+import { useDrilldown } from '@/components/risk-analysis/RiskAnalysisContext';
 import {
   attributeCategories,
   dimensionFields,

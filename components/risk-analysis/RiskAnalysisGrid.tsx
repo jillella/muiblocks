@@ -31,7 +31,7 @@ import type {
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
+import { useDrilldown } from '@/components/risk-analysis/RiskAnalysisContext';
 import {
   dimensionFields,
   measureFields,

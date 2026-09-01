@@ -3,7 +3,7 @@
 import { Box, Container, Paper } from '@mui/material';
 import { UssparcHeader } from '@/components/layout/UssparcHeader';
 import AnalysisFilterBar from '@/components/var-analysis/AnalysisFilterBar';
-import { DrilldownProvider } from '@/components/risk-analysis/DrilldownContext';
+import { DrilldownProvider } from '@/components/risk-analysis/RiskAnalysisContext';
 import RiskAnalysisPanel from '@/components/risk-analysis/RiskAnalysisPanel';
 
 export default function RiskAnalysisPage() {
