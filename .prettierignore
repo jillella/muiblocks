@@ -1,4 +1,4 @@
 node_modules
 build
 dist
-lib/var-drilldown/drilldown-rows.json
+lib/risk-analysis/drilldown-rows.json

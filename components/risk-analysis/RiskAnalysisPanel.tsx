@@ -2,17 +2,17 @@
 
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Box, Chip, Paper, Stack, Tooltip, Typography } from '@mui/material';
-import AttributePanel from '@/components/var-drilldown/AttributePanel';
-import { useDrilldown } from '@/components/var-drilldown/DrilldownContext';
-import DrilldownSummaryCards from '@/components/var-drilldown/DrilldownSummaryCards';
-import RiskAttributionGrid from '@/components/var-drilldown/RiskAttributionGrid';
-import { dimensionFieldById } from '@/components/var-drilldown/drilldownFields';
+import AttributePanel from '@/components/risk-analysis/AttributePanel';
+import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
+import DrilldownSummaryCards from '@/components/risk-analysis/DrilldownSummaryCards';
+import RiskAnalysisGrid from '@/components/risk-analysis/RiskAnalysisGrid';
+import { dimensionFieldById } from '@/components/risk-analysis/drilldownFields';
 import {
   TEXT_PRIMARY,
   TEXT_SECONDARY,
-} from '@/components/var-drilldown/drilldownFormat';
+} from '@/components/risk-analysis/drilldownFormat';
 
-export default function RiskAttributionDrilldownPanel() {
+export default function RiskAnalysisPanel() {
   const { hierarchy, drilldownEnabled } = useDrilldown();
 
   return (
@@ -25,7 +25,7 @@ export default function RiskAttributionDrilldownPanel() {
         <Typography
           sx={{ fontSize: '1.35rem', fontWeight: 600, color: TEXT_PRIMARY }}
         >
-          Risk Sensitivity Attribution
+          Risk Analysis
         </Typography>
         <Tooltip title="Drag attributes from the right-hand panel to change how the grid drills down. Every level aggregates the additive measures.">
           <InfoOutlinedIcon sx={{ fontSize: 17, color: '#9aa6b2' }} />
@@ -95,7 +95,7 @@ export default function RiskAttributionDrilldownPanel() {
             minWidth: 0,
           }}
         >
-          <RiskAttributionGrid />
+          <RiskAnalysisGrid />
         </Paper>
 
         <AttributePanel />

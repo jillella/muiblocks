@@ -22,23 +22,23 @@ import {
   Typography,
 } from '@mui/material';
 import { useMemo, useState, type DragEvent } from 'react';
-import AttributeItem from '@/components/var-drilldown/AttributeItem';
+import AttributeItem from '@/components/risk-analysis/AttributeItem';
 import DrilldownHierarchyZone, {
   type DragPayload,
-} from '@/components/var-drilldown/DrilldownHierarchyZone';
-import { useDrilldown } from '@/components/var-drilldown/DrilldownContext';
+} from '@/components/risk-analysis/DrilldownHierarchyZone';
+import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
 import {
   attributeCategories,
   dimensionFields,
   measureFields,
   type DimensionFieldId,
-} from '@/components/var-drilldown/drilldownFields';
+} from '@/components/risk-analysis/drilldownFields';
 import {
   PANEL_BORDER,
   PANEL_HEADING,
   TEXT_PRIMARY,
   TEXT_SECONDARY,
-} from '@/components/var-drilldown/drilldownFormat';
+} from '@/components/risk-analysis/drilldownFormat';
 
 export default function AttributePanel() {
   const { hierarchy, addField, removeField, moveField, clearHierarchy } =

@@ -18,12 +18,12 @@ import type { DragEvent } from 'react';
 import type {
   AttributeIconKey,
   DimensionField,
-} from '@/components/var-drilldown/drilldownFields';
+} from '@/components/risk-analysis/drilldownFields';
 import {
   PANEL_BORDER,
   TEXT_PRIMARY,
   TEXT_SECONDARY,
-} from '@/components/var-drilldown/drilldownFormat';
+} from '@/components/risk-analysis/drilldownFormat';
 
 const iconByKey: Record<AttributeIconKey, SvgIconComponent> = {
   folder: FolderOutlinedIcon,

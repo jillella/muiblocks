@@ -24,12 +24,12 @@ import {
   defaultHierarchy,
   dimensionFieldById,
   type DimensionFieldId,
-} from '@/components/var-drilldown/drilldownFields';
+} from '@/components/risk-analysis/drilldownFields';
 import {
   computeTotals,
   mockDrilldownRows,
   type DrilldownTotals,
-} from '@/lib/var-drilldown/mockDrilldown';
+} from '@/lib/risk-analysis/mockDrilldown';
 
 const HIERARCHY_PARAM = 'drill';
 

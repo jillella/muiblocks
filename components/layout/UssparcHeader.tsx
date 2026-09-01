@@ -371,8 +371,8 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
               <MenuItem component="a" href="/var/analysis2">
                 Analysis 2
               </MenuItem>
-              <MenuItem component="a" href="/var/analysis-drilldown">
-                Analysis Drilldown
+              <MenuItem component="a" href="/var/risk-analysis">
+                Risk Analysis
               </MenuItem>
               <MenuItem>Calculator</MenuItem>
               <NestedMenuItem label="Risk Factor">
@@ -470,7 +470,7 @@ export function UssparcHeader({ activeNav }: UssparcHeaderProps = {}) {
           <MobileSection title="VaR">
             <MobileLink href="/var/analysis">Analysis</MobileLink>
             <MobileLink href="/var/analysis2">Analysis 2</MobileLink>
-            <MobileLink href="/var/analysis-drilldown">Analysis Drilldown</MobileLink>
+            <MobileLink href="/var/risk-analysis">Risk Analysis</MobileLink>
             <MobileLink>Calculator</MobileLink>
             <MobileNested label="Risk Factor">
               <MobileLink>Mappings</MobileLink>

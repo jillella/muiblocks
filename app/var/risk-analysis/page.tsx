@@ -3,10 +3,10 @@
 import { Box, Container, Paper } from '@mui/material';
 import { UssparcHeader } from '@/components/layout/UssparcHeader';
 import AnalysisFilterBar from '@/components/var-analysis/AnalysisFilterBar';
-import { DrilldownProvider } from '@/components/var-drilldown/DrilldownContext';
-import RiskAttributionDrilldownPanel from '@/components/var-drilldown/RiskAttributionDrilldownPanel';
+import { DrilldownProvider } from '@/components/risk-analysis/DrilldownContext';
+import RiskAnalysisPanel from '@/components/risk-analysis/RiskAnalysisPanel';
 
-export default function VarAnalysisDrilldownPage() {
+export default function RiskAnalysisPage() {
   return (
     <Box
       component="main"
@@ -46,7 +46,7 @@ export default function VarAnalysisDrilldownPage() {
           }}
         >
           <DrilldownProvider>
-            <RiskAttributionDrilldownPanel />
+            <RiskAnalysisPanel />
           </DrilldownProvider>
         </Paper>
       </Container>

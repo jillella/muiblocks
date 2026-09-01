@@ -30,25 +30,25 @@ import type {
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useDrilldown } from '@/components/var-drilldown/DrilldownContext';
+import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
 import {
   dimensionFields,
   measureFields,
   type DimensionFieldId,
   type DrilldownRow,
-} from '@/components/var-drilldown/drilldownFields';
+} from '@/components/risk-analysis/drilldownFields';
 import {
   amountColor,
   formatAmount,
   PANEL_BORDER,
   TEXT_PRIMARY,
   TEXT_SECONDARY,
-} from '@/components/var-drilldown/drilldownFormat';
+} from '@/components/risk-analysis/drilldownFormat';
 import { registerAgEnterpriseModules } from '@/lib/ag-enterprise';
 import {
   computeTotals,
   mockDrilldownRows,
-} from '@/lib/var-drilldown/mockDrilldown';
+} from '@/lib/risk-analysis/mockDrilldown';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
@@ -70,7 +70,7 @@ const measureValueFormatter = ({
 const sameOrder = (a: string[], b: string[]) =>
   a.length === b.length && a.every((value, index) => value === b[index]);
 
-export default function RiskAttributionGrid() {
+export default function RiskAnalysisGrid() {
   const {
     hierarchy,
     drilldownEnabled,

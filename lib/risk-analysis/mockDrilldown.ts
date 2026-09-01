@@ -1,5 +1,5 @@
 /**
- * Mock data for VaR > Analysis Drilldown (`/var/analysis-drilldown`).
+ * Mock data for VaR > Risk Analysis (`/var/risk-analysis`).
  *
  * `drilldown-rows.json` holds flat leaf rows keyed on every dimension in the
  * field catalog, so AG Grid can aggregate any permutation of the drilldown
@@ -8,7 +8,7 @@
  * Regenerate with `node scripts/gen-drilldown-mock.mjs`.
  */
 
-import type { DrilldownRow } from '@/components/var-drilldown/drilldownFields';
+import type { DrilldownRow } from '@/components/risk-analysis/drilldownFields';
 import rows from './drilldown-rows.json';
 
 export const mockDrilldownRows = rows as DrilldownRow[];

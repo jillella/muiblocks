@@ -7,7 +7,7 @@
  */
 
 import { Box, Paper, Stack, Tooltip, Typography } from '@mui/material';
-import { useDrilldown } from '@/components/var-drilldown/DrilldownContext';
+import { useDrilldown } from '@/components/risk-analysis/DrilldownContext';
 import {
   amountColor,
   formatCompact,
@@ -15,7 +15,7 @@ import {
   PANEL_BORDER,
   TEXT_PRIMARY,
   TEXT_SECONDARY,
-} from '@/components/var-drilldown/drilldownFormat';
+} from '@/components/risk-analysis/drilldownFormat';
 
 interface SummaryTile {
   label: string;

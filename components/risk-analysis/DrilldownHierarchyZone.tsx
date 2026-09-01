@@ -18,13 +18,13 @@ import { useRef, useState, type DragEvent } from 'react';
 import {
   dimensionFieldById,
   type DimensionFieldId,
-} from '@/components/var-drilldown/drilldownFields';
+} from '@/components/risk-analysis/drilldownFields';
 import {
   PANEL_BORDER,
   PANEL_HEADING,
   TEXT_PRIMARY,
   TEXT_SECONDARY,
-} from '@/components/var-drilldown/drilldownFormat';
+} from '@/components/risk-analysis/drilldownFormat';
 
 export interface DragPayload {
   source: 'catalog' | 'hierarchy';
