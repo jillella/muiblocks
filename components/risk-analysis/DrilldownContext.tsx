@@ -29,7 +29,7 @@ import {
   computeTotals,
   mockDrilldownRows,
   type DrilldownTotals,
-} from '@/lib/risk-analysis/mockDrilldown';
+} from '@/components/risk-analysis/mockDrilldown';
 
 const HIERARCHY_PARAM = 'drill';
 

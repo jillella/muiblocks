@@ -48,7 +48,7 @@ import { registerAgEnterpriseModules } from '@/lib/ag-enterprise';
 import {
   computeTotals,
   mockDrilldownRows,
-} from '@/lib/risk-analysis/mockDrilldown';
+} from '@/components/risk-analysis/mockDrilldown';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 

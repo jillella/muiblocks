@@ -1,4 +1,4 @@
 node_modules
 build
 dist
-lib/risk-analysis/drilldown-rows.json
+components/risk-analysis/drilldown-rows.json

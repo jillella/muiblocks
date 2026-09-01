@@ -1,5 +1,5 @@
 /**
- * One-off generator for lib/risk-analysis/drilldown-rows.json.
+ * One-off generator for components/risk-analysis/drilldown-rows.json.
  * Seeded so the committed mock is stable across regenerations.
  *   node scripts/gen-drilldown-mock.mjs
  */
@@ -292,7 +292,7 @@ for (const pf of portfolios) {
   }
 }
 
-const out = 'lib/risk-analysis/drilldown-rows.json';
+const out = 'components/risk-analysis/drilldown-rows.json';
 mkdirSync(dirname(out), { recursive: true });
-writeFileSync(out, `${JSON.stringify(rows, null, 0)}\n`);
+writeFileSync(out, `${JSON.stringify(rows, null, 4)}\n`);
 console.log(`wrote ${rows.length} rows to ${out}`);
