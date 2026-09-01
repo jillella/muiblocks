@@ -29,8 +29,8 @@ import DrilldownHierarchyZone, {
 import { useDrilldown } from '@/components/risk-analysis/RiskAnalysisContext';
 import {
   attributeCategories,
-  dimensionFields,
   measureFields,
+  panelDimensionFields,
   type DimensionFieldId,
 } from '@/components/risk-analysis/drilldownFields';
 import {
@@ -52,7 +52,7 @@ export default function AttributePanel() {
     const needle = search.trim().toLowerCase();
     return attributeCategories.map((category) => ({
       category,
-      fields: dimensionFields.filter(
+      fields: panelDimensionFields.filter(
         (field) =>
           field.category === category.id &&
           (needle === '' ||

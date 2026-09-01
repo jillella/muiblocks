@@ -58,10 +58,7 @@ export interface ConsolidatedSensitivityResponse {
 }
 
 export type AttributeCategoryId =
-  | 'entity'
-  | 'product'
-  | 'riskFactor'
-  | 'ticker';
+  'entity' | 'product' | 'riskFactor' | 'ticker';
 
 export interface AttributeCategory {
   id: AttributeCategoryId;
@@ -69,7 +66,7 @@ export interface AttributeCategory {
 }
 
 export const attributeCategories: AttributeCategory[] = [
-  { id: 'entity', label: 'Entity & Book' },
+  { id: 'entity', label: 'Entity & Strategy' },
   { id: 'product', label: 'Product' },
   { id: 'riskFactor', label: 'Risk Factor' },
   { id: 'ticker', label: 'Tickers & Lineage' },
@@ -133,6 +130,12 @@ export interface DimensionField {
   category: AttributeCategoryId;
   icon: AttributeIconKey;
   valueType?: DimensionValueType;
+  /**
+   * Kept out of the right-hand panel's draggable list to match the design's
+   * attribute set. Still a grid column in flat mode, and still groupable from
+   * the column menu.
+   */
+  panelHidden?: boolean;
   /** Width used when the field acts as a group column. */
   width: number;
 }
@@ -152,6 +155,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'ELF_ENTITY_NM',
     category: 'entity',
     icon: 'entity',
+    panelHidden: true,
     width: 145,
   },
   {
@@ -169,6 +173,7 @@ export const dimensionFields: DimensionField[] = [
     category: 'entity',
     icon: 'flag',
     valueType: 'boolean',
+    panelHidden: true,
     width: 185,
   },
   {
@@ -177,6 +182,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'cuso_indicator',
     category: 'entity',
     icon: 'indicator',
+    panelHidden: true,
     width: 155,
   },
   {
@@ -185,6 +191,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'bhc_indicator',
     category: 'entity',
     icon: 'indicator',
+    panelHidden: true,
     width: 145,
   },
   {
@@ -193,6 +200,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'group_nm',
     category: 'entity',
     icon: 'folder',
+    panelHidden: true,
     width: 115,
   },
   {
@@ -201,6 +209,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'REVAL_LOCATION_NM',
     category: 'entity',
     icon: 'location',
+    panelHidden: true,
     width: 155,
   },
   {
@@ -273,6 +282,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'EFFECT_CURRENCY_CD',
     category: 'riskFactor',
     icon: 'currency',
+    panelHidden: true,
     width: 175,
   },
   {
@@ -289,6 +299,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'OPTION_TIME_CD',
     category: 'riskFactor',
     icon: 'tenor',
+    panelHidden: true,
     width: 145,
   },
   {
@@ -297,6 +308,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'REFERENCE_NM',
     category: 'riskFactor',
     icon: 'reference',
+    panelHidden: true,
     width: 180,
   },
   {
@@ -306,6 +318,7 @@ export const dimensionFields: DimensionField[] = [
     category: 'riskFactor',
     icon: 'strike',
     valueType: 'number',
+    panelHidden: true,
     width: 115,
   },
   {
@@ -314,6 +327,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'TS_TICKER_USSPARC',
     category: 'ticker',
     icon: 'ticker',
+    panelHidden: true,
     width: 265,
   },
   {
@@ -322,6 +336,7 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'TS_TICKER_MARX',
     category: 'ticker',
     icon: 'ticker',
+    panelHidden: true,
     width: 235,
   },
   {
@@ -330,12 +345,18 @@ export const dimensionFields: DimensionField[] = [
     columnHeader: 'query_name',
     category: 'ticker',
     icon: 'query',
+    panelHidden: true,
     width: 185,
   },
 ];
 
 export const dimensionFieldById = new Map(
   dimensionFields.map((field) => [field.id, field])
+);
+
+/** Draggable subset shown in the right-hand panel. */
+export const panelDimensionFields = dimensionFields.filter(
+  (field) => !field.panelHidden
 );
 
 export type MeasureFieldId =
