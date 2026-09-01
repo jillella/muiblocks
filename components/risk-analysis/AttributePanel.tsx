@@ -10,10 +10,13 @@
  * the shared context instead.
  */
 
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import FunctionsRoundedIcon from '@mui/icons-material/FunctionsRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import {
   Box,
+  ButtonBase,
+  Collapse,
   Divider,
   InputAdornment,
   Stack,
@@ -21,7 +24,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useMemo, useState, type DragEvent } from 'react';
+import { useMemo, useState, type DragEvent, type ReactNode } from 'react';
 import AttributeItem from '@/components/risk-analysis/AttributeItem';
 import DrilldownHierarchyZone, {
   type DragPayload,
@@ -40,13 +43,142 @@ import {
   TEXT_SECONDARY,
 } from '@/components/risk-analysis/drilldownFormat';
 
+const SECTION_COUNT_BADGE = '#7a9488';
+
+const headingSx = {
+  fontSize: '0.68rem',
+  fontWeight: 700,
+  letterSpacing: '0.08em',
+  color: PANEL_HEADING,
+  textTransform: 'uppercase',
+} as const;
+
+type PanelSectionProps = {
+  label: string;
+  /** Teal badge shown beside the chevron while collapsed. */
+  count: number;
+  expanded: boolean;
+  /** Omitted while a search is active, when sections are force-expanded. */
+  onToggle?: () => void;
+  children: ReactNode;
+};
+
+function PanelSection({
+  label,
+  count,
+  expanded,
+  onToggle,
+  children,
+}: PanelSectionProps) {
+  const heading = <Typography sx={headingSx}>{label}</Typography>;
+
+  const countBadge = !expanded ? (
+    <Box
+      aria-hidden
+      sx={{
+        minWidth: 18,
+        height: 18,
+        px: count >= 10 ? 0.375 : 0,
+        borderRadius: '999px',
+        backgroundColor: SECTION_COUNT_BADGE,
+        color: '#fff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '0.62rem',
+        fontWeight: 700,
+        lineHeight: 1,
+      }}
+    >
+      {count}
+    </Box>
+  ) : null;
+
+  const sectionControls = (
+    <Stack direction="row" spacing={0.75} sx={{ alignItems: 'center' }}>
+      {countBadge}
+      <Box
+        sx={{
+          width: 22,
+          height: 22,
+          borderRadius: '50%',
+          border: '1px solid #334155',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        <ExpandMoreRoundedIcon
+          sx={{
+            fontSize: 15,
+            color: '#334155',
+            transition: 'transform 150ms ease',
+            transform: expanded ? 'rotate(180deg)' : 'none',
+          }}
+        />
+      </Box>
+    </Stack>
+  );
+
+  return (
+    <Box>
+      {onToggle ? (
+        <ButtonBase
+          onClick={onToggle}
+          aria-expanded={expanded}
+          sx={{
+            width: '100%',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            px: 0,
+            py: 0.75,
+            borderRadius: 1,
+            '&:hover': { backgroundColor: 'transparent' },
+          }}
+        >
+          {heading}
+          {sectionControls}
+        </ButtonBase>
+      ) : (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            py: 0.75,
+          }}
+        >
+          {heading}
+          {sectionControls}
+        </Box>
+      )}
+
+      <Collapse in={expanded} unmountOnExit>
+        <Box sx={{ pt: 0.25, pb: 1.25 }}>{children}</Box>
+      </Collapse>
+    </Box>
+  );
+}
+
 export default function AttributePanel() {
   const { hierarchy, addField, removeField, moveField, clearHierarchy } =
     useDrilldown();
   const [search, setSearch] = useState('');
   const [dragPayload, setDragPayload] = useState<DragPayload | null>(null);
+  const [collapsedSections, setCollapsedSections] = useState<
+    Record<string, boolean>
+  >({});
 
   const inHierarchy = useMemo(() => new Set(hierarchy), [hierarchy]);
+
+  // A search would be useless if it could not reveal matches inside a
+  // collapsed section, so searching pins every section open and hides the
+  // toggles rather than silently ignoring clicks.
+  const searchActive = search.trim() !== '';
+
+  const toggleSection = (id: string) =>
+    setCollapsedSections((prev) => ({ ...prev, [id]: !prev[id] }));
 
   const visibleByCategory = useMemo(() => {
     const needle = search.trim().toLowerCase();
@@ -166,19 +298,15 @@ export default function AttributePanel() {
       <Box onDragOver={handleCatalogDragOver} onDrop={handleCatalogDrop}>
         {visibleByCategory.map(({ category, fields }) =>
           fields.length === 0 ? null : (
-            <Box key={category.id} sx={{ mb: 1.75 }}>
-              <Typography
-                sx={{
-                  fontSize: '0.68rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  color: PANEL_HEADING,
-                  textTransform: 'uppercase',
-                  mb: 0.75,
-                }}
-              >
-                {category.label}
-              </Typography>
+            <PanelSection
+              key={category.id}
+              label={category.label}
+              count={fields.length}
+              expanded={searchActive || !collapsedSections[category.id]}
+              onToggle={
+                searchActive ? undefined : () => toggleSection(category.id)
+              }
+            >
               <Stack spacing={0.625}>
                 {fields.map((field) => (
                   <AttributeItem
@@ -193,23 +321,17 @@ export default function AttributePanel() {
                   />
                 ))}
               </Stack>
-            </Box>
+            </PanelSection>
           )
         )}
 
         {visibleMeasures.length > 0 && (
-          <Box>
-            <Typography
-              sx={{
-                fontSize: '0.68rem',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                color: PANEL_HEADING,
-                mb: 0.75,
-              }}
-            >
-              MEASURES
-            </Typography>
+          <PanelSection
+            label="Measures"
+            count={visibleMeasures.length}
+            expanded={searchActive || !collapsedSections.measures}
+            onToggle={searchActive ? undefined : () => toggleSection('measures')}
+          >
             <Stack spacing={0.625}>
               {visibleMeasures.map((field) => (
                 <Tooltip
@@ -245,7 +367,7 @@ export default function AttributePanel() {
                 </Tooltip>
               ))}
             </Stack>
-          </Box>
+          </PanelSection>
         )}
       </Box>
     </Box>
