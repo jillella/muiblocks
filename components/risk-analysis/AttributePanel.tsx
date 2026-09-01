@@ -104,11 +104,12 @@ export default function AttributePanel() {
         border: `1px solid ${PANEL_BORDER}`,
         borderRadius: 2.5,
         backgroundColor: '#fff',
-        p: 1.75,
-        position: { lg: 'sticky' },
-        top: { lg: 16 },
-        maxHeight: { lg: 'calc(100vh - 48px)' },
-        overflowY: { lg: 'auto' },
+        p: { xs: 1.25, lg: 1.75 },
+        minWidth: 0,
+        position: 'sticky',
+        top: 16,
+        maxHeight: 'calc(100vh - 48px)',
+        overflowY: 'auto',
       }}
     >
       <Typography

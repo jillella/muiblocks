@@ -81,8 +81,14 @@ export default function RiskAnalysisPanel() {
       <Box
         sx={{
           display: 'grid',
-          gap: 2,
-          gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 1fr) 280px' },
+          gap: { xs: 1.25, md: 2 },
+          // The grid column has a floor so the panel never squeezes it into
+          // unusability; the page scrolls horizontally instead of wrapping.
+          gridTemplateColumns: {
+            xs: 'minmax(300px, 1fr) 232px',
+            sm: 'minmax(360px, 1fr) 256px',
+            lg: 'minmax(0, 1fr) 280px',
+          },
           alignItems: 'start',
         }}
       >
