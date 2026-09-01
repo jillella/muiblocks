@@ -87,9 +87,9 @@ export default function RiskAnalysisPanel() {
           // tiles and page padding above/below this row.
           height: {
             xs: 'auto',
-            md: 'calc(100vh - 375px)',
+            md: 'calc(100vh - 330px)',
           },
-          minHeight: { xs: 0, md: 520 },
+          minHeight: { xs: 0, md: 420 },
         }}
       >
         <Paper
