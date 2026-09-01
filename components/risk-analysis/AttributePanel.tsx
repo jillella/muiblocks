@@ -241,17 +241,6 @@ export default function AttributePanel() {
                     >
                       {field.label}
                     </Typography>
-                    {field.aggregation === 'none' && (
-                      <Typography
-                        sx={{
-                          fontSize: '0.66rem',
-                          color: '#b0392b',
-                          fontWeight: 600,
-                        }}
-                      >
-                        LEAF
-                      </Typography>
-                    )}
                   </Stack>
                 </Tooltip>
               ))}
