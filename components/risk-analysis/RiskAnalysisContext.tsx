@@ -14,15 +14,12 @@ import {
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from 'react';
 import {
   defaultHierarchy,
-  dimensionFieldById,
   type DimensionFieldId,
 } from '@/components/risk-analysis/drilldownFields';
 import {
@@ -30,8 +27,6 @@ import {
   mockDrilldownRows,
   type DrilldownTotals,
 } from '@/components/risk-analysis/mockDrilldown';
-
-const HIERARCHY_PARAM = 'drill';
 
 interface DrilldownContextValue {
   hierarchy: DimensionFieldId[];
@@ -48,27 +43,6 @@ interface DrilldownContextValue {
 
 const DrilldownContext = createContext<DrilldownContextValue | null>(null);
 
-const isDimensionFieldId = (value: string): value is DimensionFieldId =>
-  dimensionFieldById.has(value as DimensionFieldId);
-
-function readHierarchyFromUrl(): DimensionFieldId[] | null {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
-  const raw = new URLSearchParams(window.location.search).get(HIERARCHY_PARAM);
-  if (raw === null) {
-    return null;
-  }
-
-  const parsed = raw
-    .split(',')
-    .map((part) => part.trim())
-    .filter(isDimensionFieldId);
-
-  return Array.from(new Set(parsed));
-}
-
 export function DrilldownProvider({ children }: { children: ReactNode }) {
   const [hierarchy, setHierarchy] =
     useState<DimensionFieldId[]>(defaultHierarchy);
@@ -76,49 +50,6 @@ export function DrilldownProvider({ children }: { children: ReactNode }) {
   const [totals, setTotals] = useState<DrilldownTotals>(() =>
     computeTotals(mockDrilldownRows)
   );
-  const [hydrated, setHydrated] = useState(false);
-
-  // Captured during the first render, before the writer effect below can
-  // overwrite the query string. Reading it inside the hydrate effect instead
-  // would lose the incoming value, because StrictMode runs mount effects twice
-  // and the second pass would read back the already-rewritten URL.
-  const initialFromUrl = useRef<DimensionFieldId[] | null | undefined>(
-    undefined
-  );
-  if (initialFromUrl.current === undefined) {
-    initialFromUrl.current = readHierarchyFromUrl();
-  }
-
-  // Hydrate after mount rather than in the state initialiser so the server and
-  // the first client render agree. Avoids `useSearchParams`, which would force
-  // the page into a Suspense boundary.
-  useEffect(() => {
-    const fromUrl = initialFromUrl.current;
-    if (fromUrl && fromUrl.length > 0) {
-      setHierarchy(fromUrl);
-    }
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated || typeof window === 'undefined') {
-      return;
-    }
-
-    const params = new URLSearchParams(window.location.search);
-    if (hierarchy.length > 0) {
-      params.set(HIERARCHY_PARAM, hierarchy.join(','));
-    } else {
-      params.delete(HIERARCHY_PARAM);
-    }
-
-    const query = params.toString();
-    window.history.replaceState(
-      null,
-      '',
-      `${window.location.pathname}${query ? `?${query}` : ''}`
-    );
-  }, [hierarchy, hydrated]);
 
   /** Re-adding a field already in the hierarchy moves it to the drop position. */
   const addField = useCallback((fieldId: DimensionFieldId, index?: number) => {

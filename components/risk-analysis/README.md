@@ -8,8 +8,8 @@ its row grouping to match. Reordering the hierarchy reorders the grouping
 levels, so `Category → Product Level 1 → Currency` and
 `Currency → Category → Product Level 1` are both one drag apart.
 
-Changes propagate to the whole page, not just the grid — the KPI tiles, the
-breadcrumb chips and the URL all react to a drag.
+Changes propagate to the whole page, not just the grid — the KPI tiles and the
+drilldown breadcrumb chips react to a drag.
 
 ---
 
@@ -82,20 +82,16 @@ Unwraps `.data`, and owns `computeTotals()` (the KPI aggregation) plus
 
 It exists because the grid and the panel are _peers_ that both read and write
 the hierarchy — you can reorder by dragging in the panel or by regrouping from
-the grid's own column menu, and both paths must converge on one state. It also
-mirrors the hierarchy into the `?drill=` query string so a view is shareable.
+the grid's own column menu, and both paths must converge on one state. Hierarchy
+lives in React state for the session; refresh resets to `defaultHierarchy`.
 
-Three details are load-bearing:
+Two details are load-bearing:
 
 - `replaceHierarchy` and `publishTotals` return the _existing_ state object when
   nothing changed. Without those identity checks the grid → context → grid round
   trip becomes an infinite render loop.
 - `addField` removes a field before re-inserting it, so dropping an attribute
   that is already in the hierarchy **moves** it rather than doing nothing.
-- The incoming URL is captured into a ref during the first render, not inside
-  the hydrate effect. React StrictMode runs mount effects twice, and the second
-  pass would otherwise read back an already-rewritten query string and lose the
-  incoming `?drill=`.
 
 ### Page shell
 
