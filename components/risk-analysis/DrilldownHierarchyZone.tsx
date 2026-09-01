@@ -9,8 +9,6 @@
  * grouping API.
  */
 
-import ArrowDownwardRoundedIcon from '@mui/icons-material/ArrowDownwardRounded';
-import ArrowUpwardRoundedIcon from '@mui/icons-material/ArrowUpwardRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
 import { Box, Button, IconButton, Stack, Typography } from '@mui/material';
@@ -249,24 +247,6 @@ export default function DrilldownHierarchyZone({
                 >
                   {field.label}
                 </Typography>
-                <IconButton
-                  size="small"
-                  aria-label={`Move ${field.label} up`}
-                  disabled={index === 0}
-                  onClick={() => onMove(index, index - 1)}
-                  sx={{ p: 0.2 }}
-                >
-                  <ArrowUpwardRoundedIcon sx={{ fontSize: 14 }} />
-                </IconButton>
-                <IconButton
-                  size="small"
-                  aria-label={`Move ${field.label} down`}
-                  disabled={index === hierarchy.length - 1}
-                  onClick={() => onMove(index, index + 1)}
-                  sx={{ p: 0.2 }}
-                >
-                  <ArrowDownwardRoundedIcon sx={{ fontSize: 14 }} />
-                </IconButton>
                 <IconButton
                   size="small"
                   aria-label={`Remove ${field.label}`}
