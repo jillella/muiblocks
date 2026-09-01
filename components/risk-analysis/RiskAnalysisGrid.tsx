@@ -243,13 +243,21 @@ export default function RiskAnalysisGrid() {
   }, [drilldownEnabled, replaceHierarchy]);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        minHeight: 0,
+      }}
+    >
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         spacing={1.5}
         sx={{
           alignItems: { sm: 'center' },
           justifyContent: 'space-between',
+          flexShrink: 0,
           mb: 1.5,
         }}
       >
@@ -337,7 +345,8 @@ export default function RiskAnalysisGrid() {
           '--ag-row-hover-color': '#f8fbff',
           '--ag-cell-horizontal-padding': '12px',
           width: '100%',
-          height: 620,
+          flex: 1,
+          minHeight: 320,
           border: `1px solid ${PANEL_BORDER}`,
           borderRadius: 2,
           overflow: 'hidden',

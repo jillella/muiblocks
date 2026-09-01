@@ -89,7 +89,17 @@ export default function RiskAnalysisPanel() {
             sm: 'minmax(360px, 1fr) 256px',
             lg: 'minmax(0, 1fr) 280px',
           },
-          alignItems: 'start',
+          alignItems: 'stretch',
+          // Both columns share one viewport-sized row so the grid grows with
+          // the window instead of sitting at a fixed height next to a taller
+          // attribute panel. The subtracted chrome is the header band, KPI
+          // tiles and page padding above/below this row.
+          height: {
+            xs: 'auto',
+            md: 'calc(100vh - 480px)',
+            xl: 'calc(100vh - 405px)',
+          },
+          minHeight: { xs: 0, md: 520 },
         }}
       >
         <Paper
@@ -99,6 +109,8 @@ export default function RiskAnalysisPanel() {
             borderRadius: 2.5,
             p: { xs: 1.5, md: 2 },
             minWidth: 0,
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
           <RiskAnalysisGrid />
