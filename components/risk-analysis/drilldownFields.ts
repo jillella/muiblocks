@@ -47,7 +47,6 @@ export const attributeCategories: AttributeCategory[] = [
 export type DimensionFieldId =
   | 'portfolio'
   | 'entity'
-  | 'businessUnit'
   | 'desk'
   | 'strategy'
   | 'book'
@@ -64,7 +63,6 @@ export type DimensionFieldId =
 export type AttributeIconKey =
   | 'folder'
   | 'entity'
-  | 'businessUnit'
   | 'desk'
   | 'strategy'
   | 'book'
@@ -101,14 +99,6 @@ export const dimensionFields: DimensionField[] = [
     category: 'portfolio',
     icon: 'entity',
     width: 250,
-  },
-  {
-    id: 'businessUnit',
-    label: 'Business Unit',
-    columnHeader: 'BUSINESS_UNIT_CD',
-    category: 'portfolio',
-    icon: 'businessUnit',
-    width: 160,
   },
   {
     id: 'desk',

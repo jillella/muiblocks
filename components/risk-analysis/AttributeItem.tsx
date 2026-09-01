@@ -1,7 +1,6 @@
 'use client';
 
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined';
-import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
@@ -28,7 +27,6 @@ import {
 const iconByKey: Record<AttributeIconKey, SvgIconComponent> = {
   folder: FolderOutlinedIcon,
   entity: AccountBalanceOutlinedIcon,
-  businessUnit: BusinessOutlinedIcon,
   desk: DashboardOutlinedIcon,
   strategy: HubOutlinedIcon,
   book: MenuBookOutlinedIcon,
