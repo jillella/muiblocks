@@ -26,6 +26,7 @@ import type {
   GridApi,
   GridReadyEvent,
   IAggFuncParams,
+  KeyCreatorParams,
   ValueFormatterParams,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
@@ -35,6 +36,7 @@ import {
   dimensionFields,
   measureFields,
   type DimensionFieldId,
+  type DimensionValueType,
   type DrilldownRow,
 } from '@/components/risk-analysis/drilldownFields';
 import {
@@ -67,6 +69,30 @@ const measureValueFormatter = ({
   return formatAmount(value);
 };
 
+const BLANK_CODE = '(blank)';
+
+const displayDimensionValue = (
+  value: unknown,
+  valueType: DimensionValueType
+) => {
+  if (valueType === 'boolean') {
+    return value ? 'Yes' : 'No';
+  }
+  return value === '' || value === null || value === undefined
+    ? BLANK_CODE
+    : String(value);
+};
+
+const dimensionKeyCreator =
+  (valueType: DimensionValueType) =>
+  ({ value }: KeyCreatorParams<DrilldownRow>) =>
+    displayDimensionValue(value, valueType);
+
+const dimensionValueFormatter =
+  (valueType: DimensionValueType) =>
+  ({ value }: ValueFormatterParams<DrilldownRow>) =>
+    displayDimensionValue(value, valueType);
+
 const sameOrder = (a: string[], b: string[]) =>
   a.length === b.length && a.every((value, index) => value === b[index]);
 
@@ -82,17 +108,38 @@ export default function RiskAnalysisGrid() {
 
   const columnDefs = useMemo<ColDef<DrilldownRow>[]>(() => {
     const dimensionCols: ColDef<DrilldownRow>[] = dimensionFields.map(
-      (field) => ({
-        colId: field.id,
-        field: field.id,
-        headerName: field.columnHeader,
-        headerTooltip: field.label,
-        width: field.width,
-        minWidth: 100,
-        enableRowGroup: true,
-        filter: 'agSetColumnFilter',
-        sortable: true,
-      })
+      (field) => {
+        const valueType = field.valueType ?? 'text';
+
+        return {
+          colId: field.id,
+          field: field.id,
+          headerName: field.columnHeader,
+          headerTooltip: field.label,
+          width: field.width,
+          minWidth: 100,
+          enableRowGroup: true,
+          filter:
+            valueType === 'number'
+              ? 'agNumberColumnFilter'
+              : 'agSetColumnFilter',
+          type: valueType === 'number' ? 'rightAligned' : undefined,
+          sortable: true,
+          // Opt the boolean out of AG Grid's cell data type inference. Its
+          // checkbox renderer also takes over the generated group column, which
+          // would leave grouped rows labelled only with their child count.
+          cellDataType: valueType === 'boolean' ? false : undefined,
+          // The API sends codes as empty strings rather than nulls, which would
+          // otherwise group into an unlabelled row and an unlabelled filter
+          // entry. Booleans get words for the same reason.
+          keyCreator:
+            valueType === 'number' ? undefined : dimensionKeyCreator(valueType),
+          valueFormatter:
+            valueType === 'number'
+              ? undefined
+              : dimensionValueFormatter(valueType),
+        };
+      }
     );
 
     const lastMeasureId = measureFields[measureFields.length - 1]?.id;

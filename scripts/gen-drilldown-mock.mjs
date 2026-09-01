@@ -1,10 +1,18 @@
 /**
  * One-off generator for components/risk-analysis/drilldown-rows.json.
+ *
+ * Mirrors the consolidated sensitivity API response: same envelope, same key
+ * names, same value conventions (empty-string codes, -1 strike sentinel,
+ * ticker string formats). `agg_market_value`, `agg_var` and `agg_svar` are not
+ * in that endpoint and stand in for the VaR feed.
+ *
  * Seeded so the committed mock is stable across regenerations.
  *   node scripts/gen-drilldown-mock.mjs
  */
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
+
+const ROW_TARGET = 400;
 
 function mulberry32(seed) {
   return function rand() {
@@ -16,275 +24,282 @@ function mulberry32(seed) {
   };
 }
 
-const rand = mulberry32(20260827);
+const rand = mulberry32(20260901);
 const pick = (arr) => arr[Math.floor(rand() * arr.length)];
 const between = (lo, hi) => lo + rand() * (hi - lo);
 const round = (v, d = 2) => Number(v.toFixed(d));
 
+const books = [
+  {
+    PRDM_ENTITY_NM: 'SMBC CAPITAL MARKETS INC',
+    ELF_ENTITY_NM: 'SBCM',
+    cuso_indicator: 'CUSO ENTITY',
+    bhc_indicator: 'BHC',
+    group_nm: 'A1',
+    strategies: ['NY XVA Hedging', 'NY Linear Trading'],
+  },
+  {
+    PRDM_ENTITY_NM: 'SMBC CAPITAL MARKETS INC',
+    ELF_ENTITY_NM: 'SBCM',
+    cuso_indicator: 'CUSO ENTITY',
+    bhc_indicator: 'BHC',
+    group_nm: 'A21',
+    strategies: ['NY Rates Options', 'NY Linear Trading'],
+  },
+  {
+    PRDM_ENTITY_NM: 'SMBC DERIVATIVE PRODUCTS LTD',
+    ELF_ENTITY_NM: 'SBDP',
+    cuso_indicator: 'CUSO ENTITY',
+    bhc_indicator: 'BHC',
+    group_nm: 'A7',
+    strategies: ['NY XVA Hedging'],
+  },
+  {
+    PRDM_ENTITY_NM: 'SMBC NIKKO SECURITIES AMERICA INC',
+    ELF_ENTITY_NM: 'SNAI',
+    cuso_indicator: 'NON-CUSO',
+    bhc_indicator: 'NON-BHC',
+    group_nm: 'A21',
+    strategies: ['NY Credit Flow'],
+  },
+];
+
+/**
+ * `legs` mirror the RF_SUBCLASS_CD / RF_TYPE_CD / CURVE_NM triples seen in the
+ * API sample. `option` legs are the only ones carrying an option time, a real
+ * strike and an underlying tenor.
+ */
 const products = [
   {
-    categoryNm: 'BIRO',
-    productLevel1: 'Swaption',
-    productLevel2: 'Bermudan Interest Rate Option (Swaption)',
-    rfClass: 'IR',
+    CATEGORY_NM: 'CCS',
+    ProductLevel1_NM: 'Cross Currency Swap',
+    ProductLevel2_NM: 'Cross Currency Swap',
+    RF_CLASS_CD: 'IR',
+    query_name: 'Q1_IR_NON_FUTURES',
     legs: [
-      { rfSubclass: 'Base', rfType: 'OTC', curves: ['USD-SOFR', 'EUR-ESTR'] },
-      { rfSubclass: 'Basis', rfType: 'Index Basis', curves: ['USD-LIBOR-3M'] },
-      { rfSubclass: 'Basis', rfType: 'Xccy Basis', curves: ['USD-EUR-XCCY'] },
-      { rfSubclass: 'Vol', rfType: 'Swaption', curves: ['USD-SWAPTION-VOL'] },
+      { RF_SUBCLASS_CD: 'Basis', RF_TYPE_CD: 'Xccy Basis', CURVE_NM: 'FX_Basis' },
+      { RF_SUBCLASS_CD: 'Base', RF_TYPE_CD: 'OTC', CURVE_NM: 'Swap' },
     ],
   },
   {
-    categoryNm: 'EIRONL',
-    productLevel1: 'Swaption',
-    productLevel2: 'European Swaption Non-Libor',
-    rfClass: 'IR',
+    CATEGORY_NM: 'IRS',
+    ProductLevel1_NM: 'Interest Rate Swap',
+    ProductLevel2_NM: 'Interest Rate Swap',
+    RF_CLASS_CD: 'IR',
+    query_name: 'Q1_IR_NON_FUTURES',
     legs: [
-      { rfSubclass: 'Base', rfType: 'OTC', curves: ['EUR-ESTR', 'GBP-SONIA'] },
-      { rfSubclass: 'Vol', rfType: 'Swaption', curves: ['EUR-SWAPTION-VOL'] },
+      { RF_SUBCLASS_CD: 'Base', RF_TYPE_CD: 'OTC', CURVE_NM: 'Swap' },
+      {
+        RF_SUBCLASS_CD: 'Basis',
+        RF_TYPE_CD: 'Index Basis',
+        CURVE_NM: 'USDOIS_Basis',
+      },
     ],
   },
   {
-    categoryNm: 'BondFutOpt',
-    productLevel1: 'BondFutureOption',
-    productLevel2: 'BondFutureOption',
-    rfClass: 'IR',
+    CATEGORY_NM: 'BIRO',
+    ProductLevel1_NM: 'Swaption',
+    ProductLevel2_NM: 'Bermudan Interest Rate Option (Swaption)',
+    RF_CLASS_CD: 'IR',
+    query_name: 'Q1_IR_NON_FUTURES',
     legs: [
-      { rfSubclass: 'Base', rfType: 'Exchange', curves: ['USD-SOFR'] },
-      { rfSubclass: 'Vol', rfType: 'Exchange', curves: ['UST-FUT-VOL'] },
+      { RF_SUBCLASS_CD: 'Base', RF_TYPE_CD: 'OTC', CURVE_NM: 'Swap' },
+      {
+        RF_SUBCLASS_CD: 'Vol',
+        RF_TYPE_CD: 'Swaption',
+        CURVE_NM: 'Swaption_Vol',
+        option: true,
+      },
     ],
   },
   {
-    categoryNm: 'BondFuture',
-    productLevel1: 'BondFuture',
-    productLevel2: 'BondFuture',
-    rfClass: 'IR',
-    legs: [{ rfSubclass: 'Base', rfType: 'Exchange', curves: ['USD-SOFR'] }],
-  },
-  {
-    categoryNm: 'Cap1M',
-    productLevel1: 'Capfloor',
-    productLevel2: 'Monthly Cap (1Month Tenor)',
-    rfClass: 'IR',
+    CATEGORY_NM: 'LDO',
+    ProductLevel1_NM: 'Listed Derivative Option',
+    ProductLevel2_NM: 'Listed Derivative Option',
+    RF_CLASS_CD: 'IR',
+    query_name: 'Q1_IR_FUTURES',
     legs: [
-      { rfSubclass: 'Base', rfType: 'OTC', curves: ['USD-SOFR'] },
-      { rfSubclass: 'Vol', rfType: 'Cap/Floor', curves: ['USD-CAP-VOL'] },
+      { RF_SUBCLASS_CD: 'Base', RF_TYPE_CD: 'Exchange', CURVE_NM: 'Swap' },
+      {
+        RF_SUBCLASS_CD: 'Vol',
+        RF_TYPE_CD: 'Exchange',
+        CURVE_NM: 'Future_Vol',
+        option: true,
+      },
     ],
   },
   {
-    categoryNm: 'Cap1M_Muni',
-    productLevel1: 'Capfloor',
-    productLevel2: 'Monthly PSA Cap',
-    rfClass: 'IR',
-    legs: [{ rfSubclass: 'Base', rfType: 'OTC', curves: ['USD-MUNI-AAA'] }],
-  },
-  {
-    categoryNm: 'CapNL',
-    productLevel1: 'Capfloor',
-    productLevel2: 'Cap Non-Libor (SOFR etc.)',
-    rfClass: 'IR',
+    CATEGORY_NM: 'FRA',
+    ProductLevel1_NM: 'Forward Rate Agreement',
+    ProductLevel2_NM: 'Forward Rate Agreement',
+    RF_CLASS_CD: 'IR',
+    query_name: 'Q1_IR_FUTURES',
     legs: [
-      { rfSubclass: 'Base', rfType: 'OTC', curves: ['USD-SOFR', 'GBP-SONIA'] },
-      { rfSubclass: 'Vol', rfType: 'Cap/Floor', curves: ['USD-CAP-VOL'] },
+      { RF_SUBCLASS_CD: 'Base', RF_TYPE_CD: 'OTC', CURVE_NM: 'Swap' },
     ],
   },
   {
-    categoryNm: 'IRS',
-    productLevel1: 'Interest Rate Swap',
-    productLevel2: 'Interest Rate Swap',
-    rfClass: 'IR',
+    CATEGORY_NM: 'IndexFX',
+    ProductLevel1_NM: 'FX Index Option',
+    ProductLevel2_NM: 'FX Index Option',
+    RF_CLASS_CD: 'FX',
+    query_name: 'Q1_FX_NON_FUTURES',
+    legs: [
+      { RF_SUBCLASS_CD: 'Spot', RF_TYPE_CD: 'FX Spot', CURVE_NM: 'FX_Basis' },
+      {
+        RF_SUBCLASS_CD: 'Vol',
+        RF_TYPE_CD: 'OTC',
+        CURVE_NM: 'FX_Vol',
+        option: true,
+      },
+    ],
+  },
+  {
+    CATEGORY_NM: 'TRS',
+    ProductLevel1_NM: 'Total Return Swap',
+    ProductLevel2_NM: 'Total Return Swap',
+    RF_CLASS_CD: 'CR',
+    query_name: 'Q1_CR_NON_FUTURES',
     legs: [
       {
-        rfSubclass: 'Base',
-        rfType: 'OTC',
-        curves: ['USD-SOFR', 'EUR-ESTR', 'JPY-TONA'],
+        RF_SUBCLASS_CD: 'Base',
+        RF_TYPE_CD: 'Index Basis',
+        CURVE_NM: 'CDX_Curve',
       },
-      { rfSubclass: 'Basis', rfType: 'Index Basis', curves: ['USD-LIBOR-3M'] },
     ],
-  },
-  {
-    categoryNm: 'Muni',
-    productLevel1: 'Interest Rate Swap',
-    productLevel2: 'PSA Interest Rate Swap (Muni)',
-    rfClass: 'IR',
-    legs: [{ rfSubclass: 'Base', rfType: 'OTC', curves: ['USD-MUNI-AAA'] }],
-  },
-  {
-    categoryNm: 'OIS',
-    productLevel1: 'Interest Rate Swap',
-    productLevel2: 'Interest Rate Swap (OIS index)',
-    rfClass: 'IR',
-    legs: [
-      { rfSubclass: 'Base', rfType: 'OTC', curves: ['USD-SOFR', 'GBP-SONIA'] },
-    ],
-  },
-  {
-    categoryNm: 'SFRO',
-    productLevel1: 'SOFRFUTUREOption',
-    productLevel2: 'SOFRFUTUREOption',
-    rfClass: 'IR',
-    legs: [
-      { rfSubclass: 'Base', rfType: 'Exchange', curves: ['USD-SOFR'] },
-      { rfSubclass: 'Vol', rfType: 'Exchange', curves: ['SOFR-FUT-VOL'] },
-    ],
-  },
-  {
-    categoryNm: 'FXFWD',
-    productLevel1: 'FX Forward',
-    productLevel2: 'FX Outright Forward',
-    rfClass: 'FX',
-    legs: [
-      {
-        rfSubclass: 'Spot',
-        rfType: 'FX Spot',
-        curves: ['FX-EURUSD', 'FX-USDJPY'],
-      },
-      { rfSubclass: 'Basis', rfType: 'Xccy Basis', curves: ['USD-EUR-XCCY'] },
-    ],
-  },
-  {
-    categoryNm: 'FXOPT',
-    productLevel1: 'FX Option',
-    productLevel2: 'FX Vanilla Option',
-    rfClass: 'FX',
-    legs: [
-      {
-        rfSubclass: 'Spot',
-        rfType: 'FX Spot',
-        curves: ['FX-EURUSD', 'FX-GBPUSD'],
-      },
-      { rfSubclass: 'Vol', rfType: 'OTC', curves: ['FX-EURUSD-VOL'] },
-    ],
-  },
-  {
-    categoryNm: 'CDXIG',
-    productLevel1: 'Credit Index',
-    productLevel2: 'CDX IG Index Swap',
-    rfClass: 'CR',
-    legs: [
-      { rfSubclass: 'Base', rfType: 'Index Basis', curves: ['CDX-IG-5Y'] },
-      { rfSubclass: 'Curve', rfType: 'OTC', curves: ['CDX-IG-CURVE'] },
-    ],
-  },
-  {
-    categoryNm: 'CDSSN',
-    productLevel1: 'Credit Default Swap',
-    productLevel2: 'Single Name CDS',
-    rfClass: 'CR',
-    legs: [{ rfSubclass: 'Base', rfType: 'OTC', curves: ['CDS-SN-CURVE'] }],
   },
 ];
 
-const portfolios = [
-  {
-    portfolio: 'US Rates Trading',
-    businessUnit: 'CM-DPG',
-    entity: 'SMBC CAPITAL MARKETS INC',
-    desks: ['Linear Rates', 'Rates Options'],
-  },
-  {
-    portfolio: 'Structured Rates',
-    businessUnit: 'CM-DPG',
-    entity: 'SMBC DERIVATIVES PRODUCTS LTD',
-    desks: ['Rates Options', 'Futures & Listed'],
-  },
-  {
-    portfolio: 'Municipal Products',
-    businessUnit: 'Non-DPG',
-    entity: 'SMBC NIKKO SECURITIES AMERICA INC',
-    desks: ['Muni Desk'],
-  },
-  {
-    portfolio: 'Global Credit',
-    businessUnit: 'CM-DPG',
-    entity: 'SMBC CAPITAL MARKETS INC',
-    desks: ['Credit Flow'],
-  },
-  {
-    portfolio: 'FX & EM',
-    businessUnit: 'Non-DPG',
-    entity: 'SMBC NY BRANCH',
-    desks: ['FX Options', 'Linear Rates'],
-  },
-];
+const currencies = ['USD', 'CAD', 'EUR', 'GBP', 'JPY'];
 
-const strategies = [
-  'Directional',
-  'Relative Value',
-  'Client Facilitation',
-  'Hedge Overlay',
-  'Basis',
-];
-
-const tenors = ['1M', '3M', '6M', '1Y', '2Y', '5Y', '10Y', '30Y'];
-
-const currencyForCurve = (curve) => {
-  if (
-    curve.startsWith('EUR') ||
-    curve === 'FX-EURUSD' ||
-    curve === 'FX-EURUSD-VOL'
-  )
-    return 'EUR';
-  if (curve.startsWith('GBP') || curve === 'FX-GBPUSD') return 'GBP';
-  if (curve.startsWith('JPY') || curve === 'FX-USDJPY') return 'JPY';
-  return 'USD';
+/** Overnight index per currency, used by the US SPARC ticker for base legs. */
+const rfrByCurrency = {
+  USD: 'SOFR',
+  CAD: 'CORRA',
+  EUR: 'ESTR',
+  GBP: 'SONIA',
+  JPY: 'TONA',
 };
 
-const rows = [];
-let seq = 0;
+/** REFERENCE_NM values, with the MARX day count the ticker suffix uses. */
+const references = [
+  { REFERENCE_NM: '1D', days: 1 },
+  { REFERENCE_NM: '1W', days: 7 },
+  { REFERENCE_NM: '1M', days: 30 },
+  { REFERENCE_NM: '2M', days: 60 },
+  { REFERENCE_NM: '3M', days: 90 },
+  { REFERENCE_NM: '6M', days: 180 },
+  { REFERENCE_NM: '1Y', days: 365 },
+  { REFERENCE_NM: '2Y', days: 730 },
+  { REFERENCE_NM: '5Y', days: 1825 },
+  { REFERENCE_NM: '10Y', days: 3650 },
+  { REFERENCE_NM: '12Y', days: 4380 },
+  { REFERENCE_NM: '15Y', days: 5475 },
+  { REFERENCE_NM: '30Y', days: 10950 },
+  { REFERENCE_NM: '3MonthIMMFuture', days: 100003 },
+];
 
-for (const pf of portfolios) {
-  for (const desk of pf.desks) {
-    const bookCount = 3 + Math.floor(rand() * 3);
-    for (let b = 0; b < bookCount; b += 1) {
-      const book = `BK-${1000 + ((seq * 7) % 400)}`;
-      const strategy = pick(strategies);
+const optionTimes = ['1M', '3M', '6M', '1Y', '2Y'];
+const underlyingTenors = ['2Y', '5Y', '10Y', '30Y'];
 
-      for (const product of products) {
-        // Not every book trades every product.
-        if (rand() < 0.28) continue;
+const marxCurveToken = {
+  FX_Basis: 'FXBASIS',
+  Swap: 'OTC',
+  USDOIS_Basis: 'OIS',
+  Swaption_Vol: 'SWAPTIONVOL',
+  Future_Vol: 'FUTVOL',
+  FX_Vol: 'FXVOL',
+  CDX_Curve: 'CDX',
+};
 
-        for (const leg of product.legs) {
-          for (const curve of leg.curves) {
-            if (rand() < 0.16) continue;
+const usSparcTicker = (leg, product, currency, reference) =>
+  leg.RF_SUBCLASS_CD === 'Base'
+    ? `USSTS.${product.RF_CLASS_CD}_${currency}_${rfrByCurrency[currency]}.${reference}`
+    : `USSTS.${product.RF_CLASS_CD}_${currency}_${currency} ${leg.RF_TYPE_CD}.${reference}`;
 
-            const isVol = leg.rfSubclass === 'Vol';
-            const isFxSpot = leg.rfType === 'FX Spot';
-            const scale = between(0.4, 3.2);
+const marxTicker = (leg, currency, days) =>
+  `MR_CM_${marxCurveToken[leg.CURVE_NM]}_CM${currency}(T${days})`;
+
+/**
+ * The API repeats one close amount across every sensitivity row of a book, so
+ * it is keyed per book+strategy+currency here rather than per row.
+ */
+const closeAmounts = new Map();
+const closeAmountFor = (key) => {
+  if (!closeAmounts.has(key)) {
+    closeAmounts.set(key, between(-4_800_000, 2_600_000));
+  }
+  return closeAmounts.get(key);
+};
+
+const candidates = [];
+
+for (const book of books) {
+  for (const strategy of book.strategies) {
+    const coveredFlag = rand() < 0.25;
+    const revalLocation = rand() < 0.8 ? 'Reval' : 'Reval_EOD';
+
+    for (const product of products) {
+      // Not every book trades every product.
+      if (rand() < 0.2) continue;
+
+      for (const leg of product.legs) {
+        for (const currency of currencies) {
+          if (rand() < 0.35) continue;
+
+          for (const { REFERENCE_NM, days } of references) {
+            if (rand() < 0.55) continue;
+
+            const isOption = leg.option === true;
+            const isFxSpot = leg.RF_TYPE_CD === 'FX Spot';
+            const scale = between(0.3, 3.4);
 
             const marketValue = round(between(-4_200_000, 6_800_000) * scale);
-            const delta = isVol
-              ? round(between(-180_000, 240_000) * scale)
-              : round(marketValue * between(0.55, 1.05));
-            const gamma =
-              isVol || isFxSpot ? round(between(-9_000, 62_000) * scale) : 0;
+            const delta = isOption
+              ? round(between(-820, 940) * scale)
+              : round(between(-760, 1_180) * scale);
+            const gamma = isOption || isFxSpot ? round(between(0, 0.9), 2) : 0;
             const varUsd = round(Math.abs(marketValue) * between(0.012, 0.085));
-            const svarUsd = round(varUsd * between(1.25, 1.95));
 
-            rows.push({
-              id: `R${String(seq).padStart(5, '0')}`,
-              portfolio: pf.portfolio,
-              entity: pf.entity,
-              businessUnit: pf.businessUnit,
-              desk,
-              strategy,
-              book,
-              categoryNm: product.categoryNm,
-              productLevel1: product.productLevel1,
-              productLevel2: product.productLevel2,
-              currency: currencyForCurve(curve),
-              rfClass: product.rfClass,
-              rfSubclass: leg.rfSubclass,
-              rfType: leg.rfType,
-              tenor: isFxSpot ? 'Spot' : pick(tenors),
-              curve,
-              marketValue,
-              delta,
-              gamma,
-              varUsd,
-              svarUsd,
+            candidates.push({
+              PRDM_ENTITY_NM: book.PRDM_ENTITY_NM,
+              enterprise_trade_book_covered_position_flag: coveredFlag,
+              enterprise_trade_book_strategy_name: strategy,
+              cuso_indicator: book.cuso_indicator,
+              bhc_indicator: book.bhc_indicator,
+              CATEGORY_NM: product.CATEGORY_NM,
+              ProductLevel1_NM: product.ProductLevel1_NM,
+              ProductLevel2_NM: product.ProductLevel2_NM,
+              EFFECT_CURRENCY_CD: currency,
+              REFERENCE_NM,
+              CURRENCY_CD: currency,
+              CURVE_NM: leg.CURVE_NM,
+              OPTION_TIME_CD: isOption ? pick(optionTimes) : '',
+              TENOR_CD: isOption ? pick(underlyingTenors) : '',
+              STRIKE_AM: isOption ? round(between(0.5, 5.5), 2) : -1,
+              RF_CLASS_CD: product.RF_CLASS_CD,
+              RF_SUBCLASS_CD: leg.RF_SUBCLASS_CD,
+              RF_TYPE_CD: leg.RF_TYPE_CD,
+              agg_market_value: marketValue,
+              agg_delta: delta,
+              agg_gamma: gamma,
+              agg_close_am: closeAmountFor(
+                `${book.group_nm}|${strategy}|${currency}`
+              ),
+              agg_var: varUsd,
+              agg_svar: round(varUsd * between(1.25, 1.95)),
+              TS_TICKER_USSPARC: usSparcTicker(
+                leg,
+                product,
+                currency,
+                REFERENCE_NM
+              ),
+              TS_TICKER_MARX: marxTicker(leg, currency, days),
+              REVAL_LOCATION_NM: revalLocation,
+              group_nm: book.group_nm,
+              ELF_ENTITY_NM: book.ELF_ENTITY_NM,
+              query_name: product.query_name,
             });
-            seq += 1;
           }
         }
       }
@@ -292,7 +307,29 @@ for (const pf of portfolios) {
   }
 }
 
+/** Even stride keeps every book and product represented in the trimmed set. */
+const stride = candidates.length / ROW_TARGET;
+const rows =
+  candidates.length <= ROW_TARGET
+    ? candidates
+    : Array.from(
+        { length: ROW_TARGET },
+        (_, index) => candidates[Math.floor(index * stride)]
+      );
+
+rows.forEach((row) => {
+  row.agg_close_am = round(row.agg_close_am);
+});
+
+const payload = {
+  status: 'success',
+  message: 'Consolidated sensitivity view obtained successfully.',
+  data: rows,
+};
+
 const out = 'components/risk-analysis/drilldown-rows.json';
 mkdirSync(dirname(out), { recursive: true });
-writeFileSync(out, `${JSON.stringify(rows, null, 4)}\n`);
-console.log(`wrote ${rows.length} rows to ${out}`);
+writeFileSync(out, `${JSON.stringify(payload, null, 4)}\n`);
+console.log(
+  `wrote ${rows.length} of ${candidates.length} candidate rows to ${out}`
+);

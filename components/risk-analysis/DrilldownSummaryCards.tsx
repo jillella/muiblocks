@@ -44,6 +44,12 @@ export default function DrilldownSummaryCards() {
       color: amountColor(totals.gamma),
     },
     {
+      label: 'Close AM (USD)',
+      value: formatCompact(totals.closeAm),
+      color: amountColor(totals.closeAm),
+      hint: 'The API repeats one close amount across every sensitivity row of a book, so this total double-counts',
+    },
+    {
       label: 'VaR (99%, 1D) (USD)',
       value: formatCompact(totals.varUsd),
       color: TEXT_PRIMARY,
@@ -81,8 +87,8 @@ export default function DrilldownSummaryCards() {
         gridTemplateColumns: {
           xs: 'repeat(2, minmax(0, 1fr))',
           sm: 'repeat(3, minmax(0, 1fr))',
-          md: 'repeat(4, minmax(0, 1fr))',
-          xl: 'repeat(8, minmax(0, 1fr))',
+          md: 'repeat(5, minmax(0, 1fr))',
+          xl: 'repeat(9, minmax(0, 1fr))',
         },
         mb: 2.5,
       }}

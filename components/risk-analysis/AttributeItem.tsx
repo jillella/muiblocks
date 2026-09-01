@@ -2,14 +2,18 @@
 
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
+import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
 import HubOutlinedIcon from '@mui/icons-material/HubOutlined';
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
+import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
+import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import PinOutlinedIcon from '@mui/icons-material/PinOutlined';
+import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import ShowChartOutlinedIcon from '@mui/icons-material/ShowChartOutlined';
+import TerminalOutlinedIcon from '@mui/icons-material/TerminalOutlined';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import { Box, Stack, Typography } from '@mui/material';
 import type { SvgIconComponent } from '@mui/icons-material';
@@ -27,13 +31,18 @@ import {
 const iconByKey: Record<AttributeIconKey, SvgIconComponent> = {
   folder: FolderOutlinedIcon,
   entity: AccountBalanceOutlinedIcon,
-  desk: DashboardOutlinedIcon,
   strategy: HubOutlinedIcon,
-  book: MenuBookOutlinedIcon,
+  flag: FlagOutlinedIcon,
+  indicator: LabelOutlinedIcon,
+  location: PlaceOutlinedIcon,
+  query: TerminalOutlinedIcon,
   diamond: HexagonOutlinedIcon,
   currency: PaidOutlinedIcon,
   tenor: TimelineOutlinedIcon,
   curve: ShowChartOutlinedIcon,
+  reference: LocalOfferOutlinedIcon,
+  strike: PinOutlinedIcon,
+  ticker: LocalOfferOutlinedIcon,
 };
 
 interface AttributeItemProps {
